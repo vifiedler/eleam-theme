@@ -16,9 +16,16 @@ get_header();
 ?>
 PEO AAAAAAAAAAA aa
 PENE
+<<<<<<< HEAD
+diarrea
+
+
+ola comostan
+=======
 diarrea 
 
 desalojo anal
+>>>>>>> cc3b7607aa670368ee70a656ee71a4e667f9f72a
 	<main id="primary" class="site-main">
 
 		<?php
