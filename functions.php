@@ -178,3 +178,48 @@ if ( defined( 'JETPACK__VERSION' ) ) {
 
 require get_template_directory(). '/assets/assets.php';
 
+class Eleam_Walker_Nav extends Walker_Nav_Menu {
+
+	public function start_lvl( &$output, $depth = 0, $args = null ) {
+		$output .= '<div class="navegacion-submenu">';
+	}
+
+	public function end_lvl( &$output, $depth = 0, $args = null ) {
+		$output .= '</div>';
+	}
+
+	public function start_el( &$output, $item, $depth = 0, $args = null, $id = 0 ) {
+		$titulo      = esc_html( $item->title );
+		$url         = esc_url( $item->url );
+		$texto       = '<span class="navegacion-texto" data-texto="' . esc_attr( $item->title ) . '">' . $titulo . '</span>';
+		$tiene_hijos = in_array( 'menu-item-has-children', (array) $item->classes, true );
+		$actual      = in_array( 'current-menu-item', (array) $item->classes, true );
+		$aria        = $actual ? ' aria-current="page"' : '';
+
+		if ( $depth === 0 && $tiene_hijos ) {
+			$output .= '<details class="navegacion-secundaria">'
+				. '<summary class="nav-link">' . $texto
+				. ' <span class="bi bi-chevron-down" aria-hidden="true"></span></summary>';
+			return;
+		}
+
+		if ( $depth > 0 ) {
+			$output .= '<a href="' . $url . '"' . $aria . '>' . $texto . '</a>';
+			return;
+		}
+
+		if ( in_array( 'boton-primario', (array) $item->classes, true ) ) {
+			$output .= '<a class="btn boton boton-primario" href="' . $url . '">'
+				. $titulo . ' <span class="bi bi-arrow-right" aria-hidden="true"></span></a>';
+			return;
+		}
+
+		$output .= '<a class="nav-link" href="' . $url . '"' . $aria . '>' . $texto . '</a>';
+	}
+
+	public function end_el( &$output, $item, $depth = 0, $args = null ) {
+		if ( $depth === 0 && in_array( 'menu-item-has-children', (array) $item->classes, true ) ) {
+			$output .= '</details>';
+		}
+	}
+}
