@@ -23,4 +23,8 @@
       iconoControl.className = 'bi bi-arrow-down';
     });
   });
+<<<<<<< HEAD
 }());
+=======
+}());
+>>>>>>> 8f2f9f1058e78733050e7b8da730f3809706246e
