@@ -20,6 +20,11 @@ if ( ! defined( '_S_VERSION' ) ) {
  * as indicating support for post thumbnails.
  */
 function eleam_theme_setup() {
+	register_nav_menus(
+	array(
+		'menu-nav' => esc_html__( 'Menú principal', 'eleam-theme' ),
+	)
+);
 	/*
 		* Make theme available for translation.
 		* Translations can be filed in the /languages/ directory.
