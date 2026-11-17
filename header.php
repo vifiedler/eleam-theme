@@ -41,10 +41,6 @@
 					'theme_location' => 'menu-nav',
 					'menu_id'        => 'primary-menu',
 					'container'      => 'div',
-				'container_class'=> 'navegacion-enlaces',
-				'items_wrap'     => '%3$s', // sin <ul>
-				'walker'         => new Eleam_Walker_Nav(),
-				'fallback_cb'    => false,
 				)
 			);
 			?>
