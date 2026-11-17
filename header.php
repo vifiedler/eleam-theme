@@ -40,7 +40,6 @@
 				array(
 					'theme_location' => 'menu-nav',
 					'menu_id'        => 'primary-menu',
-					'container'      => 'div',
 				)
 			);
 			?>
