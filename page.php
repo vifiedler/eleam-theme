@@ -15,8 +15,6 @@
 get_header();
 ?>
 PEO AAAAAAAAAAA aa
-PENE
-diarrea
 jejejejejjejeje
 
 

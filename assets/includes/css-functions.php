@@ -24,6 +24,5 @@ function css_functions()
     wp_enqueue_style('donaciones-css');
 
 
-
 }
 add_action('wp_enqueue_scripts', 'css_functions'); 
