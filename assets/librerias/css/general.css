@@ -23,9 +23,6 @@
   --bs-body-line-height: 1.5;
   --bs-border-radius: var(--eleam-radio);
 }
-body{
-  color: #000
-}
 @font-face {
   font-family: Athelas;
   src: url("../fonts/Athelas-Regular.ttf") format("truetype");
