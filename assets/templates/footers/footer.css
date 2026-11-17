@@ -1,0 +1,101 @@
+.pie-sitio {
+    background-color: #1f2937;
+    color: #f9fafb;
+    padding: 3.5rem 1.5rem 1.5rem;
+    font-size: 0.95rem;
+}
+
+.contenedor-amplio {
+    max-width: 1320px;
+    margin-inline: auto;
+}
+
+.pie-sitio-rejilla {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 2.5rem;
+    padding-bottom: 2.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.pie-sitio h2 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: #ffffff;
+}
+
+.pie-sitio h3 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin: 1rem 0 0.5rem;
+    color: #e5e7eb;
+}
+
+.pie-sitio address {
+    font-style: normal;
+    line-height: 1.5;
+    color: #d1d5db;
+}
+
+.pila-contenido {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+
+.pila-contenido p {
+    margin: 0;
+    color: #d1d5db;
+}
+
+.pie-sitio-navegacion ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+.pie-sitio a {
+    color: #d1d5db;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.pie-sitio a:hover,
+.pie-sitio a[aria-current="page"] {
+    color: #ffffff;
+    text-decoration: underline;
+}
+
+.pie-sitio-legal {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.pie-sitio-legal p {
+    margin: 0;
+    line-height: 1.4;
+}
+
+/* Fuerza el salto de línea para el span del folio/resolución */
+.pie-sitio-legal p span {
+    display: block;
+    font-size: 0.85rem;
+    color: #9ca3af;
+}
+
+.texto-secundario {
+    color: #9ca3af;
+    font-size: 0.875rem;
+}
+
+.pie-sitio-creditos {
+    margin: 1.5rem 0 0;
+    text-align: center;
+    font-size: 0.85rem;
+    color: #9ca3af;
+}
