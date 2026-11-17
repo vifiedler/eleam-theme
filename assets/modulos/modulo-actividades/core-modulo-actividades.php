@@ -1,21 +1,21 @@
 <?php
-function registrar_cpt_hero()
+function registrar_cpt_actividades()
 {
 
     $labels = array(
-        'name' => 'hero',
-        'singular_name' => 'hero',
-        'menu_name' => 'hero',
-        'name_admin_bar' => 'hero',
+        'name' => 'Actividades',
+        'singular_name' => 'actividades',
+        'menu_name' => 'actividades',
+        'name_admin_bar' => 'actividades',
         'add_new' => 'Añadir nuevo',
-        'add_new_item' => 'Añadir nueva hero',
-        'new_item' => 'Nuevo hero',
-        'edit_item' => 'Editar hero',
-        'view_item' => 'Ver hero',
-        'all_items' => 'Todas las hero',
-        'search_items' => 'Buscar hero',
-        'not_found' => 'No se encontraron hero',
-        'not_found_in_trash' => 'No se encontraron hero en la papelera',
+        'add_new_item' => 'Añadir nueva actividades',
+        'new_item' => 'Nuevo actividades',
+        'edit_item' => 'Editar actividades',
+        'view_item' => 'Ver actividades',
+        'all_items' => 'Todas las actividades',
+        'search_items' => 'Buscar actividades',
+        'not_found' => 'No se encontraron actividades',
+        'not_found_in_trash' => 'No se encontraron actividades en la papelera',
         'featured_image' => 'Imagen destacada',
         'set_featured_image' => 'Asignar imagen destacada',
         'remove_featured_image' => 'Quitar imagen destacada',
@@ -27,7 +27,7 @@ function registrar_cpt_hero()
         'public' => true,
         'has_archive' => true,
         'menu_icon' => 'dashicons-edit',
-        'rewrite' => array('slug' => 'hero'),
+        'rewrite' => array('slug' => 'actividades'),
         'show_in_rest' => true,
         'supports' => array('title', 'editor', 'excerpt', 'thumbnail', 'page-attributes'),
         'menu_position' => 5,
@@ -38,6 +38,6 @@ function registrar_cpt_hero()
         'capability_type' => 'post',
     );
 
-    register_post_type('hero', $args);
+    register_post_type('actividades', $args);
 }
-add_action('init', 'registrar_cpt_hero');
+add_action('init', 'registrar_cpt_actividades');
