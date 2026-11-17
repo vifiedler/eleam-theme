@@ -11,7 +11,8 @@ function js_function()
         wp_register_script('aos-js', get_template_directory_uri() . '/assets/includes/vendors/aos/aos.js', array(), null, true);
         wp_register_script('purecounter-js', get_template_directory_uri() . '/assets/includes/vendors/purecounter/purecounter.js', array(), null, true);
         wp_register_script('custom-js', get_template_directory_uri() . '/assets/librerias/js/custom.js', array(), null, true);
-        wp_register_script('send-email-js', get_template_directory_uri() . '/assets/librerias/js/send_email.js', array(), null, true);
+        wp_register_script('calendario-js', get_template_directory_uri() . '/assets/librerias/js/calendario.js', array(), null, true);
+  
 
         wp_enqueue_script('bootstrap-js');
         wp_enqueue_script('gsap-js');
@@ -21,8 +22,7 @@ function js_function()
         wp_enqueue_script('swiper-js');
         wp_enqueue_script('aos-js');
         wp_enqueue_script('purecounter-js');
-        wp_enqueue_script('custom-js');
-        wp_enqueue_script('send-email-js');
+        wp_enqueue_script('calendario-js');
     }
 }
 add_action("wp_enqueue_scripts", "js_function", 999);
