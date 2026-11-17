@@ -40,6 +40,10 @@
 				array(
 					'theme_location' => 'menu-nav',
 					'menu_id'        => 'primary-menu',
+					'container'      => 'div',
+				'container_class'=> 'navegacion-enlaces',
+				'items_wrap'     => '%3$s', // sin <ul>
+				'fallback_cb'    => false,
 				)
 			);
 			?>
