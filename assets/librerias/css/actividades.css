@@ -21,6 +21,17 @@
   margin: 0;
 }
 
+/* La imagen se ajusta a la altura de la tarjeta (la define el texto),
+   sin importar si la foto es horizontal o vertical. */
+.seccion-participar .tarjeta {
+  min-height: 220px;
+}
+
+.tarjeta-participar-media {
+  width: 38%;
+  overflow: hidden;
+}
+
 .link-ver-mas {
   display: inline-flex;
   align-items: center;
