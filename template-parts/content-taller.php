@@ -11,13 +11,13 @@
  *   - rotulo_foto_detalle_taller      (texto)
  *   - descripcion_foto_detalle_taller (área de texto)
  *
- * Imagen destacada → hero y bloque de detalle. Extracto → bajada del hero.
+ * Hero: el de la página Actividades. Imagen destacada → bloque de detalle.
  * Contenido de la entrada → texto del bloque de detalle.
  *
  * @package eleam-theme
  */
 
-$titulo_detalle = get_field( 'titulo_seccion_detalle_taller' ) ?: __( 'Sobre el taller', 'eleam' );
+$titulo_detalle = get_field( 'titulo_seccion_detalle_taller' ) ?: get_the_title();
 $titulo_galeria = get_field( 'titulo_galeria_detalle_taller' ) ?: __( 'Galería del taller', 'eleam' );
 
 // Galería: solo filas con foto, agrupadas de a 4 por mosaico.
@@ -33,23 +33,31 @@ $diapositivas = array_chunk( $fotos, 4 );
 $total        = count( $diapositivas );
 ?>
 
+<?php
+// Hero: el mismo de la página Actividades (campos del grupo "Hero de páginas interiores").
+$pagina_actividades = get_page_by_path( 'actividades' );
+$id_actividades     = $pagina_actividades ? $pagina_actividades->ID : 0;
+$hero_titulo        = $id_actividades ? ( get_field( 'titulo_pagina', $id_actividades ) ?: get_the_title( $id_actividades ) ) : '';
+$hero_bajada        = $id_actividades ? get_field( 'bajada_texto', $id_actividades ) : '';
+$hero_imagen        = $id_actividades ? get_field( 'imagen_pagina', $id_actividades ) : null;
+?>
+<?php if ( $id_actividades ) : ?>
 <section class="hero-interior" aria-labelledby="titulo-pagina">
 	<div class="container-fluid contenedor-amplio">
 		<div class="row">
 			<div class="col-md-6 hero-interior-texto">
-				<h1 id="titulo-pagina"><?php the_title(); ?></h1>
-				<?php if ( has_excerpt() ) : ?>
-					<p><?php echo esc_html( get_the_excerpt() ); ?></p>
-				<?php endif; ?>
+				<h1 id="titulo-pagina"><?php echo esc_html( $hero_titulo ); ?></h1>
+				<p><?php echo esc_html( $hero_bajada ); ?></p>
 			</div>
-			<?php if ( has_post_thumbnail() ) : ?>
+			<?php if ( is_array( $hero_imagen ) ) : ?>
 			<div class="col-md-6">
-				<?php the_post_thumbnail( 'large', array( 'class' => 'img-fluid hero-interior-imagen' ) ); ?>
+				<img src="<?php echo esc_url( $hero_imagen['url'] ); ?>" alt="<?php echo esc_attr( $hero_imagen['alt'] ); ?>" class="img-fluid hero-interior-imagen">
 			</div>
 			<?php endif; ?>
 		</div>
 	</div>
 </section>
+<?php endif; ?>
 
 <section class="seccion-detalle-taller" aria-labelledby="titulo-detalle-taller">
 	<div class="container">
