@@ -25,35 +25,28 @@
 <div id="page" class="site">
 	<a class="skip-link screen-reader-text" href="#primary"><?php esc_html_e( 'Skip to content', 'eleam-theme' ); ?></a>
 
-	<header id="masthead" class="site-header">
-		<div class="site-branding">
-			<?php
-			the_custom_logo();
-			if ( is_front_page() && is_home() ) :
-				?>
-				<h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
-				<?php
-			else :
-				?>
-				<p class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></p>
-				<?php
-			endif;
-			$eleam_theme_description = get_bloginfo( 'description', 'display' );
-			if ( $eleam_theme_description || is_customize_preview() ) :
-				?>
-				<p class="site-description"><?php echo $eleam_theme_description; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></p>
-			<?php endif; ?>
-		</div><!-- .site-branding -->
+	<header class="cabecera-sitio">
+	<nav class="navbar navegacion-principal container-fluid contenedor-amplio" aria-label="<?php esc_attr_e( 'Navegación principal', 'eleam-theme' ); ?>">
 
-		<nav id="site-navigation" class="main-navigation">
-			<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false"><?php esc_html_e( 'Primary Menu', 'eleam-theme' ); ?></button>
-			<?php
+		<a class="navbar-brand marca-sitio" href="<?php echo esc_url( home_url( '/' ) ); ?>" aria-label="<?php esc_attr_e( 'ELEAM San Francisco, inicio', 'eleam-theme' ); ?>">
+			<img class="img-fluid"
+				src="<?php echo esc_url( get_theme_file_uri( 'assets/images/logo-eleam.avif' ) ); ?>"
+				alt="<?php echo esc_attr( get_bloginfo( 'name' ) ); ?>"
+				decoding="async">
+		</a>
+
+		<?php
 			wp_nav_menu(
 				array(
-					'theme_location' => 'menu-1',
+					'theme_location' => 'menu-nav',
 					'menu_id'        => 'primary-menu',
 				)
 			);
 			?>
-		</nav><!-- #site-navigation -->
-	</header><!-- #masthead -->
+	</nav>
+</header>
+
+
+
+ 
+  

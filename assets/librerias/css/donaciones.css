@@ -1,0 +1,73 @@
+/* Tarjetas de impacto: cabecera con filete verde y cuerpo de texto */
+.tarjeta-impacto .card-body:first-child {
+  text-align: center;
+  border-bottom: 8px solid var(--eleam-verde);
+}
+
+.tarjeta-impacto .card-body:last-child {
+  background: var(--eleam-crema);
+}
+
+/* Opciones de aporte: botón de contorno terracota y estado seleccionado */
+.boton.boton-contorno {
+  --eleam-ancho-boton: 216px;
+  border: 1px solid var(--eleam-terracota);
+  --bs-btn-border-width: 1px;
+  --bs-btn-bg: white;
+  --bs-btn-color: var(--eleam-terracota);
+  --bs-btn-border-color: var(--eleam-terracota);
+  --bs-btn-hover-bg: white;
+  --bs-btn-hover-color: var(--eleam-terracota);
+  --bs-btn-hover-border-color: var(--eleam-terracota);
+  --bs-btn-active-bg: white;
+  --bs-btn-active-color: var(--eleam-terracota);
+  --bs-btn-active-border-color: var(--eleam-terracota);
+}
+
+.boton.boton[aria-pressed="true"] {
+  --bs-btn-bg: var(--eleam-terracota);
+  --bs-btn-color: white;
+  --bs-btn-hover-bg: var(--eleam-terracota);
+  --bs-btn-hover-color: white;
+  --bs-btn-active-bg: var(--eleam-terracota);
+  --bs-btn-active-color: white;
+  padding: 0 13px;
+  border: 3px solid var(--eleam-azul);
+}
+
+.opciones-aporte {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px 20px;
+  margin-block: 16px 24px;
+}
+
+.formulario-aporte fieldset+fieldset {
+  margin-top: 24px;
+}
+
+.formulario-aporte legend {
+  float: none;
+  width: 100%;
+  margin: 0;
+  text-align: center;
+  font-weight: 500;
+}
+
+.formulario-aporte-pasos {
+  display: flex;
+  justify-content: space-around;
+  gap: 16px;
+  margin-top: 16px;
+  font-size: .875rem;
+}
+
+
+.imagen-aporte {
+  width: 100%;
+  border-radius: 16px;
+  box-shadow: 0 4px 2px #00000040;
+  object-fit: cover;
+  height: 100%;
+}
