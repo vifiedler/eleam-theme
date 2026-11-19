@@ -1,4 +1,4 @@
-﻿/* ELEAM San Francisco · Adaby
+/* ELEAM San Francisco · Adaby
    Cargar después de Bootstrap 5.3.8. Clases propias en español.
    Las clases de Bootstrap se conservan en inglés para mantener su compatibilidad. */
 :root {
@@ -25,7 +25,7 @@
 }
 @font-face {
   font-family: Athelas;
-  src: url("../../../fonts/Athelas-Regular.ttf") format("truetype");
+  src: url("../../includes/fonts/Athelas-Regular.ttf") format("truetype");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -33,7 +33,7 @@
 
 @font-face {
   font-family: Athelas;
-  src: url("../../fonts/Athelas-Bold.ttf") format("truetype");
+  src: url("../../includes/fonts/Athelas-Bold.ttf") format("truetype");
   font-weight: 700 800;
   font-style: normal;
   font-display: swap;
@@ -41,7 +41,7 @@
 
 @font-face {
   font-family: Athelas;
-  src: url("../../fonts/Athelas-BoldItalic.ttf") format("truetype");
+  src: url("../../includes/fonts/Athelas-BoldItalic.ttf") format("truetype");
   font-weight: 400;
   font-style: italic;
   font-display: swap;
@@ -49,7 +49,7 @@
 
 @font-face {
   font-family: "Helvetica Neue Local";
-  src: url("../../fonts/HelveticaNeue-Roman.otf") format("opentype");
+  src: url("../../includes/fonts/HelveticaNeue-Roman.otf") format("opentype");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -57,7 +57,7 @@
 
 @font-face {
   font-family: "Helvetica Neue Local";
-  src: url("../../fonts/HelveticaNeue-Light.otf") format("opentype");
+  src: url("../../includes/fonts/HelveticaNeue-Light.otf") format("opentype");
   font-weight: 300;
   font-style: normal;
   font-display: swap;
@@ -65,7 +65,7 @@
 
 @font-face {
   font-family: "Helvetica Neue Local";
-  src: url("../../fonts/HelveticaNeue-Medium.otf") format("opentype");
+  src: url("../../includes/fonts/HelveticaNeue-Medium.otf") format("opentype");
   font-weight: 500 600;
   font-style: normal;
   font-display: swap;
@@ -73,18 +73,46 @@
 
 @font-face {
   font-family: "Helvetica Neue Local";
-  src: url("../../fonts/HelveticaNeue-Bold.otf") format("opentype");
+  src: url("../../includes/fonts/HelveticaNeue-Bold.otf") format("opentype");
   font-weight: 700 800;
   font-style: normal;
   font-display: swap;
 }
 
+/* La familia del diseño debe aplicarse también a los controles del formulario. */
+html,
 body {
   margin: 0;
+  background: var(--eleam-crema);
 }
-.post, .page {
-  margin: 0 0 0;
+
+body,
+button,
+input,
+select,
+optgroup,
+textarea {
+  font-family: "Helvetica Neue Local", Helvetica, Arial, sans-serif;
+  color: var(--eleam-texto);
 }
+
+/* El lienzo del sitio es blanco; el fondo crema evita una franja de contraste
+   bajo el último elemento y la estructura flex lleva el footer hasta el borde. */
+.site {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+.site > .site-main {
+  flex: 1 0 auto;
+  background: white;
+}
+
+.site > .pie-sitio {
+  flex: 0 0 auto;
+}
+
+
 h1,
 h2,
 h3,
@@ -120,7 +148,7 @@ h2,
 
 h3,
 .titulo-tarjeta {
-  font-size: 1.3rem;
+  font-size: 1.5rem;
   font-weight: 600;
   line-height: 1.35;
 }
@@ -481,4 +509,19 @@ a {
   display: flex;
   justify-content: center;
   margin-top: 32px;
+}
+
+/* Excepción deliberada: conservar la tipografía y escala previa de las
+   tarjetas de equipo de ¿Quiénes somos?, sin afectar los encabezados globales. */
+.tarjeta-horizontal,
+.tarjeta-persona {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+}
+.tarjeta-horizontal :is(h3, h4),
+.tarjeta-persona :is(h3, h4) {
+  font-family: inherit;
+}
+.tarjeta-horizontal .tarjeta-horizontal-titulo,
+.tarjeta-persona .card-body h3 {
+  font-size: 1.3rem;
 }

@@ -13,8 +13,8 @@ $texto_consultas = eleam_inicio_texto('descripcion_consultas', $contacto_id);
 $titulo_formulario = eleam_inicio_texto('titulo_formulario_contacto', $contacto_id, 'Formulario de contacto');
 $formulario = eleam_inicio_formulario_cf7();
 ?>
-<section class="seccion seccion-crema" aria-labelledby="titulo-contacto-inicio">
-    <div class="container">
+<section class="seccion seccion-crema contacto-interior" aria-label="Información de contacto y formulario">
+    <div class="contenedor-contenido">
         <div class="row align-items-stretch">
             <div class="col-lg">
                 <div class="bloque-contacto-informacion">
@@ -37,7 +37,7 @@ $formulario = eleam_inicio_formulario_cf7();
             <div class="col-lg-auto d-none d-lg-block"><div class="vr h-100"></div></div>
             <div class="col-lg">
                 <div class="formulario-contacto">
-                    <h2 class="inicio-formulario-titulo"><?php echo esc_html($titulo_formulario); ?></h2>
+                    <h2 class="visually-hidden"><?php echo esc_html($titulo_formulario); ?></h2>
                     <?php if ($formulario !== ''): ?>
                         <?php echo $formulario; // HTML producido y saneado por Contact Form 7. ?>
                     <?php else: ?>

@@ -125,3 +125,42 @@
     font-size: .875rem;
   }
 }
+
+/* Primera sección: lectura editorial compacta con jerarquía consistente. */
+.capellania-introduccion .encabezado-seccion {
+  margin-bottom: 0;
+}
+.capellania-introduccion .encabezado-seccion > h2 {
+  max-width: 900px;
+  margin-inline: auto;
+}
+.capellania-introduccion .encabezado-seccion > h2::after {
+  content: "";
+  display: block;
+  width: 64px;
+  height: 3px;
+  margin: 20px auto 0;
+  background: var(--eleam-terracota);
+  border-radius: 3px;
+}
+.capellania-introduccion-texto {
+  display: grid;
+  gap: 18px 40px;
+  max-width: 1050px;
+  margin: 30px auto 0;
+  text-align: left;
+}
+.capellania-introduccion-texto p {
+  margin: 0;
+  line-height: 1.7;
+  color: var(--eleam-texto);
+}
+.capellania-introduccion-texto p:first-child {
+  font-size: 1.0625rem;
+  font-weight: 500;
+}
+@media (min-width: 992px) {
+  .capellania-introduccion-texto:has(> p + p) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

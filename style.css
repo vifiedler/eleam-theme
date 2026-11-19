@@ -536,9 +536,7 @@ a {
 	color: #4169e1;
 }
 
-a:visited {
-	color: #800080;
-}
+/* Sin color especial para enlaces visitados: conservan los estilos de cada componente. */
 
 a:hover,
 a:focus,
