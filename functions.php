@@ -178,4 +178,10 @@ if ( defined( 'JETPACK__VERSION' ) ) {
 
 require get_template_directory(). '/assets/assets.php';
 
-
+$columnas = array(
+	'footer-1'        => 'Footer · Columna 1 (logo)',
+	'footer-2'        => 'Footer · Columna 2 (ubicación y contacto)',
+	'footer-3'        => 'Footer · Columna 3 (navegación)',
+	'footer-4'        => 'Footer · Columna 4 (marco legal)',
+	'footer-creditos' => 'Footer · Créditos',
+);
