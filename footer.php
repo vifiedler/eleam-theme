@@ -13,9 +13,9 @@
 
 		<div class="pie-sitio-rejilla">
 			<?php for ( $i = 1; $i <= 4; $i++ ) : ?>
-				<?php if ( is_active_sidebar( 'footer-' . $i ) ) : ?>
+				<?php if ( is_active_sidebar( 'footer_1' . $i ) ) : ?>
 					<div class="pie-sitio-columna">
-						<?php dynamic_sidebar( 'footer-' . $i ); ?>
+						<?php dynamic_sidebar( 'footer_1' . $i ); ?>
 					</div>
 				<?php endif; ?>
 			<?php endfor; ?>
