@@ -26,10 +26,9 @@ if ( $wp_query->have_posts() ) :
 							the_row();
 
 							// Subcampos
-							$imagen      = get_sub_field( 'imagen' );
-							$rotulo      = get_sub_field( 'rotulo' );
-							$descripcion = get_sub_field( 'descripcion' );
-							$clase_img   = get_sub_field( 'clase_imagen' );
+							$imagen      = get_sub_field( 'imagen_capellania' );
+							$descripcion = get_sub_field( 'descripcion_foto_capellania' );
+							$clase_img   = get_sub_field( 'etiqueta_foto_capellania' );
 							$class_special = ( 1 === get_row_index() ) ? ' galeria-mosaico-pieza-descripcion' : '';
 							?>
 

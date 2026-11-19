@@ -178,30 +178,4 @@ if ( defined( 'JETPACK__VERSION' ) ) {
 
 require get_template_directory(). '/assets/assets.php';
 
-function eleam_registrar_galeria() {
-	$labels = array(
-		'name'               => 'Galerías',
-		'singular_name'      => 'Galería',
-		'add_new'            => 'Añadir nueva',
-		'add_new_item'       => 'Añadir nueva galería',
-		'edit_item'          => 'Editar galería',
-		'new_item'           => 'Nueva galería',
-		'view_item'          => 'Ver galería',
-		'search_items'       => 'Buscar galerías',
-		'not_found'          => 'No se encontraron galerías',
-		'not_found_in_trash' => 'No hay galerías en la papelera',
-		'menu_name'          => 'Galerías',
-	);
 
-	register_post_type( 'galeria', array(
-		'labels'       => $labels,
-		'public'       => false,
-		'show_in_rest' => false,   // editor de bloques y API REST
-		'menu_icon'    => 'dashicons-format-gallery',
-		'menu_position' => 20,
-		'supports'     => array( 'title', 'excerpt' ),
-		'has_archive'  => false,
-		'rewrite'      => array( 'slug' => 'galeria' ),
-	) );
-}
-add_action( 'init', 'eleam_registrar_galeria' );
