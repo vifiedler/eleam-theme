@@ -74,22 +74,7 @@ while ( have_posts() ) :
 
 		<!-- GALERÍA -->
 		<section class="seccion" aria-labelledby="titulo-galeria">
-			<div class="container">
-				<div class="encabezado-seccion">
-					<h2 id="titulo-galeria"><?php echo $t( 'galeria_titulo' ); ?></h2>
-					<p class="text-center"><?php echo $t( 'galeria_texto' ); ?></p>
-				</div>
-				<div class="galeria-mosaico" role="group" aria-label="<?php echo esc_attr( get_field( 'galeria_etiqueta' ) ); ?>">
-					<?php foreach ( $piezas as $i => $pieza ) : ?>
-					<figure class="galeria-mosaico-pieza<?php echo 0 === $i ? ' galeria-mosaico-pieza-descripcion' : ''; ?>" data-rotulo="<?php echo esc_attr( $pieza['rotulo'] ); ?>"
-						tabindex="0">
-						<img class="img-fluid<?php echo $pieza['clase_imagen'] ? ' ' . esc_attr( $pieza['clase_imagen'] ) : ''; ?>" src="<?php echo $src( $pieza['imagen'] ); ?>" alt="<?php echo $alt( $pieza['imagen'] ); ?>"
-							loading="lazy" decoding="async">
-						<figcaption class="galeria-mosaico-pie"><?php echo esc_html( $pieza['descripcion'] ); ?></figcaption>
-					</figure>
-					<?php endforeach; ?>
-				</div>
-			</div>
+			<?php include get_template_directory() . '/assets/modulos/modulo-capellania/loop-modulo-capellania.php'; ?>
 		</section>
 
 		<!-- CALENDARIO LITÚRGICO: ENCABEZADO -->
