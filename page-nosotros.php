@@ -89,37 +89,8 @@ while ( have_posts() ) :
 		</section>
 
 		<!-- NUESTROS VALORES-->
-		<?php if ( $tabs ) : ?>
-		<section class="seccion" aria-labelledby="titulo-valores">
-			<div class="container">
-				<header class="encabezado-seccion">
-					<h2 id="titulo-valores"><?php echo $t( 'valores_titulo' ); ?></h2>
-				</header>
+					<?php include get_template_directory() . '/assets/modulos/modulo-quienes-somos/loop-modulo-quienes-somos.php'; ?>
 
-				<div class="nav d-grid talleres-botones" role="tablist" style="grid-template-columns: repeat(<?php echo count( $tabs ); ?>, 1fr);">
-					<?php foreach ( $tabs as $i => $tab ) : ?>
-						<?php $slug = sanitize_title( $tab['pestana'] ) ?: 'item-' . $i; ?>
-					<button type="button" id="tab-<?php echo esc_attr( $slug ); ?>" class="taller-boton<?php echo 0 === $i ? ' active' : ''; ?>" data-bs-toggle="tab" data-bs-target="#panel-<?php echo esc_attr( $slug ); ?>" role="tab" aria-controls="panel-<?php echo esc_attr( $slug ); ?>" aria-selected="<?php echo 0 === $i ? 'true' : 'false'; ?>"<?php echo 0 === $i ? '' : ' tabindex="-1"'; ?>><?php echo esc_html( $tab['pestana'] ); ?></button>
-					<?php endforeach; ?>
-				</div>
-
-				<div class="tab-content">
-					<?php foreach ( $tabs as $i => $tab ) : ?>
-						<?php $slug = sanitize_title( $tab['pestana'] ) ?: 'item-' . $i; ?>
-					<div class="tab-pane fade<?php echo 0 === $i ? ' show active' : ''; ?>" id="panel-<?php echo esc_attr( $slug ); ?>" role="tabpanel" aria-labelledby="tab-<?php echo esc_attr( $slug ); ?>" tabindex="0">
-						<div class="d-flex flex-column flex-md-row taller-panel">
-							<img src="<?php echo $src( $tab['imagen'] ); ?>" alt="<?php echo $alt( $tab['imagen'] ); ?>" class="col-md-6 img-fluid object-fit-cover">
-							<div class="d-flex flex-column taller-contenido col-md-6">
-								<h3 class="taller-titulo mt-4 text-center"><?php echo esc_html( $tab['titulo'] ); ?></h3>
-								<?php echo $ps( $tab['texto'] ); ?>
-							</div>
-						</div>
-					</div>
-					<?php endforeach; ?>
-				</div>
-			</div>
-		</section>
-		<?php endif; ?>
 
 		<!-- NUESTRO EQUIPO -->
 		<section class="seccion" aria-labelledby="titulo-equipo">
