@@ -1,0 +1,129 @@
+/* ELEAM · Navegación con Walker. Extensión localizada de general.css. */
+
+.navegacion-principal .navbar-collapse {
+    min-width: 0;
+    justify-content: flex-end;
+}
+
+.navegacion-principal .navegacion-enlaces {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 0 auto;
+}
+
+.navegacion-principal .nav-item {
+    list-style: none;
+}
+
+/* El enlace padre se reemplaza por un botón accesible; igual apariencia. */
+.navegacion-principal button.nav-link {
+    border: 0;
+    border-bottom: 2px solid transparent;
+    cursor: pointer;
+    font-family: inherit;
+    text-align: left;
+}
+
+.navegacion-principal .dropdown-toggle::after {
+    display: none;
+}
+
+.navegacion-principal .navegacion-secundaria > button .bi {
+    font-size: .75em;
+    transition: transform var(--eleam-duracion-interaccion) var(--eleam-curva-transicion);
+}
+
+.navegacion-principal .navegacion-secundaria > button[aria-expanded="true"] .bi {
+    transform: rotate(180deg);
+}
+
+.navegacion-principal .current-menu-ancestor > .nav-link,
+.navegacion-principal .current-menu-parent > .nav-link,
+.navegacion-principal .current-menu-item > .nav-link {
+    font-weight: 700;
+    border-bottom-color: var(--eleam-terracota);
+}
+
+.navegacion-principal .navegacion-submenu {
+    margin: 0;
+    padding: 8px;
+    border-radius: var(--eleam-radio);
+    max-width: min(90vw, 320px);
+}
+
+.navegacion-principal .navegacion-submenu .dropdown-item {
+    border-radius: var(--eleam-radio);
+    border-bottom: 2px solid transparent;
+    min-height: 44px;
+    white-space: normal;
+}
+
+.navegacion-principal .navegacion-submenu .dropdown-item:focus-visible,
+.navegacion-principal .navegacion-submenu .dropdown-item[aria-current="page"] {
+    border-bottom-color: var(--eleam-terracota);
+}
+
+.navegacion-principal .navegacion-accion .boton {
+    text-decoration: none;
+}
+
+.navegacion-principal .boton-menu-movil {
+    border: 1px solid var(--eleam-borde);
+    border-radius: var(--eleam-radio);
+    color: var(--eleam-azul);
+    padding: 8px 12px;
+    min-height: 44px;
+    min-width: 44px;
+}
+
+.navegacion-principal .boton-menu-movil:focus-visible {
+    outline: 3px solid var(--eleam-azul);
+    outline-offset: 3px;
+    box-shadow: none;
+}
+
+.navegacion-principal .boton-menu-movil .bi {
+    font-size: 1.5rem;
+    line-height: 1;
+}
+
+@media (max-width: 1199.98px) {
+    .navegacion-principal .navbar-collapse {
+        flex-basis: 100%;
+    }
+
+    .navegacion-principal .navegacion-enlaces {
+        width: 100%;
+        padding: 12px 0 8px;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 2px;
+    }
+
+    .navegacion-principal .navegacion-enlaces > .nav-item > .nav-link,
+    .navegacion-principal .navegacion-enlaces > .nav-item > .boton {
+        display: flex;
+        width: 100%;
+        justify-content: flex-start;
+    }
+
+    .navegacion-principal .navegacion-submenu {
+        position: static;
+        min-width: 0;
+        max-width: 100%;
+        border: 0;
+        box-shadow: none;
+        padding: 0 0 0 16px;
+    }
+
+    .navegacion-principal .navegacion-accion {
+        margin-top: 8px;
+    }
+
+    .navegacion-principal .navegacion-accion .boton {
+        justify-content: center !important;
+        max-width: 100%;
+    }
+}
