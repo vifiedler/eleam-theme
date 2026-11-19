@@ -1,55 +1,32 @@
-<?php
-$temp = $wp_query;
-$args = array(
-	'post_type'      => 'galeria',  
-	'orderby'        => 'date',
-	'order'          => 'ASC',
-	'posts_per_page' => 1,
-);
-$wp_query = new WP_Query( $args );
+<div class="container">
+	<div class="encabezado-seccion">
+		<h2 id="titulo-galeria"><?php echo esc_html( get_field( 'titulo_seccion_2_capellania' ) ); ?></h2>
+		<p class="text-center"><?php echo esc_html( get_field( 'texto_seccion_2_capellania' ) ); ?></p>
+	</div>
 
-if ( $wp_query->have_posts() ) :
-	while ( $wp_query->have_posts() ) :
-		$wp_query->the_post(); ?>
+	<?php if ( function_exists( 'have_rows' ) && have_rows( 'galeria_capellania' ) ) : ?>
+		<div class="galeria-mosaico" role="group" aria-label="<?php echo esc_attr( get_field( 'titulo_seccion_2_capellania' ) ); ?>">
+			<?php
+			while ( have_rows( 'galeria_capellania' ) ) :
+				the_row();
 
-		<section class="seccion" aria-labelledby="titulo-galeria">
-			<div class="container">
-				<div class="encabezado-seccion">
-					<h2 id="titulo-galeria"><?php the_title(); ?></h2>
-					<p class="text-center"><?php echo esc_html( get_the_excerpt() ); ?></p>
-				</div>
+				$imagen      = get_sub_field( 'imagen_capellania' );
+				$rotulo      = get_sub_field( 'etiqueta_foto_capellania' );
+				$descripcion = get_sub_field( 'descripcion_foto_capellania' );
+				$class_special = ( 1 === get_row_index() ) ? ' galeria-mosaico-pieza-descripcion' : '';
+				?>
 
-				<div class="galeria-mosaico" role="group" aria-label="<?php echo esc_attr( get_field( 'galeria_etiqueta' ) ); ?>">
-					<?php
-					if ( have_rows( 'galeria_capellania' ) ) :
-						while ( have_rows( 'galeria_capellania' ) ) :
-							the_row();
+				<figure class="galeria-mosaico-pieza<?php echo esc_attr( $class_special ); ?>" data-rotulo="<?php echo esc_attr( $rotulo ); ?>" tabindex="0">
+					<?php if ( is_array( $imagen ) && ! empty( $imagen['url'] ) ) : ?>
+						<img class="img-fluid"
+							src="<?php echo esc_url( $imagen['url'] ); ?>"
+							alt="<?php echo esc_attr( isset( $imagen['alt'] ) && $imagen['alt'] ? $imagen['alt'] : $rotulo ); ?>"
+							loading="lazy" decoding="async">
+					<?php endif; ?>
+					<figcaption class="galeria-mosaico-pie"><?php echo esc_html( $descripcion ); ?></figcaption>
+				</figure>
 
-							// Subcampos
-							$imagen      = get_sub_field( 'imagen_capellania' );
-							$descripcion = get_sub_field( 'descripcion_foto_capellania' );
-							$clase_img   = get_sub_field( 'etiqueta_foto_capellania' );
-							$class_special = ( 1 === get_row_index() ) ? ' galeria-mosaico-pieza-descripcion' : '';
-							?>
-
-							<figure class="galeria-mosaico-pieza<?php echo esc_attr( $class_special ); ?>" data-rotulo="<?php echo esc_attr( $rotulo ); ?>" tabindex="0">
-								<?php if ( ! empty( $imagen ) ) : ?>
-									<img class="img-fluid<?php echo $clase_img ? ' ' . esc_attr( $clase_img ) : ''; ?>"
-										src="<?php echo esc_url( $imagen['url'] ); ?>"
-										alt="<?php echo esc_attr( $imagen['alt'] ); ?>"
-										loading="lazy" decoding="async">
-								<?php endif; ?>
-								<figcaption class="galeria-mosaico-pie"><?php echo esc_html( $descripcion ); ?></figcaption>
-							</figure>
-
-						<?php endwhile;
-					endif; // FIN DEL REPETIDOR ?>
-				</div>
-			</div>
-		</section>
-
-	<?php endwhile;
-endif;
-wp_reset_query();
-$wp_query = $temp;
-?>
+			<?php endwhile; ?>
+		</div>
+	<?php endif; ?>
+</div>
