@@ -44,10 +44,10 @@ if ( have_rows( 'tarjetas_actividades' ) ) : ?>
 
 					<article class="card tarjeta d-flex flex-row">
 						<?php if ( ! empty( $imagen ) ) : ?>
-							<div class="flex-shrink-0" style="width: 38%;">
+							<div class="flex-shrink-0 position-relative tarjeta-participar-media">
 								<img src="<?php echo esc_url( $imagen['url'] ); ?>"
 									alt="<?php echo esc_attr( $imagen['alt'] ); ?>"
-									class="w-100 h-100 object-fit-cover" loading="lazy" decoding="async">
+									class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover" loading="lazy" decoding="async">
 							</div>
 						<?php endif; ?>
 						<div class="card-body d-flex flex-column justify-content-center">
