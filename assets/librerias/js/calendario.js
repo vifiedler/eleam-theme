@@ -216,7 +216,7 @@
         programarSiguienteHito();
       });
 
-      function moverCuatroHitos(direccion) {
+      function moverUnHito(direccion) {
         cancelarSiguienteFrame();
         congelarYCancelar();
 
@@ -240,13 +240,13 @@
       $calendario
         .find('[data-calendario-accion="anterior"]')
         .on('click.calendario', function () {
-          moverCuatroHitos(-1);
+          moverUnHito(-1);
         });
 
       $calendario
         .find('[data-calendario-accion="siguiente"]')
         .on('click.calendario', function () {
-          moverCuatroHitos(1);
+          moverUnHito(1);
         });
 
       $botonPlay.on('click.calendario', function () {

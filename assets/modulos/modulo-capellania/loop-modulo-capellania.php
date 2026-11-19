@@ -87,10 +87,6 @@
 				aria-label="Reproducir calendario">
 				<i class="bi bi-play-fill" aria-hidden="true"></i>
 			</button>
-			<button type="button" class="calendario-liturgico-control" data-calendario-accion="pausar"
-				aria-label="Pausar calendario">
-				<i class="bi bi-pause-fill" aria-hidden="true"></i>
-			</button>
 			<button type="button" class="calendario-liturgico-control" data-calendario-accion="siguiente"
 				aria-label="Siguiente hito">
 				<i class="bi bi-chevron-right" aria-hidden="true"></i>
