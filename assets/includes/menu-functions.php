@@ -6,6 +6,18 @@ function cargar_estilos_para_menus()
     wp_register_style('estilos-menus', get_template_directory_uri() . '/assets/templates/navs/nav.css', array('general'), filemtime(get_template_directory() . '/assets/templates/navs/nav.css'), 'all');
 
     wp_enqueue_style('estilos-menus');
+
+    // Interacción accesible y localizada del desplegable del Walker ELEAM.
+    $script_nav = get_template_directory() . '/assets/templates/navs/nav.js';
+    if (file_exists($script_nav)) {
+        wp_enqueue_script(
+            'eleam-nav-desplegable',
+            get_template_directory_uri() . '/assets/templates/navs/nav.js',
+            array(),
+            filemtime($script_nav),
+            true
+        );
+    }
 }
 
 // Añadir la acción al hook 'wp_enqueue_scripts' que es el adecuado para encolar estilos y scripts
