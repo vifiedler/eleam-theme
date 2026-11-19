@@ -98,3 +98,54 @@
 		</div>
 	</section>
 <?php endif; ?>
+
+<?php
+// Textos de la PÁGINA: se leen antes del loop, porque dentro de la consulta get_field() lee la entrada actual.
+$titulo_pub = get_field( 'titulo_actividades_liturgicas' );
+$texto_pub  = get_field( 'contenido_actividades_liturgicas' );
+$ver_mas    = get_field( 'texto_expandir_publicacion' ) ?: 'Ver más';
+
+$capellania_query = new WP_Query( array(
+	'post_type'           => 'post',
+	'category_name'       => 'capellania',
+	'orderby'             => 'date',
+	'order'               => 'DESC',
+	'posts_per_page'      => 6,
+	'ignore_sticky_posts' => true,
+) );
+
+if ( $capellania_query->have_posts() ) : ?>
+<section class="seccion" aria-labelledby="titulo-publicaciones">
+	<div class="container">
+		<header class="encabezado-seccion">
+			<h2 id="titulo-publicaciones"><?php echo esc_html( $titulo_pub ); ?></h2>
+			<p class="text-center"><?php echo esc_html( $texto_pub ); ?></p>
+		</header>
+
+		<?php
+		while ( $capellania_query->have_posts() ) :
+			$capellania_query->the_post();
+			$detalle_id = 'detalle-capellania-' . get_the_ID();
+			?>
+			<article class="publicacion" data-publicacion>
+				<time class="publicacion-fecha" datetime="<?php echo esc_attr( get_the_date( 'Y-m-d' ) ); ?>"><strong><?php echo esc_html( get_the_date( 'd' ) ); ?></strong><?php echo esc_html( date_i18n( 'M. Y', get_post_timestamp() ) ); ?></time>
+				<div>
+					<h3 class="publicacion-titulo"><?php the_title(); ?></h3>
+					<p class="publicacion-extracto"><?php echo esc_html( get_the_excerpt() ); ?></p>
+					<div class="publicacion-detalle collapse" id="<?php echo esc_attr( $detalle_id ); ?>">
+						<?php the_content(); ?>
+					</div>
+				</div>
+				<button class="publicacion-control" type="button" data-bs-toggle="collapse"
+					data-bs-target="#<?php echo esc_attr( $detalle_id ); ?>" aria-expanded="false" aria-controls="<?php echo esc_attr( $detalle_id ); ?>">
+					<span class="publicacion-control-texto"><?php echo esc_html( $ver_mas ); ?></span>
+					<span class="bi bi-arrow-down" aria-hidden="true"></span>
+				</button>
+			</article>
+		<?php endwhile; ?>
+	</div>
+</section>
+<?php
+	wp_reset_postdata();
+endif;
+?>
