@@ -51,7 +51,7 @@ if ( have_rows( 'tarjetas_actividades' ) ) : ?>
 							</div>
 						<?php endif; ?>
 						<div class="card-body d-flex flex-column justify-content-start">
-							<h3 class="card-title mb-5"><?php echo esc_html( $titulo ); ?></h3>
+							<h3 class="card-title mb-3"><?php echo esc_html( $titulo ); ?></h3>
 							<p class="card-text"><?php echo esc_html( $texto ); ?></p>
 							<?php if ( $tiene_enlace ) : ?>
 								<a href="<?php echo esc_url( $enlace['url'] ); ?>" target="<?php echo esc_attr( $enlace_dest ); ?>" class="link-ver-mas"><?php echo esc_html( $enlace_texto ); ?> <i class="bi bi-arrow-right-short" aria-hidden="true"></i></a>
