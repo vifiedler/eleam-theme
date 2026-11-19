@@ -1290,15 +1290,18 @@ textarea.form-control {
   z-index: 1;
 }
 
+/* El gradiente de Figma superpuesto a la imagen */
 .compromiso-tarjeta::before {
   content: '';
   position: absolute;
   inset: 0;
   z-index: 2;
-  pointer-events: none; 
+  pointer-events: none; /* Para que no bloquee clics */
+  /* Gradiente exacto de Figma: CFCFCF a 1B95FF */
   background: linear-gradient(180deg, #CFCFCF 0%, #1B95FF 54%);
+  /* Al 12% de opacidad como dice el Figma */
   opacity: 0.12; 
-  mix-blend-mode: multiply; 
+  mix-blend-mode: multiply; /* Ayuda a integrar el gradiente con la imagen */
 }
 
 .compromiso-contenido {
