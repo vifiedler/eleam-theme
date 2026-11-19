@@ -21,8 +21,8 @@ if ( $wp_query->have_posts() ) :
 
 				<div class="galeria-mosaico" role="group" aria-label="<?php echo esc_attr( get_field( 'galeria_etiqueta' ) ); ?>">
 					<?php
-					if ( have_rows( 'galeria_piezas' ) ) :
-						while ( have_rows( 'galeria_piezas' ) ) :
+					if ( have_rows( 'galeria_capellania' ) ) :
+						while ( have_rows( 'galeria_capellania' ) ) :
 							the_row();
 
 							// Subcampos
