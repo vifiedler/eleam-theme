@@ -54,15 +54,7 @@ while ( have_posts() ) :
 		<!-- INFORMACIÓN Y FORMULARIO -->
 					<?php include get_template_directory() . '/assets/modulos/modulo-contacto/loop-modulo-contacto.php'; ?>
 
-		<!-- BANNER CONTRIBUCIÓN -->
-		<section class="banner-contribucion" aria-labelledby="titulo-contribucion">
-			<div class="contenedor-contenido">
-				<h2 id="titulo-contribucion"><?php echo $t( 'banner_titulo' ); ?></h2>
-				<p><?php echo $t( 'banner_texto' ); ?></p>
-				<a class="btn boton boton-primario" href="<?php echo $btn_banner['url']; ?>"><?php echo $btn_banner['title']; ?> <span
-						aria-hidden="true">→</span></a>
-			</div>
-		</section>
+		<?php get_template_part( 'assets/modulos/modulo-comun/loop-banner' ); ?>
 
 	</div><!-- #contenido -->
 	<?php

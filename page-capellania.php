@@ -59,6 +59,8 @@ while ( have_posts() ) :
 
 			<?php include get_template_directory() . '/assets/modulos/modulo-capellania/loop-modulo-capellania.php'; ?>
 
+		<?php get_template_part( 'assets/modulos/modulo-comun/loop-banner' ); ?>
+
 	</div><!-- #contenido -->
 	<?php
 endwhile; // End of the loop.
