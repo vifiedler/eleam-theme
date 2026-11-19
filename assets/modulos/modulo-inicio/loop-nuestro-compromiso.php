@@ -4,8 +4,8 @@ defined('ABSPATH') || exit;
 $filas = eleam_inicio_campo('tarjetas_compromiso_inicio', false, array());
 $tarjetas = is_array($filas) ? $filas : array();
 $grupos = array(
-    array('clase' => 'row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4', 'items' => array_slice($tarjetas, 0, 3)),
-    array('clase' => 'row row-cols-1 row-cols-md-2 row-cols-lg-2 g-4 m-1', 'items' => array_slice($tarjetas, 3)),
+    // row-cols-lg-5 fuerza a que se dividan en 5 columnas exactas
+    array('clase' => 'row row-cols-1 row-cols-md-2 row-cols-lg-5 g-3', 'items' => $tarjetas),
 );
 ?>
 <section class="seccion seccion-crema" aria-labelledby="titulo-compromiso">
