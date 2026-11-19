@@ -35,6 +35,30 @@
   border: 3px solid var(--eleam-azul);
 }
 
+/* Botones del formulario de aporte: se ven clickeables (cursor, hover y presión). */
+.formulario-aporte .boton[data-valor] {
+  cursor: pointer;
+  transition: background-color 180ms ease, border-color 180ms ease, color 180ms ease, box-shadow 180ms ease, transform 120ms ease;
+}
+
+.formulario-aporte .boton[data-valor][aria-pressed="false"]:hover {
+  --bs-btn-hover-bg: #fbeee8;
+  --bs-btn-hover-color: var(--eleam-terracota-oscuro);
+  --bs-btn-hover-border-color: var(--eleam-terracota-oscuro);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+}
+
+.formulario-aporte .boton[data-valor][aria-pressed="true"]:hover {
+  --bs-btn-hover-bg: var(--eleam-terracota-oscuro);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.formulario-aporte .boton[data-valor]:active {
+  transform: translateY(0) scale(0.97);
+  box-shadow: none;
+}
+
 .opciones-aporte {
   display: flex;
   flex-wrap: wrap;
