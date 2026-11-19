@@ -43,3 +43,57 @@
         </div>
     </div>
 </section>
+
+<?php if ( function_exists( 'have_rows' ) && have_rows( 'eventos_calendario_liturgico' ) ) : ?>
+<section class="calendario-liturgico seccion-crema pb-5" role="group" aria-label="<?php echo esc_attr( get_field( 'titulo_calendario_liturgico' ) ); ?>">
+	<div class="calendario-liturgico-linea" aria-hidden="true"></div>
+	<div class="container calendario-liturgico-pista">
+		<?php
+		while ( have_rows( 'eventos_calendario_liturgico' ) ) :
+			the_row();
+
+			$titulo = get_sub_field( 'titulo_hito_liturgico' );
+
+			// "false" devuelve el valor guardado (Ymd), sin depender del formato de retorno del campo.
+			$inicio  = get_sub_field( 'fecha_inicio_liturgica', false );
+			$termino = get_sub_field( 'fecha_termino_liturgica', false );
+
+			$ts_inicio  = $inicio ? strtotime( $inicio ) : false;
+			$ts_termino = $termino ? strtotime( $termino ) : false;
+
+			$fecha_attr  = $ts_inicio ? date_i18n( 'Y-m-d', $ts_inicio ) : '';
+			$fecha_texto = $ts_inicio ? date_i18n( 'j \d\e F', $ts_inicio ) : '';
+
+			// Si hay rango (término distinto del inicio): "30 de marzo al 3 de abril".
+			if ( $ts_inicio && $ts_termino && $ts_termino !== $ts_inicio ) {
+				$fecha_texto .= ' al ' . date_i18n( 'j \d\e F', $ts_termino );
+			}
+			?>
+			<article class="calendario-liturgico-hito">
+				<div class="calendario-liturgico-tarjeta">
+					<h3><?php echo esc_html( $titulo ); ?></h3>
+				</div>
+				<time datetime="<?php echo esc_attr( $fecha_attr ); ?>"><?php echo esc_html( $fecha_texto ); ?></time>
+			</article>
+		<?php endwhile; ?>
+	</div>
+	<div class="calendario-liturgico-controles" role="group" aria-label="Controles del calendario litúrgico">
+		<button type="button" class="calendario-liturgico-control" data-calendario-accion="anterior"
+			aria-label="Hito anterior">
+			<i class="bi bi-chevron-left" aria-hidden="true"></i>
+		</button>
+		<button type="button" class="calendario-liturgico-control" data-calendario-accion="reproducir"
+			aria-label="Reproducir calendario">
+			<i class="bi bi-play-fill" aria-hidden="true"></i>
+		</button>
+		<button type="button" class="calendario-liturgico-control" data-calendario-accion="pausar"
+			aria-label="Pausar calendario">
+			<i class="bi bi-pause-fill" aria-hidden="true"></i>
+		</button>
+		<button type="button" class="calendario-liturgico-control" data-calendario-accion="siguiente"
+			aria-label="Siguiente hito">
+			<i class="bi bi-chevron-right" aria-hidden="true"></i>
+		</button>
+	</div>
+</section>
+<?php endif; ?>
