@@ -1272,7 +1272,7 @@ textarea.form-control {
   display: flex;
   flex-direction: column;
   height: 100%;
-  min-height: 440px;
+  min-height: 350px; 
   border-radius: 0.5rem;
   overflow: hidden;
   background-color: #fcf8f4;
@@ -1313,7 +1313,7 @@ textarea.form-control {
   flex-direction: column;
   justify-content: flex-start;
   height: 100%;
-  padding: 73px 22px 26px 22px;
+  padding: 50px 24px 26px 24px; 
   text-align: center;
 }
 
@@ -1340,15 +1340,10 @@ textarea.form-control {
   line-height: 150%;
 }
 
+/* Ajuste para móviles/tablets */
 @media (max-width: 991.98px) {
   .compromiso-tarjeta {
-    min-height: 380px;
-  }
-}
-
-@media (max-width: 767.98px) {
-  .compromiso-contenido {
-    padding-top: 40px;
+    min-height: 300px;
   }
 }
 

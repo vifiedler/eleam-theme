@@ -125,7 +125,7 @@ foreach ( $grupos_valores as $clave => $grupo_campo ) {
 					$profesion   = get_sub_field( 'subtitulo_profesion_clinico' );
 					$descripcion = get_sub_field( 'descripcion_clinico' );
 					?>
-					<div class="col-md-4">
+					<div class="col-md-3">
 						<article class="card tarjeta tarjeta-persona h-100">
 							<?php if ( is_array( $imagen ) && ! empty( $imagen['url'] ) ) : ?>
 								<img src="<?php echo esc_url( $imagen['url'] ); ?>"
