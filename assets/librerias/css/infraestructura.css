@@ -1,0 +1,26 @@
+/* Galerías SCF incompletas: el último mosaico mantiene la altura de los demás. */
+.galeria-mosaico--1 {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: 600px;
+}
+.galeria-mosaico--2 {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: repeat(2, 292px);
+}
+.galeria-mosaico--3 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: repeat(2, 292px);
+}
+.galeria-mosaico--1 > .galeria-mosaico-pieza,
+.galeria-mosaico--2 > .galeria-mosaico-pieza,
+.galeria-mosaico--3 > .galeria-mosaico-pieza {
+    grid-column: auto;
+}
+.galeria-mosaico--3 > .galeria-mosaico-pieza:last-child {
+    grid-column: 1 / -1;
+}
+@media (max-width: 767.98px) {
+    .galeria-mosaico--1 { grid-template-rows: 456px; }
+    .galeria-mosaico--2,
+    .galeria-mosaico--3 { grid-template-rows: repeat(2, 220px); }
+}

@@ -18,7 +18,7 @@ get_header();
             <?php get_template_part('assets/modulos/modulo-transparencia/loop-aportes'); ?>
             <?php get_template_part('assets/modulos/modulo-transparencia/loop-transferencias'); ?>
             <?php get_template_part('assets/modulos/modulo-transparencia/loop-directorio'); ?>
-            <!--<?php get_template_part('assets/modulos/modulo-transparencia/loop-profesionales'); ?>-->
+            <?php get_template_part('assets/modulos/modulo-transparencia/loop-profesionales'); ?>
             <?php get_template_part('assets/modulos/modulo-transparencia/loop-banner'); ?>
         </div>
     <?php endwhile; ?>
