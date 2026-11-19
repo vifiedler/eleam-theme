@@ -11,7 +11,7 @@
 <footer id="colophon" class="pie-sitio">
 	<div class="container-fluid contenedor-amplio">
 		<div class="pie-sitio-rejilla">
-			<div class="pie-sitio-columna pie-sitio-marca">
+			<div class="pie-sitio-marca">
 				<?php if ( is_active_sidebar( 'footer_1' ) ) : ?>
 					<?php dynamic_sidebar( 'footer_1' ); ?>
 				<?php else : ?>
@@ -22,7 +22,7 @@
 					<a href="<?php echo esc_url( home_url( '/' ) ); ?>" aria-label="<?php esc_attr_e( 'ELEAM San Francisco, inicio', 'eleam-theme' ); ?>">
 						<?php if ( $logo_id ) : ?>
 							<?php echo wp_get_attachment_image( $logo_id, 'medium', false, array(
-								'class' => 'img-fluid',
+								'class' => 'pie-sitio-logo',
 								'alt' => 'ELEAM San Francisco',
 								'loading' => 'lazy',
 								'decoding' => 'async',
@@ -35,17 +35,22 @@
 			</div>
 
 			<?php if ( is_active_sidebar( 'footer_2' ) ) : ?>
-				<div class="pie-sitio-columna">
+				<div>
 					<?php dynamic_sidebar( 'footer_2' ); ?>
 				</div>
 			<?php else : ?>
-				<div class="pie-sitio-columna">
+				<div>
 					<h2><?php esc_html_e( 'Ubicación', 'eleam-theme' ); ?></h2>
 					<address>Los Libertadores 234, El Monte. Región Metropolitana</address>
+					<h3><?php esc_html_e( 'Teléfono', 'eleam-theme' ); ?></h3>
+					<div class="pila-contenido">
+						<p><?php esc_html_e( 'Teléfono: por confirmar', 'eleam-theme' ); ?></p>
+						<p><?php esc_html_e( 'Correo: por confirmar', 'eleam-theme' ); ?></p>
+					</div>
 				</div>
 			<?php endif; ?>
 
-			<div class="pie-sitio-columna">
+			<div>
 				<?php if ( is_active_sidebar( 'footer_3' ) ) : ?>
 					<?php dynamic_sidebar( 'footer_3' ); ?>
 				<?php else : ?>
@@ -80,13 +85,24 @@
 			</div>
 
 			<?php if ( is_active_sidebar( 'footer_4' ) ) : ?>
-				<div class="pie-sitio-columna">
+				<div>
 					<?php dynamic_sidebar( 'footer_4' ); ?>
 				</div>
 			<?php else : ?>
-				<div class="pie-sitio-columna">
+				<div>
 					<h2><?php esc_html_e( 'Marco legal y calidad', 'eleam-theme' ); ?></h2>
 					<div class="pie-sitio-legal">
+						<p>
+							<?php esc_html_e( 'Resolución sanitaria SEREMI de Salud', 'eleam-theme' ); ?>
+							<span>[N.º y fecha por confirmar]</span>
+						</p>
+						<p>
+							<?php esc_html_e( 'Registro Nacional ELEAM · SENAMA', 'eleam-theme' ); ?>
+							<span>[Folio por confirmar]</span>
+						</p>
+						<p class="pie-sitio-respaldo">
+							<?php esc_html_e( 'Respaldo institucional: Fundación Cáritas Melipilla.', 'eleam-theme' ); ?>
+						</p>
 						<a href="<?php echo esc_url( home_url( '/transparencia/' ) ); ?>">
 							<?php esc_html_e( 'Ver informes y balances', 'eleam-theme' ); ?>
 							<span class="bi bi-arrow-right" aria-hidden="true"></span>
