@@ -30,3 +30,48 @@
 		</div>
 	<?php endif; ?>
 </div>
+
+<?php if ( have_rows( 'eventos_calendario_liturgico' ) ) : ?>
+<section class="calendario-liturgico seccion-crema pb-5" role="group" aria-label="<?php echo esc_attr( get_field( 'calendario_etiqueta' ) ?: 'Hitos del calendario litúrgico' ); ?>">
+	<div class="calendario-liturgico-linea" aria-hidden="true"></div>
+	<div class="container calendario-liturgico-pista">
+		<?php
+		while ( have_rows( 'calendario_hitos' ) ) :
+			the_row();
+
+			$nombre      = get_sub_field( 'titulo_hito_liturgico' );
+			$fecha_raw   = get_sub_field( 'fecha_inicio_liturgica', false ); // valor sin formatear (Ymd), no depende del formato de retorno
+			$fecha_texto = get_sub_field( 'fecha_termino_liturgica' );
+
+			$ts          = $fecha_raw ? strtotime( $fecha_raw ) : false;
+			$fecha_attr  = $ts ? date_i18n( 'Y-m-d', $ts ) : '';
+			$fecha_texto = $fecha_texto ?: ( $ts ? date_i18n( 'j \d\e F', $ts ) : '' );
+			?>
+			<article class="calendario-liturgico-hito">
+				<div class="calendario-liturgico-tarjeta">
+					<h3><?php echo esc_html( $nombre ); ?></h3>
+				</div>
+				<time datetime="<?php echo esc_attr( $fecha_attr ); ?>"><?php echo esc_html( $fecha_texto ); ?></time>
+			</article>
+		<?php endwhile; ?>
+	</div>
+	<div class="calendario-liturgico-controles" role="group" aria-label="Controles del calendario litúrgico">
+		<button type="button" class="calendario-liturgico-control" data-calendario-accion="anterior"
+			aria-label="Hito anterior">
+			<i class="bi bi-chevron-left" aria-hidden="true"></i>
+		</button>
+		<button type="button" class="calendario-liturgico-control" data-calendario-accion="reproducir"
+			aria-label="Reproducir calendario">
+			<i class="bi bi-play-fill" aria-hidden="true"></i>
+		</button>
+		<button type="button" class="calendario-liturgico-control" data-calendario-accion="pausar"
+			aria-label="Pausar calendario">
+			<i class="bi bi-pause-fill" aria-hidden="true"></i>
+		</button>
+		<button type="button" class="calendario-liturgico-control" data-calendario-accion="siguiente"
+			aria-label="Siguiente hito">
+			<i class="bi bi-chevron-right" aria-hidden="true"></i>
+		</button>
+	</div>
+</section>
+<?php endif; ?>
