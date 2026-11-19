@@ -9,7 +9,7 @@ function js_function()
         wp_register_script('bootstrap-js', $bootstrap_url, array(), '5.3.8', true);
         wp_register_script('slick-js', 'https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js', array('jquery'), '1.8.1', true);
         wp_register_script('gsap-js', get_template_directory_uri() . '/assets/includes/vendors/gsap/gsap.min.js', array(), null, true);
-        wp_register_script('calendario-js', get_template_directory_uri() . '/assets/librerias/js/calendario.js', array(), null, true);
+        wp_register_script('calendario-js', get_template_directory_uri() . '/assets/librerias/js/calendario.js', array('jquery', 'slick-js'), null, true);
         wp_register_script('capellania-js', get_template_directory_uri() . '/assets/librerias/js/capellania.js', array('bootstrap-js'), null, true);
         wp_register_script('donaciones-js', get_template_directory_uri() . '/assets/librerias/js/donaciones.js', array(), null, true);
         wp_register_script('galeria-js', get_template_directory_uri() . '/assets/librerias/js/galeria.js', array('jquery', 'slick-js'), null, true);
