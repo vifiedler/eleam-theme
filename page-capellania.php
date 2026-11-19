@@ -48,18 +48,12 @@ while ( have_posts() ) :
 
 		<!-- HERO -->
 		<section class="hero-interior" aria-labelledby="titulo-pagina">
-			<div class="container-fluid contenedor-amplio">
-				<div class="row">
-					<div class="col-md-6 hero-interior-texto">
-						<h1 id="titulo-pagina"><?php the_title(); ?></h1>
-						<p><?php echo $t( 'hero_texto' ); ?></p>
-					</div>
-					<div class="col-md-6">
-						<img src="<?php echo $src( $hero_imagen ); ?>" alt="<?php echo $alt( $hero_imagen ); ?>"
-							class="img-fluid hero-interior-imagen" decoding="async">
-					</div>
-				</div>
-			</div>
+			<div class="container-fluid contenedor-amplio"><div class="row">
+				<div class="col-md-6 hero-interior-texto"><h1 id="titulo-pagina"><?php echo esc_html( $hero_titulo ); ?></h1><p><?php echo $t( 'bajada_texto' ); ?></p></div>
+				<?php if ( $hero_imagen ) : ?>
+				<div class="col-md-6"><img src="<?php echo $src( $hero_imagen ); ?>" alt="<?php echo $alt( $hero_imagen ); ?>" class="img-fluid hero-interior-imagen"></div>
+				<?php endif; ?>
+			</div></div>
 		</section>
 
 		<!-- FE, COMPAÑÍA Y ESPERANZA -->
