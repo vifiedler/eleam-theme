@@ -57,7 +57,7 @@
 }
 
 .talleres-botones {
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   gap: 20px;
   margin-bottom: 32px;
 }
@@ -66,18 +66,18 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 48px;
+  min-height: 48px;
   margin: 0;
-  padding: 0 16px;
+  padding: 10px 16px;
+  text-align: center;
   border: 1px solid var(--eleam-borde-control);
   border-radius: var(--eleam-radio);
   background-color: #fff;
   font-weight: 700;
-  line-height: 1;
+  line-height: 1.25;
   letter-spacing: 0.32px;
   color: var(--eleam-texto);
   cursor: pointer;
-  white-space: nowrap;
 }
 
 #taller-crear:checked ~ .talleres-botones [for="taller-crear"],
