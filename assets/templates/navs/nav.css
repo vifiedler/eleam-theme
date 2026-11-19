@@ -154,3 +154,68 @@
         max-width: 100%;
     }
 }
+
+/* Corrección del anclaje: el submenú depende del control «Nosotros»,
+   nunca del contenedor general del encabezado ni de la marca del sitio. */
+.navegacion-principal .navegacion-secundaria,
+.navegacion-principal .navegacion-secundaria > .navegacion-desplegable {
+    position: relative;
+}
+
+.navegacion-principal .navegacion-secundaria > .navegacion-desplegable > .navegacion-submenu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: auto;
+    min-width: 210px;
+    padding: 12px 16px;
+    background: #fff;
+    border: 1px solid var(--eleam-borde);
+    border-radius: var(--eleam-radio);
+    box-shadow: var(--eleam-sombra-control);
+    z-index: 100;
+}
+
+.navegacion-principal .navegacion-submenu .dropdown-item {
+    color: var(--eleam-azul);
+    text-decoration: none;
+}
+
+.navegacion-principal .navegacion-submenu .dropdown-item:hover,
+.navegacion-principal .navegacion-submenu .dropdown-item:focus-visible {
+    color: var(--eleam-azul);
+    background-color: var(--eleam-crema);
+}
+
+.navegacion-principal .navegacion-accion .boton,
+.navegacion-principal .navegacion-accion .boton:visited {
+    color: #fff;
+    background-color: var(--eleam-terracota);
+}
+
+.navegacion-principal .navegacion-accion .boton:hover,
+.navegacion-principal .navegacion-accion .boton:focus-visible {
+    color: #fff;
+    background-color: var(--eleam-terracota-oscuro);
+}
+
+/* En escritorio el control es hover-only con mouse.
+   Sigue siendo operable con teclado; en móvil se puede tocar. */
+@media (min-width: 1200px) and (hover: hover) and (pointer: fine) {
+    .navegacion-principal .navegacion-desplegable > .navegacion-disparador {
+        pointer-events: none;
+        cursor: default;
+    }
+}
+
+@media (max-width: 1199.98px) {
+    .navegacion-principal .navegacion-secundaria > .navegacion-desplegable > .navegacion-submenu {
+        position: static;
+        min-width: 0;
+        max-width: 100%;
+        margin: 0;
+        padding: 4px 0 4px 16px;
+        border: 0;
+        box-shadow: none;
+    }
+}
