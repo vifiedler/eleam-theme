@@ -82,50 +82,7 @@ while ( have_posts() ) :
 		
 
 		<!-- ACTIVIDADES LITÚRGICAS  -->
-		<section class="seccion" aria-labelledby="titulo-publicaciones">
-			<div class="container">
-				<header class="encabezado-seccion">
-					<h2 id="titulo-publicaciones"><?php echo $t( 'publicaciones_titulo' ); ?></h2>
-					<p class="text-center"><?php echo $t( 'publicaciones_texto' ); ?></p>
-				</header>
 
-				<?php
-				$capellania_query = new WP_Query(
-					array(
-						'post_type'           => 'post',
-						'category_name'       => 'capellania',
-						'posts_per_page'      => 6,
-						'ignore_sticky_posts' => true,
-					)
-				);
-
-				if ( $capellania_query->have_posts() ) :
-					while ( $capellania_query->have_posts() ) :
-						$capellania_query->the_post();
-						$detalle_id = 'detalle-capellania-' . get_the_ID();
-						?>
-						<article class="publicacion" data-publicacion>
-							<time class="publicacion-fecha" datetime="<?php echo esc_attr( get_the_date( 'Y-m-d' ) ); ?>"><strong><?php echo esc_html( get_the_date( 'd' ) ); ?></strong><?php echo esc_html( date_i18n( 'M. Y', get_post_timestamp() ) ); ?></time>
-							<div>
-								<h3 class="publicacion-titulo"><?php the_title(); ?></h3>
-								<p class="publicacion-extracto"><?php echo esc_html( get_the_excerpt() ); ?></p>
-								<div class="publicacion-detalle collapse" id="<?php echo esc_attr( $detalle_id ); ?>">
-									<?php the_content(); ?>
-								</div>
-							</div>
-							<button class="publicacion-control" type="button" data-bs-toggle="collapse"
-								data-bs-target="#<?php echo esc_attr( $detalle_id ); ?>" aria-expanded="false" aria-controls="<?php echo esc_attr( $detalle_id ); ?>">
-								<span class="publicacion-control-texto"><?php esc_html_e( 'Ver más', 'eleam' ); ?></span>
-								<span class="bi bi-arrow-down" aria-hidden="true"></span>
-							</button>
-						</article>
-						<?php
-					endwhile;
-					wp_reset_postdata();
-				endif;
-				?>
-			</div>
-		</section>
 
 	</div><!-- #contenido -->
 	<?php
