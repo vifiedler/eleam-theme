@@ -25,7 +25,7 @@
 }
 @font-face {
   font-family: Athelas;
-  src: url("../fonts/Athelas-Regular.ttf") format("truetype");
+  src: url("../../../fonts/Athelas-Regular.ttf") format("truetype");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -33,7 +33,7 @@
 
 @font-face {
   font-family: Athelas;
-  src: url("../fonts/Athelas-Bold.ttf") format("truetype");
+  src: url("../../fonts/Athelas-Bold.ttf") format("truetype");
   font-weight: 700 800;
   font-style: normal;
   font-display: swap;
@@ -41,7 +41,7 @@
 
 @font-face {
   font-family: Athelas;
-  src: url("../fonts/Athelas-BoldItalic.ttf") format("truetype");
+  src: url("../../fonts/Athelas-BoldItalic.ttf") format("truetype");
   font-weight: 400;
   font-style: italic;
   font-display: swap;
@@ -49,7 +49,7 @@
 
 @font-face {
   font-family: "Helvetica Neue Local";
-  src: url("../fonts/HelveticaNeue-Roman.otf") format("opentype");
+  src: url("../../fonts/HelveticaNeue-Roman.otf") format("opentype");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -57,7 +57,7 @@
 
 @font-face {
   font-family: "Helvetica Neue Local";
-  src: url("../fonts/HelveticaNeue-Light.otf") format("opentype");
+  src: url("../../fonts/HelveticaNeue-Light.otf") format("opentype");
   font-weight: 300;
   font-style: normal;
   font-display: swap;
@@ -65,7 +65,7 @@
 
 @font-face {
   font-family: "Helvetica Neue Local";
-  src: url("../fonts/HelveticaNeue-Medium.otf") format("opentype");
+  src: url("../../fonts/HelveticaNeue-Medium.otf") format("opentype");
   font-weight: 500 600;
   font-style: normal;
   font-display: swap;
@@ -73,7 +73,7 @@
 
 @font-face {
   font-family: "Helvetica Neue Local";
-  src: url("../fonts/HelveticaNeue-Bold.otf") format("opentype");
+  src: url("../../fonts/HelveticaNeue-Bold.otf") format("opentype");
   font-weight: 700 800;
   font-style: normal;
   font-display: swap;

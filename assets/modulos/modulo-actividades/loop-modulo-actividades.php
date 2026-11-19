@@ -50,8 +50,8 @@ if ( have_rows( 'tarjetas_actividades' ) ) : ?>
 									class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover" loading="lazy" decoding="async">
 							</div>
 						<?php endif; ?>
-						<div class="card-body d-flex flex-column justify-content-center">
-							<h3 class="card-title"><?php echo esc_html( $titulo ); ?></h3>
+						<div class="card-body d-flex flex-column justify-content-start">
+							<h3 class="card-title mb-3"><?php echo esc_html( $titulo ); ?></h3>
 							<p class="card-text"><?php echo esc_html( $texto ); ?></p>
 							<?php if ( $tiene_enlace ) : ?>
 								<a href="<?php echo esc_url( $enlace['url'] ); ?>" target="<?php echo esc_attr( $enlace_dest ); ?>" class="link-ver-mas"><?php echo esc_html( $enlace_texto ); ?> <i class="bi bi-arrow-right-short" aria-hidden="true"></i></a>

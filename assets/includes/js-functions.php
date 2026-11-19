@@ -18,7 +18,6 @@ function js_function()
   
 
         wp_enqueue_script('bootstrap-js');
-        wp_enqueue_script('gsap-js');
         wp_enqueue_script('calendario-js');
         wp_enqueue_script('capellania-js');
         wp_enqueue_script('donaciones-js');

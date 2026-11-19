@@ -1,96 +1,137 @@
-<!-- Custom loop hero -->
 <?php
-$temp = $wp_query;
-$paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
-$args = array(
-    'post_type' => 'hero',
-    'orderby' => 'date',
-    'order' => 'ASC',
-    'paged' => $paged,
-    'posts_per_page' => 1
+$grupos_valores = array(
+    'mision' => 'grupo_mision',
+    'vision' => 'grupo_vision',
+    'gobernanza' => 'grupo_gobernanza',
 );
-$wp_query = new WP_Query($args);
-if ($wp_query->have_posts()):
-    while ($wp_query->have_posts()):
-        $wp_query->the_post(); ?>
 
+$tabs[] = array(
+	'pestana' => $grupo[ 'titulo_' . $clave ],
+	'imagen'  => $grupo[ 'imagen_' . $clave ] ?? null,
+	'titulo'  => $grupo[ 'titulo_texto_' . $clave ] ?? '',
+	'texto'   => $grupo[ 'texto_' . $clave ] ?? '',
+);
+?>
 
-        <section class="hero__v6 section" id="home">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-6 mb-4 mb-lg-0">
-                        <div class="row">
-                            <div class="col-lg-11"><span class="hero-subtitle text-uppercase" data-aos="fade-up"
-                                    data-aos-delay="0"><?php echo get_the_excerpt(); ?></span>
-                                <h1 class="hero-title mb-3" data-aos="fade-up" data-aos-delay="100">
-                                    <?php echo get_the_title(); ?>
-                                </h1>
-                                <p class="hero-description mb-4 mb-lg-5" data-aos="fade-up" data-aos-delay="200">
-                                    <?php the_content(); ?>
-                                </p>
-                                <div class="cta d-flex gap-2 mb-4 mb-lg-5" data-aos="fade-up" data-aos-delay="300"><a
-                                        class="btn"
-                                        href="<?php echo esc_html(get_field('link_boton_uno_hero')); ?>"><?php echo esc_html(get_field('boton_uno_hero')); ?></a><a
-                                        class="btn btn-white-outline"
-                                        href="<?php echo esc_html(get_field('link_boton_dos_hero')); ?>"><?php echo esc_html(get_field('boton_dos_hero')); ?>
-                                        <i class="bi bi-arrow-up-right"></i></a></div>
-                                <div class="logos mb-4" data-aos="fade-up" data-aos-delay="400"><span
-                                        class="logos-title text-uppercase mb-4 d-block"><?php echo esc_html(get_field('texto_logo_hero')); ?></span>
-                                    <div class="logos-images d-flex gap-4 align-items-center">
-                                        <?php
+<?php if ($tabs): ?>
+    <section class="seccion" aria-labelledby="titulo-valores">
+        <div class="container">
+            <header class="encabezado-seccion">
+                <h2 id="titulo-valores"><?php echo esc_html(get_field('titulo_seccion_dos')); ?></h2>
+            </header>
 
-                                        // Check rows exists.
-                                        if (have_rows('logos_hero')):
+            <div class="nav d-grid talleres-botones" role="tablist"
+                style="grid-template-columns: repeat(<?php echo count($tabs); ?>, 1fr);">
+                <?php foreach ($tabs as $i => $tab): ?>
+                    <?php $slug = sanitize_title($tab['pestana']) ?: 'item-' . $i; ?>
+                    <button type="button" id="tab-<?php echo esc_attr($slug); ?>"
+                        class="taller-boton<?php echo 0 === $i ? ' active' : ''; ?>" data-bs-toggle="tab"
+                        data-bs-target="#panel-<?php echo esc_attr($slug); ?>" role="tab"
+                        aria-controls="panel-<?php echo esc_attr($slug); ?>"
+                        aria-selected="<?php echo 0 === $i ? 'true' : 'false'; ?>" <?php echo 0 === $i ? '' : ' tabindex="-1"'; ?>><?php echo esc_html($tab['pestana']); ?></button>
+                <?php endforeach; ?>
+            </div>
 
-                                            // Loop through rows.
-                                            while (have_rows('logos_hero')):
-                                                the_row();
-
-                                                // Load sub field value.
-                                                $image = get_sub_field('imagen_logo');
-                                                echo wp_get_attachment_image($image['ID'], 'full');
-                                                // Do something, but make sure you escape the value if outputting directly...
-                                
-                                                // End loop.
-                                            endwhile;
-
-                                            // No value.
-                                        else:
-                                            // Do something...
-                                        endif; ?>
-                                    </div>
-                                </div>
+            <div class="tab-content">
+                <?php foreach ($tabs as $i => $tab): ?>
+                    <?php
+                    $slug = sanitize_title($tab['pestana']) ?: 'item-' . $i;
+                    $imagen = $tab['imagen'];
+                    ?>
+                    <div class="tab-pane fade<?php echo 0 === $i ? ' show active' : ''; ?>"
+                        id="panel-<?php echo esc_attr($slug); ?>" role="tabpanel"
+                        aria-labelledby="tab-<?php echo esc_attr($slug); ?>" tabindex="0">
+                        <div class="d-flex flex-column flex-md-row taller-panel">
+                            <?php if (is_array($imagen) && !empty($imagen['url'])): ?>
+                                <img src="<?php echo esc_url($imagen['url']); ?>"
+                                    alt="<?php echo esc_attr(!empty($imagen['alt']) ? $imagen['alt'] : $tab['titulo']); ?>"
+                                    class="col-md-6 taller-imagen" loading="lazy" decoding="async">
+                            <?php endif; ?>
+                            <div class="d-flex flex-column taller-contenido col-md-6">
+                                <h3 class="taller-titulo mt-4 text-start"><?php echo esc_html($tab['titulo']); ?></h3>
+                                <?php echo wp_kses_post($tab['texto']); ?>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-6">
-                        <div class="hero-img">
-                            <?php
-                            $image = get_field('imagen_tarjeta_hero');
-                            if (!empty($image)): ?>
-                            <img class="img-card img-fluid" src="<?php echo esc_url($image['url']); ?>"
-                                alt="<?php echo esc_attr($image['alt']); ?>" data-aos="fade-down" data-aos-delay="600">
-                            
-                            
-                            <?php endif; ?>
-                            <img class="img-main img-fluid rounded-4" src="<?php echo get_the_post_thumbnail_url(get_the_ID(),'full');?>"
-                                alt="<?php echo get_the_title(); ?>" data-aos="fade-in" data-aos-delay="500">
-                        </div>
-                    </div>
-                </div>
+                <?php endforeach; ?>
             </div>
-            <!-- End Hero-->
-        </section>
+        </div>
+    </section>
+<?php endif; ?>
 
+<section class="seccion" aria-labelledby="titulo-equipo">
+    <div class="container">
+        <header class="encabezado-seccion">
+            <h2 id="titulo-equipo"><?php echo esc_html(get_field('titulo_seccion_equipo')); ?></h2>
+        </header>
 
+        <?php if (function_exists('have_rows') && have_rows('tarjetas_equipo_directivo')): ?>
+            <h3 class="mb-3"><?php echo esc_html(get_field('subtitulo_equipo_directivo')); ?></h3>
+            <div class="row mb-5">
+                <?php
+                while (have_rows('tarjetas_equipo_directivo')):
+                    the_row();
 
+                    $imagen = get_sub_field('imagen_directivo');
+                    $nombre = get_sub_field('nombre_directivo');
+                    $cargo = get_sub_field('cargo_directivo');
+                    $profesion = get_sub_field('profesion_directivo');
+                    $lugar = get_sub_field('lugar_de_trabajo_directivo');
+                    ?>
+                    <div class="col-lg-6">
+                        <article class="card tarjeta tarjeta-horizontal">
+                            <?php if (is_array($imagen) && !empty($imagen['url'])): ?>
+                                <img src="<?php echo esc_url($imagen['url']); ?>"
+                                    alt="<?php echo esc_attr(!empty($imagen['alt']) ? $imagen['alt'] : $nombre); ?>"
+                                    class="img-fluid card-img-top tarjeta-horizontal-imagen" loading="lazy" decoding="async">
+                            <?php endif; ?>
+                            <div>
+                                <h3 class="tarjeta-horizontal-titulo"><?php echo esc_html($nombre); ?></h3>
+                                <div class="card-body">
+                                    <h4><?php echo esc_html($cargo); ?></h4>
+                                    <?php if ($profesion): ?>
+                                        <p class="texto-secundario"><?php echo esc_html($profesion); ?></p>
+                                    <?php endif; ?>
+                                    <?php if ($lugar): ?>
+                                        <p><?php echo nl2br(esc_html($lugar)); ?></p>
+                                    <?php endif; ?>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                <?php endwhile; ?>
+            </div>
+        <?php endif; ?>
 
+        <?php if (function_exists('have_rows') && have_rows('tarjetas_equipo_clinico')): ?>
+            <h3 class="mb-3"><?php echo esc_html(get_field('subtitulo_equipo_clinico')); ?></h3>
+            <p class="mb-4"><?php echo esc_html(get_field('texto_equipo_clinico')); ?></p>
+            <div class="row">
+                <?php
+                while (have_rows('tarjetas_equipo_clinico')):
+                    the_row();
 
-
-
-
-
-    <?php endwhile;
-endif;
-wp_reset_query();
-$wp_query = $temp; ?>
+                    $imagen = get_sub_field('imagen_clinico');
+                    $nombre = get_sub_field('nombre_clinico');
+                    $profesion = get_sub_field('subtitulo_profesion_clinico');
+                    $descripcion = get_sub_field('descripcion_clinico');
+                    ?>
+                    <div class="col-md-4">
+                        <article class="card tarjeta tarjeta-persona">
+                            <?php if (is_array($imagen) && !empty($imagen['url'])): ?>
+                                <img src="<?php echo esc_url($imagen['url']); ?>"
+                                    alt="<?php echo esc_attr(!empty($imagen['alt']) ? $imagen['alt'] : $nombre); ?>"
+                                    class="img-fluid card-img-top tarjeta-imagen" loading="lazy" decoding="async">
+                            <?php endif; ?>
+                            <div class="card-body">
+                                <h3><?php echo esc_html($nombre); ?></h3>
+                                <p class="texto-secundario"><?php echo esc_html($profesion); ?></p>
+                                <p><?php echo esc_html($descripcion); ?></p>
+                            </div>
+                        </article>
+                    </div>
+                <?php endwhile; ?>
+            </div>
+        <?php endif; ?>
+    </div>
+</section>
