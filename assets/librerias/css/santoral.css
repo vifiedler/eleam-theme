@@ -1,0 +1,82 @@
+/* Inicio > Capellanía > Santoral. Extiende las clases existentes sin alterarlas. */
+.capellania-inicio .santoral {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-width: 0;
+}
+.capellania-inicio .santoral-diapositivas {
+  display: flex;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+.capellania-inicio .santoral-diapositiva {
+  width: 100%;
+  min-width: 0;
+  height: 100%;
+}
+.capellania-inicio .santoral-diapositiva[hidden] {
+  display: none !important;
+}
+.capellania-inicio .santoral-sin-imagen {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: var(--eleam-secundario);
+  font-size: clamp(3rem, 7vw, 5rem);
+}
+.capellania-inicio .santoral-fuente {
+  margin: 0;
+  font-size: .875rem;
+  line-height: 1.45;
+}
+.capellania-inicio .santoral-fuente a {
+  color: var(--eleam-azul);
+  text-decoration: underline;
+  text-underline-offset: .15em;
+}
+.capellania-inicio .santoral-fuente a:focus-visible {
+  outline: 2px solid var(--eleam-terracota);
+  outline-offset: 4px;
+}
+.capellania-inicio .santoral-credito {
+  font-size: .75rem;
+}
+.capellania-inicio .santoral-controles {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 16px;
+  border: 1px solid var(--eleam-borde);
+  border-top: 0;
+  background: var(--eleam-arena);
+  border-radius: 0 0 var(--eleam-radio) var(--eleam-radio);
+}
+.capellania-inicio .santoral-control {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--eleam-borde);
+  border-radius: 50%;
+  color: var(--eleam-azul);
+  background: var(--eleam-crema);
+  cursor: pointer;
+}
+.capellania-inicio .santoral-control:hover {
+  background: white;
+}
+.capellania-inicio .santoral-control:focus-visible {
+  outline: 2px solid var(--eleam-terracota);
+  outline-offset: 3px;
+}
+.capellania-inicio .santoral-posicion {
+  min-width: 4.5rem;
+  text-align: center;
+  color: var(--eleam-azul);
+  font-size: .875rem;
+  font-weight: 600;
+}
