@@ -20,7 +20,7 @@ get_header();
             <?php get_template_part('assets/modulos/modulo-inicio/loop-actividades'); ?>
             <?php get_template_part('assets/modulos/modulo-inicio/loop-capellania'); ?>
             <?php get_template_part('assets/modulos/modulo-inicio/loop-contacto'); ?>
-            <?php get_template_part('assets/modulos/modulo-inicio/loop-banner'); ?>
+            <?php get_template_part('assets/modulos/modulo-comun/loop-banner'); ?>
         </div>
     <?php endwhile; ?>
 </main>

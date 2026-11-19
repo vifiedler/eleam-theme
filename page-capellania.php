@@ -40,27 +40,12 @@ $alt = function ( $img ) {
 while ( have_posts() ) :
 	the_post();
 
-	$hero_imagen = get_field( 'hero_imagen' );
 	$piezas      = get_field( 'galeria_piezas' ) ?: array();
 	$hitos       = get_field( 'calendario_hitos' ) ?: array();
 	?>
 	<div id="contenido">
 
-		<!-- HERO -->
-		<section class="hero-interior" aria-labelledby="titulo-pagina">
-			<div class="container-fluid contenedor-amplio">
-				<div class="row">
-					<div class="col-md-6 hero-interior-texto">
-						<h1 id="titulo-pagina"><?php the_title(); ?></h1>
-						<p><?php echo $t( 'hero_texto' ); ?></p>
-					</div>
-					<div class="col-md-6">
-						<img src="<?php echo $src( $hero_imagen ); ?>" alt="<?php echo $alt( $hero_imagen ); ?>"
-							class="img-fluid hero-interior-imagen" decoding="async">
-					</div>
-				</div>
-			</div>
-		</section>
+		<?php get_template_part( 'assets/modulos/modulo-capellania/loop-hero' ); ?>
 
 		<!-- FE, COMPAÑÍA Y ESPERANZA -->
 		<section class="seccion seccion-crema">
@@ -73,6 +58,8 @@ while ( have_posts() ) :
 		</section>
 
 			<?php include get_template_directory() . '/assets/modulos/modulo-capellania/loop-modulo-capellania.php'; ?>
+
+		<?php get_template_part( 'assets/modulos/modulo-comun/loop-banner' ); ?>
 
 	</div><!-- #contenido -->
 	<?php

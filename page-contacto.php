@@ -44,40 +44,17 @@ $alt = function ( $img ) {
 while ( have_posts() ) :
 	the_post();
 
-	$hero_imagen = get_field( 'hero_imagen' );
 	$mapa        = get_field( 'contacto_mapa' );
 	$btn_banner  = $lk( 'banner_boton' );
 	?>
 	<div id="contenido">
 
-		<!-- HERO -->
-		<section class="hero-interior" aria-labelledby="titulo-contacto">
-			<div class="contenedor-amplio">
-				<div class="row">
-					<div class="col-md-6 hero-interior-texto">
-						<h1 id="titulo-contacto"><?php the_title(); ?></h1>
-						<p><?php echo $t( 'hero_texto' ); ?></p>
-					</div>
-					<div class="col-md-6">
-						<img class="hero-interior-imagen" src="<?php echo $src( $hero_imagen ); ?>"
-							alt="<?php echo $alt( $hero_imagen ); ?>" width="720" height="340">
-					</div>
-				</div>
-			</div>
-		</section>
+		<?php get_template_part( 'assets/modulos/modulo-contacto/loop-hero' ); ?>
 
 		<!-- INFORMACIÓN Y FORMULARIO -->
 					<?php include get_template_directory() . '/assets/modulos/modulo-contacto/loop-modulo-contacto.php'; ?>
 
-		<!-- BANNER CONTRIBUCIÓN -->
-		<section class="banner-contribucion" aria-labelledby="titulo-contribucion">
-			<div class="contenedor-contenido">
-				<h2 id="titulo-contribucion"><?php echo $t( 'banner_titulo' ); ?></h2>
-				<p><?php echo $t( 'banner_texto' ); ?></p>
-				<a class="btn boton boton-primario" href="<?php echo $btn_banner['url']; ?>"><?php echo $btn_banner['title']; ?> <span
-						aria-hidden="true">→</span></a>
-			</div>
-		</section>
+		<?php get_template_part( 'assets/modulos/modulo-comun/loop-banner' ); ?>
 
 	</div><!-- #contenido -->
 	<?php

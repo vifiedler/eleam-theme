@@ -171,6 +171,8 @@ while ( have_posts() ) :
 		wp_reset_postdata();
 		?>
 
+		<?php get_template_part( 'assets/modulos/modulo-comun/loop-banner' ); ?>
+
 	</div><!-- #contenido -->
 	<?php
 endwhile; // End of the loop.

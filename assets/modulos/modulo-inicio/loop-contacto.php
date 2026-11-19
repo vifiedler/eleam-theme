@@ -14,7 +14,7 @@ $titulo_formulario = eleam_inicio_texto('titulo_formulario_contacto', $contacto_
 $formulario = eleam_inicio_formulario_cf7();
 ?>
 <section class="seccion seccion-crema" aria-labelledby="titulo-contacto-inicio">
-    <div class="contenedor-contenido">
+    <div class="container">
         <div class="row align-items-stretch">
             <div class="col-lg">
                 <div class="bloque-contacto-informacion">

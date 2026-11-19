@@ -56,27 +56,13 @@ $alt = function ( $img ) {
 while ( have_posts() ) :
 	the_post();
 
-	$hero_imagen  = get_field( 'hero_imagen' );
 	$tabs         = get_field( 'valores_tabs' ) ?: array();
 	$directivos   = get_field( 'directivos' ) ?: array();
 	$clinico      = get_field( 'clinico_tarjetas' ) ?: array();
 	?>
 	<div id="contenido">
 
-		<!-- HERO -->
-		<section class="hero-interior" aria-labelledby="titulo-pagina">
-			<div class="container-fluid contenedor-amplio">
-				<div class="row">
-					<div class="col-md-6 hero-interior-texto">
-						<h1 id="titulo-pagina"><?php the_title(); ?></h1>
-						<p><?php echo $t( 'hero_texto' ); ?></p>
-					</div>
-					<div class="col-md-6">
-						<img src="<?php echo $src( $hero_imagen ); ?>" alt="<?php echo $alt( $hero_imagen ); ?>" class="img-fluid hero-interior-imagen">
-					</div>
-				</div>
-			</div>
-		</section>
+		<?php get_template_part( 'assets/modulos/modulo-quienes-somos/loop-hero' ); ?>
 
 		<!-- QUÉ NOS DEFINE -->
 		<section class="seccion-crema py-5" aria-labelledby="titulo-definen">
@@ -136,16 +122,7 @@ while ( have_posts() ) :
 			</div>
 		</section>
 
-		<!-- BANNER -->
-		<?php $btn_banner = $lk( 'banner_boton' ); ?>
-		<section class="banner-contribucion" aria-labelledby="titulo-contribucion">
-			<div class="contenedor-contenido">
-				<h2 id="titulo-contribucion"><?php echo $t( 'banner_titulo' ); ?></h2>
-				<p><?php echo $t( 'banner_texto' ); ?></p>
-				<a class="btn boton boton-primario" href="<?php echo $btn_banner['url']; ?>"><?php echo $btn_banner['title']; ?> <span
-						aria-hidden="true">→</span></a>
-			</div>
-		</section>
+		<?php get_template_part( 'assets/modulos/modulo-comun/loop-banner' ); ?>
 
 	</div>
 	<?php

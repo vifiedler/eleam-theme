@@ -14,7 +14,7 @@ get_header();
         <div id="contenido">
             <?php get_template_part('assets/modulos/modulo-infraestructura/loop-hero'); ?>
             <?php get_template_part('assets/modulos/modulo-infraestructura/loop-galeria'); ?>
-            <?php get_template_part('assets/modulos/modulo-infraestructura/loop-banner'); ?>
+            <?php get_template_part('assets/modulos/modulo-comun/loop-banner'); ?>
         </div>
     <?php endwhile; ?>
 </main>
