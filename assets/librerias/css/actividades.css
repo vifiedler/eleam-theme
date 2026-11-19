@@ -187,10 +187,14 @@
   padding: 28px 0;
 }
 
-/* Galería del detalle de taller: se mantiene el efecto hover, pero sin textos.
-   Se oculta la franja del rótulo (::before), que sin texto quedaría como una banda vacía. */
-.seccion-detalle-galeria .galeria-mosaico-pieza::before {
+/* Galería del detalle de taller: sin capa azul al pasar el cursor;
+   el rótulo (::before) se mantiene visible siempre. */
+.seccion-detalle-galeria .galeria-mosaico-pieza::after {
   content: none;
+}
+
+.seccion-detalle-galeria .galeria-mosaico-pieza:hover::before {
+  opacity: 1;
 }
 
 @media (max-width: 767.98px) {
