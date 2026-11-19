@@ -1,3 +1,27 @@
+<?php
+$grupos_valores = array(
+	'mision'     => 'grupo_mision',
+	'vision'     => 'grupo_vision',
+	'gobernanza' => 'grupo_gobernanza',
+);
+
+$tabs = array();
+foreach ( $grupos_valores as $clave => $grupo_campo ) {
+	$grupo = function_exists( 'get_field' ) ? get_field( $grupo_campo ) : null;
+
+	if ( ! is_array( $grupo ) || empty( $grupo[ 'titulo_' . $clave ] ) ) {
+		continue;
+	}
+
+	$tabs[] = array(
+		'pestana' => $grupo[ 'titulo_' . $clave ],
+		'imagen'  => $grupo[ 'imagen_' . $clave ], null,
+		'titulo'  => $grupo[ 'titulo_texto_' . $clave ], '',
+		'texto'   => $grupo[ 'texto_' . $clave ], '',
+	);
+}
+?>
+
 <?php if ( $tabs ) : ?>
 	<section class="seccion" aria-labelledby="titulo-valores">
 		<div class="container">
