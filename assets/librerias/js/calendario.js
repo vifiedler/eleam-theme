@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+
+=======
+>>>>>>> 8f2f9f1058e78733050e7b8da730f3809706246e
 (function ($) {
   'use strict';
 
@@ -9,7 +13,14 @@
 
     const VELOCIDAD_AUTOPLAY = 15000;
     const VELOCIDAD_MANUAL = 1800;
+<<<<<<< HEAD
     const HITOS_POR_FLECHA = 4;
+=======
+<<<<<<< HEAD
+    const HITOS_POR_FLECHA = 1;
+=======
+>>>>>>> 8f2f9f1058e78733050e7b8da730f3809706246e
+>>>>>>> parent of 2d8f867 (linea tiempo capellania)
 
     $('.calendario-liturgico-pista').each(function () {
       const $pista = $(this);
@@ -29,8 +40,10 @@
       let trackAnimado = null;
       let siguienteFrame = null;
 
+      // Mantener un único botón Play/Pausa.
       $botonPausa.remove();
 
+      // Slick administra los hitos, no el autoplay.
       $pista.slick({
         accessibility: true,
         arrows: false,
@@ -58,12 +71,14 @@
         return slick.$slideTrack[0];
       }
 
+      // Desactivar la transición CSS convencional.
       obtenerTrack().style.setProperty(
         'transition',
         'none',
         'important'
       );
 
+      // Actualizar el botón y su accesibilidad.
       function actualizarBoton() {
         const accion = reproduciendo
           ? 'Pausar calendario'
@@ -89,6 +104,7 @@
         }
       }
 
+      // Conservar la posición visual antes de interrumpir.
       function congelarYCancelar() {
         if (!animacionActiva) return;
 
@@ -115,6 +131,7 @@
         slick.animating = false;
       }
 
+      // Programar el siguiente movimiento continuo.
       function programarSiguienteHito() {
         cancelarSiguienteFrame();
 
@@ -134,6 +151,7 @@
         });
       }
 
+      // Override del motor de animación de Slick.
       slick.animateSlide = function (destino, callback) {
         if (animacionActiva) {
           congelarYCancelar();
@@ -165,6 +183,7 @@
           'important'
         );
 
+        // Animación nativa controlable.
         const animacion = track.animate(
           [
             {
@@ -172,7 +191,9 @@
                 ? 'translate3d(0px, 0px, 0px)'
                 : desde
             },
-            { transform: hasta }
+            {
+              transform: hasta
+            }
           ],
           {
             duration: duracion,
@@ -187,12 +208,14 @@
         animacion.onfinish = function () {
           if (animacionActiva !== animacion) return;
 
+          // Conservar el destino antes de retirar la animación.
           track.style.transform = hasta;
 
           animacionActiva = null;
           trackAnimado = null;
           animacion.cancel();
 
+          // Permitir que Slick actualice índices y clones.
           if (typeof callback === 'function') {
             callback.call(slick);
           }
@@ -202,6 +225,7 @@
         };
       };
 
+      // Gestionar reconstrucciones responsive de Slick.
       $pista.on('reInit.calendario', function () {
         cancelarSiguienteFrame();
 
@@ -216,6 +240,7 @@
         programarSiguienteHito();
       });
 
+      // Flechas: desplazar cuatro hitos con ease-in.
       function moverCuatroHitos(direccion) {
         cancelarSiguienteFrame();
         congelarYCancelar();
@@ -249,18 +274,22 @@
           moverCuatroHitos(1);
         });
 
+      // Botón Play/Pausa con congelación instantánea.
       $botonPlay.on('click.calendario', function () {
         reproduciendo = !reproduciendo;
 
         if (reproduciendo) {
           if (animacionActiva) {
+            // Reanuda exactamente donde se pausó.
             if (animacionActiva.playState === 'paused') {
               animacionActiva.play();
             }
           } else {
+            // Inicia el movimiento si todavía no existe.
             programarSiguienteHito();
           }
         } else {
+          // Congela la posición actual de la animación.
           cancelarSiguienteFrame();
 
           if (animacionActiva) {
@@ -271,7 +300,12 @@
         actualizarBoton();
       });
 
+      // Estado inicial: completamente pausado.
       actualizarBoton();
     });
   });
+<<<<<<< HEAD
 }(jQuery));
+=======
+}(jQuery));
+>>>>>>> 8f2f9f1058e78733050e7b8da730f3809706246e
