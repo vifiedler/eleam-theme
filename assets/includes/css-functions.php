@@ -10,7 +10,7 @@ function css_functions()
     wp_register_style('actividades-css', get_template_directory_uri() . '/assets/librerias/css/actividades.css', array(), null, 'all');
     wp_register_style('catalogo-css', get_template_directory_uri() . '/assets/librerias/css/catalogo.css', array(), null, 'all');
     wp_register_style('componentes-css', get_template_directory_uri() . '/assets/librerias/css/componentes.css', array(), null, 'all');
-    wp_register_style('donaciones-css', get_template_directory_uri() . '/assets/donaciones/css/actividades.css', array(), null, 'all');
+    wp_register_style('donaciones-css', get_template_directory_uri() . '/assets/librerias/css/donaciones.css', array(), null, 'all');
 
 
     wp_enqueue_style('bootstrap');
