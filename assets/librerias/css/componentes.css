@@ -1272,16 +1272,13 @@ textarea.form-control {
   display: flex;
   flex-direction: column;
   height: 100%;
-  min-height: 440px; /* Altura aproximada de las píldoras */
-  border-radius: 0.5rem; /* 8px */
+  min-height: 440px;
+  border-radius: 0.5rem;
   overflow: hidden;
   background-color: #fcf8f4;
-  
-  /* Drop shadow exacto de Figma: 0px, 4px, 4px, 25% opacidad */
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
-/* La imagen real de fondo */
 /* La imagen real de fondo */
 .compromiso-imagen {
   position: absolute;
@@ -1292,20 +1289,20 @@ textarea.form-control {
   object-fit: cover;
   object-position: center;
   z-index: 1;
-  filter: brightness(0.85) contrast(1.1); 
+  filter: blur(2px) brightness(0.85) contrast(1.1);
+  transform: scale(1.05); /* Evita que el desenfoque deje bordes blancos en las orillas */
 }
-/* El gradiente de Figma superpuesto a la imagen */
+
+/* La capa blanca/gradiente para legibilidad */
 .compromiso-tarjeta::before {
   content: '';
   position: absolute;
   inset: 0;
   z-index: 2;
-  pointer-events: none; /* Para que no bloquee clics */
-  /* Gradiente exacto de Figma: CFCFCF a 1B95FF */
-  background: linear-gradient(180deg, #CFCFCF 0%, #1B95FF 54%);
-  /* Al 12% de opacidad como dice el Figma */
-  opacity: 0.12; 
-  mix-blend-mode: multiply; /* Ayuda a integrar el gradiente con la imagen */
+  pointer-events: none;
+  /* Usamos el color crema de tu paleta con opacidad para que se lea el texto azul */
+  background: linear-gradient(180deg, rgba(252, 248, 244, 0.6) 0%, rgba(252, 248, 244, 0.95) 100%);
+  opacity: 1; 
 }
 
 /* El contenido (texto) por encima de la imagen y el gradiente */
@@ -1316,11 +1313,11 @@ textarea.form-control {
   flex-direction: column;
   justify-content: flex-start;
   height: 100%;
-  padding: 73px 22px 26px 22px; /* Márgenes exactos del Figma */
+  padding: 73px 22px 26px 22px;
   text-align: center;
 }
 
-/* Título - Estilos exactos de Figma */
+/* Título */
 .compromiso-titulo {
   color: #003d73;
   text-align: center;
@@ -1328,19 +1325,19 @@ textarea.form-control {
   font-size: 20px;
   font-style: normal;
   font-weight: 700;
-  line-height: 108%; /* 21.6px */
+  line-height: 108%;
   letter-spacing: 0.2px;
   margin-bottom: 28px;
 }
 
-/* Párrafo - Estilos exactos de Figma */
+/* Párrafo */
 .compromiso-texto {
   color: #262220;
   font-family: "Helvetica Neue Local", Helvetica, Arial, sans-serif;
   font-size: 16px;
   font-style: normal;
   font-weight: 600;
-  line-height: 150%; /* 24px */
+  line-height: 150%;
 }
 
 @media (max-width: 991.98px) {
