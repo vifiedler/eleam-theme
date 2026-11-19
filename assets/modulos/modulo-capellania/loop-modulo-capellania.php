@@ -96,4 +96,42 @@
 		</button>
 	</div>
 </section>
+<div class="col-12">
+                <div class="capellania-publicaciones">
+                    <h3 class="capellania-publicaciones-titulo"><?php echo esc_html($titulo_publicaciones); ?></h3>
+                    <?php if ($publicaciones->have_posts()): ?>
+                        <?php while ($publicaciones->have_posts()): $publicaciones->the_post();
+                            $detalle_id = 'detalle-capellania-' . get_the_ID();
+                            $extracto = get_the_excerpt();
+                            $contenido = get_the_content();
+                            ?>
+                            <article class="publicacion" data-publicacion data-texto-expandir="<?php echo esc_attr($texto_ver); ?>" data-texto-colapsar="<?php echo esc_attr($texto_ocultar); ?>">
+                                <time class="publicacion-fecha" datetime="<?php echo esc_attr(get_the_date('Y-m-d')); ?>">
+                                    <strong><?php echo esc_html(get_the_date('d')); ?></strong><?php echo esc_html(wp_date('M. Y', get_post_timestamp())); ?>
+                                </time>
+                                <div class="publicacion-contenido">
+                                    <h4 class="publicacion-titulo"><?php echo esc_html(get_the_title()); ?></h4>
+                                    <?php if ($extracto !== ''): ?><p class="publicacion-extracto"><?php echo esc_html($extracto); ?></p><?php endif; ?>
+                                    <?php if (trim($contenido) !== ''): ?>
+                                        <div class="publicacion-detalle collapse" id="<?php echo esc_attr($detalle_id); ?>">
+                                            <?php echo apply_filters('the_content', $contenido); // Contenido WordPress con filtros nativos. ?>
+                                        </div>
+                                    <?php endif; ?>
+                                </div>
+                                <?php if (trim($contenido) !== ''): ?>
+                                    <button class="publicacion-control" type="button" data-bs-toggle="collapse"
+                                            data-bs-target="#<?php echo esc_attr($detalle_id); ?>" aria-expanded="false"
+                                            aria-controls="<?php echo esc_attr($detalle_id); ?>">
+                                        <span class="publicacion-control-texto"><?php echo esc_html($texto_ver); ?></span>
+                                        <span class="bi bi-arrow-down" aria-hidden="true"></span>
+                                    </button>
+                                <?php endif; ?>
+                            </article>
+                        <?php endwhile; ?>
+                    <?php else: ?>
+                        <p><?php esc_html_e('Pronto compartiremos nuevas actividades de capellanía.', 'eleam-theme'); ?></p>
+                    <?php endif; ?>
+                    <?php wp_reset_postdata(); ?>
+                </div>
+            </div>
 <?php endif; ?>
