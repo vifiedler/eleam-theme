@@ -1272,13 +1272,16 @@ textarea.form-control {
   display: flex;
   flex-direction: column;
   height: 100%;
-  min-height: 300px; 
-  border-radius: 0.5rem; 
+  min-height: 440px; /* Altura aproximada de las píldoras */
+  border-radius: 0.5rem; /* 8px */
   overflow: hidden;
   background-color: #fcf8f4;
+  
+  /* Drop shadow exacto de Figma: 0px, 4px, 4px, 25% opacidad */
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
+/* La imagen real de fondo */
 .compromiso-imagen {
   position: absolute;
   top: 0;
@@ -1304,18 +1307,19 @@ textarea.form-control {
   mix-blend-mode: multiply; /* Ayuda a integrar el gradiente con la imagen */
 }
 
+/* El contenido (texto) por encima de la imagen y el gradiente */
 .compromiso-contenido {
-    position: relative;
-    z-index: 3;
-    display: flex;
-    flex-direction: column;
-    justify-content: end;
-    height: 100%;
-    padding: 24px;
-    text-align: left;
-    gap: 1.5rem;
+  position: relative;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  height: 100%;
+  padding: 73px 22px 26px 22px; /* Márgenes exactos del Figma */
+  text-align: center;
 }
 
+/* Título - Estilos exactos de Figma */
 .compromiso-titulo {
   color: #003d73;
   text-align: center;
@@ -1323,18 +1327,19 @@ textarea.form-control {
   font-size: 20px;
   font-style: normal;
   font-weight: 700;
-  line-height: 108%; 
+  line-height: 108%; /* 21.6px */
   letter-spacing: 0.2px;
   margin-bottom: 28px;
 }
 
+/* Párrafo - Estilos exactos de Figma */
 .compromiso-texto {
   color: #262220;
   font-family: "Helvetica Neue Local", Helvetica, Arial, sans-serif;
   font-size: 16px;
   font-style: normal;
   font-weight: 600;
-  line-height: 150%; 
+  line-height: 150%; /* 24px */
 }
 
 @media (max-width: 991.98px) {
