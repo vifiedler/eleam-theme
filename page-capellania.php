@@ -73,56 +73,13 @@ while ( have_posts() ) :
 		</section>
 
 		<!-- GALERÍA -->
-		<section class="seccion" aria-labelledby="titulo-galeria">
 			<?php include get_template_directory() . '/assets/modulos/modulo-capellania/loop-modulo-capellania.php'; ?>
-		</section>
 
 		<!-- CALENDARIO LITÚRGICO: ENCABEZADO -->
-		<section class="seccion seccion-crema" aria-labelledby="titulo-calendario-liturgico">
-			<div class="container">
-				<div class="encabezado-seccion">
-					<h2 id="titulo-calendario-liturgico"><?php echo $t( 'calendario_titulo' ); ?></h2>
-					<p class="text-center"><?php echo $t( 'calendario_texto' ); ?></p>
-				</div>
-			</div>
-		</section>
+
 
 		<!-- CALENDARIO LITÚRGICO: HITOS -->
-		<section class="calendario-liturgico seccion-crema pb-5" role="group" aria-label="<?php echo esc_attr( get_field( 'calendario_etiqueta' ) ); ?>">
-			<div class="calendario-liturgico-linea" aria-hidden="true"></div>
-			<div class="container calendario-liturgico-pista">
-				<?php foreach ( $hitos as $hito ) : ?>
-					<?php
-					$fecha       = $hito['fecha']; // Selector de fecha, retorno Y-m-d.
-					$fecha_texto = $hito['fecha_texto'] ?: ( $fecha ? date_i18n( 'j \d\e F', strtotime( $fecha ) ) : '' );
-					?>
-				<article class="calendario-liturgico-hito">
-					<div class="calendario-liturgico-tarjeta">
-						<h3><?php echo esc_html( $hito['nombre'] ); ?></h3>
-					</div>
-					<time datetime="<?php echo esc_attr( $fecha ); ?>"><?php echo esc_html( $fecha_texto ); ?></time>
-				</article>
-				<?php endforeach; ?>
-			</div>
-			<div class="calendario-liturgico-controles" role="group" aria-label="Controles del calendario litúrgico">
-				<button type="button" class="calendario-liturgico-control" data-calendario-accion="anterior"
-					aria-label="Hito anterior">
-					<i class="bi bi-chevron-left" aria-hidden="true"></i>
-				</button>
-				<button type="button" class="calendario-liturgico-control" data-calendario-accion="reproducir"
-					aria-label="Reproducir calendario">
-					<i class="bi bi-play-fill" aria-hidden="true"></i>
-				</button>
-				<button type="button" class="calendario-liturgico-control" data-calendario-accion="pausar"
-					aria-label="Pausar calendario">
-					<i class="bi bi-pause-fill" aria-hidden="true"></i>
-				</button>
-				<button type="button" class="calendario-liturgico-control" data-calendario-accion="siguiente"
-					aria-label="Siguiente hito">
-					<i class="bi bi-chevron-right" aria-hidden="true"></i>
-				</button>
-			</div>
-		</section>
+		
 
 		<!-- ACTIVIDADES LITÚRGICAS  -->
 		<section class="seccion" aria-labelledby="titulo-publicaciones">
