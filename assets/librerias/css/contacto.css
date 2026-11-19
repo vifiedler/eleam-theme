@@ -3,12 +3,12 @@
 .contacto-interior .bloque-contacto-informacion {
   padding: 24px 32px 24px 0;
 }
-.contacto-interior .inicio-contacto-titulo {
+.contacto-interior .bloque-contacto-informacion h3 {
   margin: 0 0 24px;
   font-size: 1.5rem;
   line-height: 1.35;
 }
-.contacto-interior .inicio-contacto-subtitulo {
+.contacto-interior .bloque-contacto-informacion h4 {
   margin: 24px 0 16px;
   font-size: 1.25rem;
   line-height: 1.4;
@@ -18,7 +18,7 @@
   font-style: normal;
   color: var(--eleam-texto);
 }
-.contacto-interior .inicio-mapa {
+.contacto-interior .mapa-referencial {
   display: block;
   width: 100%;
   height: 240px;
@@ -116,7 +116,7 @@
   }
 }
 @media (max-width: 575.98px) {
-  .contacto-interior .inicio-mapa {
+  .contacto-interior .mapa-referencial {
     height: 220px;
   }
   .contacto-interior .formulario-contacto {

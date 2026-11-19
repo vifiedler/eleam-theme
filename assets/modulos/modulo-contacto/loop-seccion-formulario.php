@@ -12,7 +12,7 @@ $texto_consultas = eleam_interior_texto('descripcion_consultas');
 $titulo_formulario = eleam_interior_texto('titulo_formulario_contacto', false, 'Formulario de contacto');
 $formulario = eleam_inicio_formulario_cf7();
 ?>
-<section class="seccion seccion-crema" aria-label="Información de contacto y formulario">
+<section class="seccion seccion-crema contacto-interior" aria-label="Información de contacto y formulario">
     <div class="contenedor-contenido">
         <div class="row align-items-stretch">
             <div class="col-lg">

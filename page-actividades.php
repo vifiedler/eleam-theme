@@ -124,13 +124,6 @@ while ( have_posts() ) :
 			$ids = wp_list_pluck( $talleres->posts, 'ID' );
 			?>
 		<section class="seccion-talleres" aria-labelledby="titulo-talleres">
-			<style>
-				<?php foreach ( $ids as $id ) : ?>
-				#taller-<?php echo (int) $id; ?>:checked ~ .panel-<?php echo (int) $id; ?> { display: flex; }
-				#taller-<?php echo (int) $id; ?>:checked ~ .talleres-botones [for="taller-<?php echo (int) $id; ?>"] { border: 3px solid var(--eleam-azul); color: var(--eleam-azul); }
-				#taller-<?php echo (int) $id; ?>:focus-visible ~ .talleres-botones [for="taller-<?php echo (int) $id; ?>"] { outline: 3px solid var(--eleam-azul); outline-offset: 3px; }
-				<?php endforeach; ?>
-			</style>
 			<div class="container">
 				<header class="encabezado-seccion">
 					<h2 id="titulo-talleres"><?php echo $t( 'titulo_seccion_3actividades' ); ?></h2>
