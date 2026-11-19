@@ -112,9 +112,11 @@ while ( have_posts() ) :
 			array(
 				'post_type'      => 'post',
 				'category_name'  => 'talleres',
-				'posts_per_page' => 6,
-				'orderby'        => 'date',
-				'order'          => 'DESC',
+				'posts_per_page' => 4,
+				'orderby'        => array(
+					'date' => 'DESC',
+					'ID'   => 'DESC',
+				),
 			)
 		);
 
