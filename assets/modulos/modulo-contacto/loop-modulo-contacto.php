@@ -1,5 +1,5 @@
 <?php
-/** Información y formulario de la página Contacto. */
+/** Inicio reutiliza la información SCF de Contacto y su formulario de Contact Form 7. */
 defined('ABSPATH') || exit;
 
 $contacto_id = eleam_inicio_contacto_id();
@@ -14,14 +14,13 @@ $titulo_formulario = eleam_inicio_texto('titulo_formulario_contacto', $contacto_
 $formulario = eleam_inicio_formulario_cf7();
 ?>
 <section class="seccion seccion-crema" aria-labelledby="titulo-contacto-inicio">
-    <div class="contenedor-contenido">
+    <div class="container">
         <div class="row align-items-stretch">
             <div class="col-lg">
                 <div class="bloque-contacto-informacion">
-                    <h2 class="visually-hidden"><?php echo esc_html($titulo_formulario); ?></h2>
-                    <h3 id="titulo-contacto-inicio" class="inicio-contacto-titulo"><?php echo esc_html($titulo); ?></h3>
+                    <h2 id="titulo-contacto-inicio" class="inicio-contacto-titulo"><?php echo esc_html($titulo); ?></h2>
                     <?php if ($descripcion !== ''): ?><p><?php echo esc_html($descripcion); ?></p><?php endif; ?>
-                    <h4 class="inicio-contacto-subtitulo"><?php echo esc_html($titulo_ubicacion); ?></h4>
+                    <h3 class="inicio-contacto-subtitulo"><?php echo esc_html($titulo_ubicacion); ?></h3>
                     <address>Los Libertadores 234, El Monte, Región Metropolitana.</address>
                     <?php if ($mapa !== ''): ?>
                         <iframe class="mapa-referencial inicio-mapa" src="<?php echo esc_url($mapa); ?>"
@@ -31,7 +30,7 @@ $formulario = eleam_inicio_formulario_cf7();
                     <?php if ($ruta !== ''): ?>
                         <p class="inicio-como-llegar"><a href="<?php echo esc_url($ruta); ?>" target="_blank" rel="noopener noreferrer">Cómo llegar <span class="bi bi-box-arrow-up-right" aria-hidden="true"></span></a></p>
                     <?php endif; ?>
-                    <h4 class="inicio-contacto-subtitulo"><?php echo esc_html($titulo_consultas); ?></h4>
+                    <h3 class="inicio-contacto-subtitulo"><?php echo esc_html($titulo_consultas); ?></h3>
                     <?php if ($texto_consultas !== ''): ?><p><?php echo esc_html($texto_consultas); ?></p><?php endif; ?>
                 </div>
             </div>

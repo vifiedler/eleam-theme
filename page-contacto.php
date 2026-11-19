@@ -51,8 +51,7 @@ while ( have_posts() ) :
 
 		<?php get_template_part( 'assets/modulos/modulo-contacto/loop-hero' ); ?>
 
-		<!-- INFORMACIÓN Y FORMULARIO -->
-					<?php include get_template_directory() . '/assets/modulos/modulo-contacto/loop-modulo-contacto.php'; ?>
+		<?php get_template_part( 'assets/modulos/modulo-contacto/loop-seccion-formulario' ); ?>
 
 		<?php get_template_part( 'assets/modulos/modulo-comun/loop-banner' ); ?>
 
