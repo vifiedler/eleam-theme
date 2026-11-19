@@ -68,52 +68,6 @@ while ( have_posts() ) :
 
 		<!-- NUESTROS VALORES-->
 					<?php include get_template_directory() . '/assets/modulos/modulo-quienes-somos/loop-modulo-quienes-somos.php'; ?>
-
-
-		<!-- NUESTRO EQUIPO -->
-		<section class="seccion" aria-labelledby="titulo-equipo">
-			<div class="container">
-				<header class="encabezado-seccion">
-					<h2 id="titulo-equipo"><?php echo $t( 'equipo_titulo' ); ?></h2>
-				</header>
-
-				<h3 class="mb-3"><?php echo $t( 'directivos_titulo' ); ?></h3>
-				<div class="row mb-5">
-					<?php foreach ( $directivos as $d ) : ?>
-					<div class="col-lg-6">
-						<article class="card tarjeta tarjeta-horizontal">
-							<img src="<?php echo $src( $d['imagen'] ); ?>" alt="<?php echo $alt( $d['imagen'] ); ?>" class="img-fluid card-img-top tarjeta-horizontal-imagen" loading="lazy" decoding="async">
-							<div>
-								<h3 class="tarjeta-horizontal-titulo"><?php echo esc_html( $d['nombre'] ); ?></h3>
-								<div class="card-body">
-									<h4><?php echo esc_html( $d['cargo'] ); ?></h4>
-									<p><?php echo $br( $d['detalle'] ); ?></p>
-								</div>
-							</div>
-						</article>
-					</div>
-					<?php endforeach; ?>
-				</div>
-
-				<h3 class="mb-3"><?php echo $t( 'clinico_titulo' ); ?></h3>
-				<p class="mb-4"><?php echo $t( 'clinico_texto' ); ?></p>
-				<div class="row">
-					<?php foreach ( $clinico as $c ) : ?>
-					<div class="col-md-4">
-						<article class="card tarjeta tarjeta-persona">
-							<img src="<?php echo $src( $c['imagen'] ); ?>" alt="<?php echo $alt( $c['imagen'] ); ?>" class="img-fluid card-img-top tarjeta-imagen" loading="lazy" decoding="async">
-							<div class="card-body">
-								<h3><?php echo esc_html( $c['titulo'] ); ?></h3>
-								<p class="texto-secundario"><?php echo esc_html( $c['subtitulo'] ); ?></p>
-								<p><?php echo esc_html( $c['texto'] ); ?></p>
-							</div>
-						</article>
-					</div>
-					<?php endforeach; ?>
-				</div>
-			</div>
-		</section>
-
 		<?php get_template_part( 'assets/modulos/modulo-comun/loop-banner' ); ?>
 
 	</div>

@@ -75,7 +75,10 @@ foreach ( $grupos_valores as $clave => $grupo_campo ) {
 		</header>
 
 		<?php if ( function_exists( 'have_rows' ) && have_rows( 'tarjetas_equipo_directivo' ) ) : ?>
-			<h3 class="mb-3"><?php echo esc_html( get_field( 'subtitulo_equipo_directivo' ) ); ?></h3>
+			<?php $subtitulo_directivos = trim((string) get_field( 'subtitulo_equipo_directivo' ) ); ?>
+			<?php if ( $subtitulo_directivos !== '' ) : ?>
+				<h3 class="mb-3"><?php echo esc_html( $subtitulo_directivos ); ?></h3>
+			<?php endif; ?>
 			<div class="row mb-5 g-4">
 				<?php
 				while ( have_rows( 'tarjetas_equipo_directivo' ) ) :
@@ -113,8 +116,14 @@ foreach ( $grupos_valores as $clave => $grupo_campo ) {
 		<?php endif; ?>
 
 		<?php if ( function_exists( 'have_rows' ) && have_rows( 'tarjetas_equipo_clinico' ) ) : ?>
-			<h3 class="mb-3"><?php echo esc_html( get_field( 'subtitulo_equipo_clinico' ) ); ?></h3>
-			<p class="mb-4"><?php echo esc_html( get_field( 'texto_equipo_clinico' ) ); ?></p>
+			<?php $subtitulo_clinicos = trim((string) get_field( 'subtitulo_equipo_clinico' ) ); ?>
+			<?php $texto_clinicos = trim((string) get_field( 'texto_equipo_clinico' ) ); ?>
+			<?php if ( $subtitulo_clinicos !== '' ) : ?>
+				<h3 class="mb-3"><?php echo esc_html( $subtitulo_clinicos ); ?></h3>
+			<?php endif; ?>
+			<?php if ( $texto_clinicos !== '' ) : ?>
+				<p class="mb-4"><?php echo esc_html( $texto_clinicos ); ?></p>
+			<?php endif; ?>
 			<div class="row g-4">
 				<?php
 				while ( have_rows( 'tarjetas_equipo_clinico' ) ) :
