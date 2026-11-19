@@ -87,13 +87,12 @@ $hero_imagen        = $id_actividades ? get_field( 'imagen_pagina', $id_activida
 					<div class="galeria-mosaico">
 						<?php
 						foreach ( $piezas as $j => $pieza ) :
-							$foto   = $pieza['foto_detalle_taller'];
-							$rotulo = $pieza['rotulo_foto_detalle_taller'] ?: $foto['title'];
-							$texto  = $pieza['descripcion_foto_detalle_taller'] ?: $rotulo;
+							$foto = $pieza['foto_detalle_taller'];
+							// Solo la foto: sin rótulo ni descripción visibles. El rótulo queda como alt si la imagen no tiene uno.
+							$alt_foto = $foto['alt'] ?: ( $pieza['rotulo_foto_detalle_taller'] ?: $foto['title'] );
 							?>
-						<figure class="galeria-mosaico-pieza<?php echo 0 === $j ? ' galeria-mosaico-pieza-descripcion' : ''; ?>" data-rotulo="<?php echo esc_attr( $rotulo ); ?>" tabindex="0">
-							<img class="img-fluid" src="<?php echo esc_url( $foto['url'] ); ?>" alt="<?php echo esc_attr( $foto['alt'] ?: $rotulo ); ?>" loading="lazy" decoding="async">
-							<figcaption class="galeria-mosaico-pie"><?php echo esc_html( $texto ); ?></figcaption>
+						<figure class="galeria-mosaico-pieza">
+							<img class="img-fluid" src="<?php echo esc_url( $foto['url'] ); ?>" alt="<?php echo esc_attr( $alt_foto ); ?>" loading="lazy" decoding="async">
 						</figure>
 						<?php endforeach; ?>
 					</div>

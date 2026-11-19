@@ -187,6 +187,12 @@
   padding: 28px 0;
 }
 
+/* Galería del detalle de taller: se mantiene el efecto hover, pero sin textos.
+   Se oculta la franja del rótulo (::before), que sin texto quedaría como una banda vacía. */
+.seccion-detalle-galeria .galeria-mosaico-pieza::before {
+  content: none;
+}
+
 @media (max-width: 767.98px) {
   .grilla-tarjetas {
     grid-template-columns: 1fr;
