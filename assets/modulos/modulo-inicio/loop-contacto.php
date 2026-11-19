@@ -2,6 +2,8 @@
 /** Inicio reutiliza la información SCF de Contacto y su formulario de Contact Form 7. */
 defined('ABSPATH') || exit;
 
+$es_pagina_contacto = isset($args['eleam_contexto']) && $args['eleam_contexto'] === 'pagina-contacto';
+$titulo_id = $es_pagina_contacto ? 'titulo-contacto-pagina' : 'titulo-contacto-inicio';
 $contacto_id = eleam_inicio_contacto_id();
 $titulo = eleam_inicio_texto('titulo_contacto_info', $contacto_id, 'Estamos para orientarte');
 $descripcion = eleam_inicio_texto('descripcion_contacto_info', $contacto_id);
@@ -13,12 +15,12 @@ $texto_consultas = eleam_inicio_texto('descripcion_consultas', $contacto_id);
 $titulo_formulario = eleam_inicio_texto('titulo_formulario_contacto', $contacto_id, 'Formulario de contacto');
 $formulario = eleam_inicio_formulario_cf7();
 ?>
-<section class="seccion seccion-crema" aria-labelledby="titulo-contacto-inicio">
+<section class="seccion seccion-crema" aria-labelledby="<?php echo esc_attr($titulo_id); ?>">
     <div class="container">
         <div class="row align-items-stretch">
             <div class="col-lg">
                 <div class="bloque-contacto-informacion">
-                    <h2 id="titulo-contacto-inicio" class="inicio-contacto-titulo"><?php echo esc_html($titulo); ?></h2>
+                    <h2 id="<?php echo esc_attr($titulo_id); ?>" class="inicio-contacto-titulo"><?php echo esc_html($titulo); ?></h2>
                     <?php if ($descripcion !== ''): ?><p><?php echo esc_html($descripcion); ?></p><?php endif; ?>
                     <h3 class="inicio-contacto-subtitulo"><?php echo esc_html($titulo_ubicacion); ?></h3>
                     <address>Los Libertadores 234, El Monte, Región Metropolitana.</address>

@@ -24,15 +24,17 @@ function css_functions()
     wp_enqueue_style('componentes-css');
     wp_enqueue_style('donaciones-css');
 
-    // El formulario de Contact Form 7 comparte el aspecto con Inicio, pero
-    // Contacto necesita sus estilos incluso si no está activa la plantilla Inicio.
+    // Contacto reutiliza el loop y los estilos exactos del Inicio.
+    // No se carga contacto.css: sus reglas anteriores alteraban la maqueta.
     if (is_page('contacto') || is_page_template('page-contacto.php')) {
-        $contacto_css = '/assets/librerias/css/contacto.css';
+        $inicio_css = '/assets/librerias/css/inicio.css';
         wp_enqueue_style(
-            'eleam-contacto',
-            get_template_directory_uri() . $contacto_css,
+            'eleam-inicio',
+            get_template_directory_uri() . $inicio_css,
             array('componentes-css'),
-            filemtime(get_template_directory() . $contacto_css),
+            file_exists(get_template_directory() . $inicio_css)
+                ? (string) filemtime(get_template_directory() . $inicio_css)
+                : null,
             'all'
         );
     }
