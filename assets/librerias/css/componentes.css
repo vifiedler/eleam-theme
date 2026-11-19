@@ -901,13 +901,15 @@ textarea.form-control {
 
 .hero-inicio-diapositiva img {
   width: 100%;
+  aspect-ratio: 4 / 3;
   height: auto;
+  object-fit: cover;
   display: block;
   border-radius: 8px;
-  transform: scale(0.65);
+  transform: scale(0.85);
   transform-origin: right center;
-  filter: blur(2px);
-  opacity: .78;
+  filter: blur(1px);
+  opacity: .8;
   transition: transform 400ms ease-in-out, filter 400ms ease-in-out, opacity 400ms ease-in-out;
 }
 
@@ -916,8 +918,6 @@ textarea.form-control {
 }
 
 .hero-inicio-pista .slick-current img {
-  width: 100%;
-  height: auto;
   transform: scale(1);
   transform-origin: center center;
   filter: none;
@@ -926,7 +926,7 @@ textarea.form-control {
 
 .hero-inicio-controles {
   position: relative;
-  width: 62%;
+  width: 80%;
   margin-inline: auto;
   display: flex;
   justify-content: space-between;
@@ -1027,44 +1027,6 @@ textarea.form-control {
 
 
 
-
-/* Ajustes Responsive */
-@media (max-width: 991.98px) {
-  .hero-inicio {
-    padding-block: 40px;
-  }
-  .hero-inicio-texto {
-    text-align: center;
-    margin-bottom: 40px;
-  }
-  .hero-inicio-texto p {
-    max-width: 100%;
-    margin-inline: auto;
-  }
-  .hero-inicio-acciones {
-    justify-content: center;
-  }
-  .hero-inicio-carrusel-contenedor {
-    padding-inline: 20px;
-  }
-}
-
-@media (max-width: 575.98px) {
-  .hero-inicio-carrusel-contenedor {
-    padding-inline: 10px;
-  }
-  .hero-inicio-diapositiva img {
-    filter: none;
-    opacity: 1;
-  }
-  .hero-inicio-controles {
-    width: 100%;
-    margin-top: 16px;
-  }
-  .hero-inicio-acciones .boton {
-    width: 100%;
-  }
-}
 
 /* =========================================
    HOME · Capellanía: santo + publicaciones
