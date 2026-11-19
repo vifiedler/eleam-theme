@@ -185,7 +185,10 @@ class ELEAM_Nav_Walker extends Walker_Nav_Menu {
     }
 
     public function start_el( &$output, $item, $depth = 0, $args = null, $id = 0 ) {
-        $tiene_hijos = ! empty( $args->has_children );
+        $es_nosotros_sin_url = 0 === $depth
+            && 'nosotros' === sanitize_title( $item->title )
+            && empty( $item->url );
+        $tiene_hijos = ! empty( $args->has_children ) || $es_nosotros_sin_url;
         $this->elementos_con_hijos[ (int) $item->ID ] = $tiene_hijos;
         $clases = array_filter( (array) $item->classes );
         $clases[] = 'nav-item';

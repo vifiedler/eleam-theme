@@ -8,6 +8,42 @@
     'use strict';
 
     const iniciar = () => {
+        // Compatibilidad con marcado generado por una copia anterior del Walker.
+        // Convierte únicamente padres sin dirección en controles <details>/<summary>.
+        document.querySelectorAll(
+            '.navegacion-principal .navegacion-enlaces > .menu-item-has-children'
+        ).forEach((item) => {
+            if (item.querySelector(':scope > .navegacion-desplegable')) return;
+
+            const enlace = item.querySelector(':scope > a');
+            const submenu = item.querySelector(':scope > .navegacion-submenu');
+            if (!enlace || !submenu) return;
+
+            const sinDireccion = !enlace.hasAttribute('href') ||
+                enlace.getAttribute('href') === '' ||
+                enlace.getAttribute('href') === '#';
+            if (!sinDireccion && enlace.textContent.trim() !== 'Nosotros') return;
+
+            item.classList.add('navegacion-secundaria');
+
+            const detalles = document.createElement('details');
+            detalles.className = 'navegacion-desplegable';
+
+            const resumen = document.createElement('summary');
+            resumen.id = enlace.id || 'eleam-dropdown-nosotros';
+            resumen.className = 'nav-link navegacion-disparador';
+            resumen.innerHTML = enlace.innerHTML;
+
+            const chevron = document.createElement('span');
+            chevron.className = 'bi bi-chevron-down';
+            chevron.setAttribute('aria-hidden', 'true');
+            resumen.appendChild(chevron);
+
+            detalles.appendChild(resumen);
+            detalles.appendChild(submenu);
+            enlace.replaceWith(detalles);
+        });
+
         const consultas = document.querySelectorAll(
             '.navegacion-principal .navegacion-desplegable'
         );
