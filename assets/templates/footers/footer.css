@@ -58,6 +58,13 @@
     color var(--eleam-duracion-interaccion) var(--eleam-curva-transicion);
 }
 
+.pie-sitio-navegacion a:link,
+.pie-sitio-navegacion a:visited,
+.pie-sitio-navegacion a:active {
+  color: var(--eleam-texto);
+  text-decoration: none;
+}
+
 .pie-sitio-navegacion a:hover,
 .pie-sitio-navegacion a:focus-visible {
   color: var(--eleam-azul);

@@ -47,15 +47,7 @@ while ( have_posts() ) :
 
 		<?php get_template_part( 'assets/modulos/modulo-capellania/loop-hero' ); ?>
 
-		<!-- FE, COMPAÑÍA Y ESPERANZA -->
-		<section class="seccion seccion-crema">
-			<div class="container">
-				<div class="encabezado-seccion">
-					<h2><?php echo $t( 'fe_titulo' ); ?></h2>
-					<?php echo $ps( get_field( 'fe_texto' ) ); ?>
-				</div>
-			</div>
-		</section>
+		<?php get_template_part( 'assets/modulos/modulo-capellania/loop-seccion-uno' ); ?>
 
 			<?php include get_template_directory() . '/assets/modulos/modulo-capellania/loop-modulo-capellania.php'; ?>
 
