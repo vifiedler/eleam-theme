@@ -67,7 +67,7 @@ while ( have_posts() ) :
 		</section>
 
 		<!-- INFORMACIÓN Y FORMULARIO -->
-					<?php include get_template_directory() . '/assets/modulos/modulo-inicio/loop-contacto.php'; ?>
+					<?php include get_template_directory() . '/assets/modulos/modulo-contacto/loop-modulo-contacto.php'; ?>
 
 
 		<!-- BANNER CONTRIBUCIÓN -->
