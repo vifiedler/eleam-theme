@@ -67,9 +67,7 @@ while ( have_posts() ) :
 		</section>
 
 		<!-- INFORMACIÓN Y FORMULARIO -->
-		 <div class="contenido">
 					<?php include get_template_directory() . '/assets/modulos/modulo-contacto/loop-modulo-contacto.php'; ?>
-</div>
 
 		<!-- BANNER CONTRIBUCIÓN -->
 		<section class="banner-contribucion" aria-labelledby="titulo-contribucion">
