@@ -15,36 +15,62 @@
     list-style: none;
 }
 
-/* El enlace padre se reemplaza por un botón accesible; igual apariencia. */
-.navegacion-principal button.nav-link {
-    border: 0;
-    border-bottom: 2px solid transparent;
-    cursor: pointer;
-    font-family: inherit;
-    text-align: left;
+/* "Nosotros" es un control nativo, no un enlace. */
+.navegacion-principal .navegacion-desplegable {
+    position: relative;
 }
 
-.navegacion-principal .dropdown-toggle::after {
+.navegacion-principal .navegacion-disparador {
+    cursor: pointer;
+    user-select: none;
+    list-style: none;
+}
+
+.navegacion-principal .navegacion-disparador::marker {
+    content: "";
+}
+
+.navegacion-principal .navegacion-disparador::-webkit-details-marker {
     display: none;
 }
 
-.navegacion-principal .navegacion-secundaria > button .bi {
+.navegacion-principal .navegacion-disparador .bi {
     font-size: .75em;
     transition: transform var(--eleam-duracion-interaccion) var(--eleam-curva-transicion);
 }
 
-.navegacion-principal .navegacion-secundaria > button[aria-expanded="true"] .bi {
+.navegacion-principal .navegacion-desplegable[open] > .navegacion-disparador .bi {
     transform: rotate(180deg);
 }
 
-.navegacion-principal .current-menu-ancestor > .nav-link,
-.navegacion-principal .current-menu-parent > .nav-link,
+.navegacion-principal .navegacion-desplegable:not([open]) > .navegacion-submenu {
+    display: none;
+}
+
+.navegacion-principal .navegacion-desplegable[open] > .navegacion-submenu {
+    display: block;
+}
+
+.navegacion-principal .navegacion-disparador:focus-visible {
+    outline: 3px solid var(--eleam-azul);
+    outline-offset: 3px;
+}
+
+.navegacion-principal .marca-sitio-texto {
+    color: var(--eleam-azul);
+    font-weight: 700;
+}
+
+.navegacion-principal .current-menu-ancestor > .navegacion-desplegable > .navegacion-disparador,
+.navegacion-principal .current-menu-parent > .navegacion-desplegable > .navegacion-disparador,
 .navegacion-principal .current-menu-item > .nav-link {
     font-weight: 700;
     border-bottom-color: var(--eleam-terracota);
 }
 
 .navegacion-principal .navegacion-submenu {
+    list-style: none;
+    z-index: 30;
     margin: 0;
     padding: 8px;
     border-radius: var(--eleam-radio);
@@ -103,7 +129,8 @@
     }
 
     .navegacion-principal .navegacion-enlaces > .nav-item > .nav-link,
-    .navegacion-principal .navegacion-enlaces > .nav-item > .boton {
+    .navegacion-principal .navegacion-enlaces > .nav-item > .boton,
+    .navegacion-principal .navegacion-enlaces > .nav-item > .navegacion-desplegable > .navegacion-disparador {
         display: flex;
         width: 100%;
         justify-content: flex-start;

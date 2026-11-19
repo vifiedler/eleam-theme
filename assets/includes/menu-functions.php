@@ -155,15 +155,17 @@ function eleam_registrar_navegacion_principal() {
 add_action( 'after_setup_theme', 'eleam_registrar_navegacion_principal', 11 );
 
 /**
- * Walker semántico para Bootstrap 5.
- * Los elementos con hijos son botones: nunca enlazan a la página padre.
+ * Walker ELEAM. El elemento de menú con hijos se presenta como un disclosure
+ * nativo (<details>/<summary>), no como enlace a una página.
+ * No depende de JavaScript externo para mostrar las opciones.
  */
 class ELEAM_Nav_Walker extends Walker_Nav_Menu {
     private $ids_padres = array();
+    private $elementos_con_hijos = array();
 
     public function start_lvl( &$output, $depth = 0, $args = null ) {
         $parent_id = isset( $this->ids_padres[ $depth ] ) ? $this->ids_padres[ $depth ] : 0;
-        $output .= "\n<ul class=\"dropdown-menu navegacion-submenu\" aria-labelledby=\"eleam-dropdown-" . esc_attr( $parent_id ) . "\">\n";
+        $output .= "\n<ul class=\"navegacion-submenu\" aria-labelledby=\"eleam-dropdown-" . esc_attr( $parent_id ) . "\">\n";
     }
 
     public function end_lvl( &$output, $depth = 0, $args = null ) {
@@ -172,16 +174,15 @@ class ELEAM_Nav_Walker extends Walker_Nav_Menu {
 
     public function start_el( &$output, $item, $depth = 0, $args = null, $id = 0 ) {
         $tiene_hijos = ! empty( $args->has_children );
+        $this->elementos_con_hijos[ (int) $item->ID ] = $tiene_hijos;
         $clases = array_filter( (array) $item->classes );
         $clases[] = 'nav-item';
 
         if ( $tiene_hijos ) {
-            $clases[] = 'dropdown';
             $clases[] = 'navegacion-secundaria';
             $this->ids_padres[ $depth ] = (int) $item->ID;
         }
 
-        // Reconocer el CTA del menú sin depender de un ID fijo del entorno.
         $es_contribuye = ! $tiene_hijos && 0 === $depth
             && 'contribuye' === sanitize_title( $item->title );
 
@@ -198,17 +199,18 @@ class ELEAM_Nav_Walker extends Walker_Nav_Menu {
             . esc_html( $titulo ) . '</span>';
 
         if ( $tiene_hijos ) {
-            // Control real, nunca un enlace con href="#" a una página vacía.
-            $output .= '<button type="button" id="eleam-dropdown-' . esc_attr( $item->ID ) . '"'
-                . ' class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">'
+            // <summary> abre/cierra el menú; el elemento padre no tiene href.
+            $output .= '<details class="navegacion-desplegable">'
+                . '<summary id="eleam-dropdown-' . esc_attr( $item->ID ) . '" class="nav-link navegacion-disparador">'
                 . $titulo_html
                 . '<span class="bi bi-chevron-down" aria-hidden="true"></span>'
-                . '</button>';
+                . '</summary>';
             return;
         }
 
         $es_actual = in_array( 'current-menu-item', $clases, true )
             || in_array( 'current_page_item', $clases, true );
+
         $atributos = array(
             'class' => $es_contribuye
                 ? 'btn boton boton-primario'
@@ -244,6 +246,11 @@ class ELEAM_Nav_Walker extends Walker_Nav_Menu {
     }
 
     public function end_el( &$output, $item, $depth = 0, $args = null ) {
+        $item_id = (int) $item->ID;
+        if ( ! empty( $this->elementos_con_hijos[ $item_id ] ) ) {
+            $output .= '</details>';
+        }
+        unset( $this->elementos_con_hijos[ $item_id ] );
         $output .= "</li>\n";
     }
 }
