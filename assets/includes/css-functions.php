@@ -77,5 +77,18 @@ function eleam_theme_css()
     wp_enqueue_style('componentes-css');
     wp_enqueue_style('footer-css');
     wp_enqueue_style('capellania-css');
+
+    // Página Contribuye: estilos de tarjetas de impacto y formulario de aporte.
+    if (is_page_template('page-donaciones.php')) {
+        wp_enqueue_style(
+            'donaciones-css',
+            get_template_directory_uri() . '/assets/librerias/css/donaciones.css',
+            array('componentes-css'),
+            file_exists(get_template_directory() . '/assets/librerias/css/donaciones.css')
+                ? (string) filemtime(get_template_directory() . '/assets/librerias/css/donaciones.css')
+                : null,
+            'all'
+        );
+    }
 }
 add_action('wp_enqueue_scripts', 'eleam_theme_css', 5);
