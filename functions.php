@@ -185,3 +185,26 @@ $columnas = array(
 	'footer-4'        => 'Footer · Columna 4 (marco legal)',
 	'footer-creditos' => 'Footer · Créditos',
 );
+function eleam_sin_barras_finales( $html ) {
+    $partes = preg_split(
+        '~(<script\b[^>]*>.*?</script>|<style\b[^>]*>.*?</style>|<!--.*?-->)~is',
+        $html,
+        -1,
+        PREG_SPLIT_DELIM_CAPTURE
+    );
+    if ( ! is_array( $partes ) ) {
+        return $html;
+    }
+    foreach ( $partes as $indice => $parte ) {
+        if ( preg_match( '~^<(?:script|style)\b|^<!--~i', $parte ) ) {
+            continue;
+        }
+        // Solamente elimina la barra que cierra una etiqueta vacía.
+        $partes[ $indice ] = preg_replace(
+            '~<(area|base|br|col|embed|hr|img|input|link|meta|param|source|track|wbr)\b((?:"[^"]*"|\x27[^\x27]*\x27|[^\x27">])*)\s*/>~i',
+            '<$1$2>',
+            $parte
+        );
+    }
+    return implode( '', $partes );
+}
