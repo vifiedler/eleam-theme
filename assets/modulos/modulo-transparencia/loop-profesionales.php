@@ -50,7 +50,7 @@ $nombre_clinicos = $quienes_id ? eleam_transparencia_texto('subtitulo_equipo_cli
                 <?php endforeach; ?>
             </div>
         <?php endif; ?>
-        <?php if ($clinicos): ?>
+        <!--<?php if ($clinicos): ?>
             <h3 class="transparencia-subtitulo-equipo"><?php echo esc_html($nombre_clinicos); ?></h3>
             <div class="row g-4 transparencia-bloque-equipo">
                 <?php foreach ($clinicos as $fila):
@@ -72,7 +72,7 @@ $nombre_clinicos = $quienes_id ? eleam_transparencia_texto('subtitulo_equipo_cli
                     </div>
                 <?php endforeach; ?>
             </div>
-        <?php endif; ?>
+        <?php endif; ?>-->
         <?php if (!$directivos_visibles && !$clinicos): ?>
             <p class="transparencia-sin-datos">La información del equipo profesional se encuentra pendiente de publicación.</p>
         <?php endif; ?>
