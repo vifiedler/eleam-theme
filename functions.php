@@ -185,7 +185,7 @@ $columnas = array(
 	'footer-4'        => 'Footer · Columna 4 (marco legal)',
 	'footer-creditos' => 'Footer · Créditos',
 );
-function entre_versos_sin_barras_finales( $html ) {
+function eleam_sin_barras_finales( $html ) {
     $partes = preg_split(
         '~(<script\b[^>]*>.*?</script>|<style\b[^>]*>.*?</style>|<!--.*?-->)~is',
         $html,
