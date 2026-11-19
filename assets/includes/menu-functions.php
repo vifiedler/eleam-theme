@@ -3,7 +3,7 @@
 function cargar_estilos_para_menus()
 {
     // Registrar la hoja de estilo
-    wp_register_style('estilos-menus', get_template_directory_uri() . '/assets/templates/navs/nav.css', array(), false, 'all');
+    wp_register_style('estilos-menus', get_template_directory_uri() . '/assets/templates/navs/nav.css', array('general'), filemtime(get_template_directory() . '/assets/templates/navs/nav.css'), 'all');
 
     wp_enqueue_style('estilos-menus');
 }
@@ -143,3 +143,107 @@ class bootstrap_5_wp_nav_menu_walker extends Walker_Nav_Menu
     }
 }
 /*menu wordpress*/
+
+/**
+ * Ubicación del menú conservada del WordPress actual y su exportación WXR.
+ * El contenido sigue administrándose en Apariencia > Menús, pero el marcado
+ * completo lo produce el Walker del tema.
+ */
+function eleam_registrar_navegacion_principal() {
+    register_nav_menus( array( 'menu-nav' => __( 'Navegación principal ELEAM', 'eleam-theme' ) ) );
+}
+add_action( 'after_setup_theme', 'eleam_registrar_navegacion_principal', 11 );
+
+/**
+ * Walker semántico para Bootstrap 5.
+ * Los elementos con hijos son botones: nunca enlazan a la página padre.
+ */
+class ELEAM_Nav_Walker extends Walker_Nav_Menu {
+    private $ids_padres = array();
+
+    public function start_lvl( &$output, $depth = 0, $args = null ) {
+        $parent_id = isset( $this->ids_padres[ $depth ] ) ? $this->ids_padres[ $depth ] : 0;
+        $output .= "\n<ul class=\"dropdown-menu navegacion-submenu\" aria-labelledby=\"eleam-dropdown-" . esc_attr( $parent_id ) . "\">\n";
+    }
+
+    public function end_lvl( &$output, $depth = 0, $args = null ) {
+        $output .= "</ul>\n";
+    }
+
+    public function start_el( &$output, $item, $depth = 0, $args = null, $id = 0 ) {
+        $tiene_hijos = ! empty( $args->has_children );
+        $clases = array_filter( (array) $item->classes );
+        $clases[] = 'nav-item';
+
+        if ( $tiene_hijos ) {
+            $clases[] = 'dropdown';
+            $clases[] = 'navegacion-secundaria';
+            $this->ids_padres[ $depth ] = (int) $item->ID;
+        }
+
+        // Reconocer el CTA del menú sin depender de un ID fijo del entorno.
+        $es_contribuye = ! $tiene_hijos && 0 === $depth
+            && 'contribuye' === sanitize_title( $item->title );
+
+        if ( $es_contribuye ) {
+            $clases[] = 'navegacion-accion';
+        }
+
+        $clases = apply_filters( 'nav_menu_css_class', $clases, $item, $args, $depth );
+        $clases = array_unique( array_filter( array_map( 'sanitize_html_class', $clases ) ) );
+        $output .= '<li class="' . esc_attr( implode( ' ', $clases ) ) . '">';
+
+        $titulo = apply_filters( 'the_title', $item->title, $item->ID );
+        $titulo_html = '<span class="navegacion-texto" data-texto="' . esc_attr( wp_strip_all_tags( $titulo ) ) . '">'
+            . esc_html( $titulo ) . '</span>';
+
+        if ( $tiene_hijos ) {
+            // Control real, nunca un enlace con href="#" a una página vacía.
+            $output .= '<button type="button" id="eleam-dropdown-' . esc_attr( $item->ID ) . '"'
+                . ' class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">'
+                . $titulo_html
+                . '<span class="bi bi-chevron-down" aria-hidden="true"></span>'
+                . '</button>';
+            return;
+        }
+
+        $es_actual = in_array( 'current-menu-item', $clases, true )
+            || in_array( 'current_page_item', $clases, true );
+        $atributos = array(
+            'class' => $es_contribuye
+                ? 'btn boton boton-primario'
+                : ( $depth > 0 ? 'dropdown-item' : 'nav-link' ),
+            'href' => ! empty( $item->url ) ? $item->url : '',
+        );
+        if ( $es_actual ) {
+            $atributos['aria-current'] = 'page';
+        }
+        if ( ! empty( $item->target ) ) {
+            $atributos['target'] = $item->target;
+        }
+        if ( ! empty( $item->xfn ) ) {
+            $atributos['rel'] = $item->xfn;
+        }
+        if ( ! empty( $item->attr_title ) ) {
+            $atributos['title'] = $item->attr_title;
+        }
+        $atributos = apply_filters( 'nav_menu_link_attributes', $atributos, $item, $args, $depth );
+        $output .= '<a';
+        foreach ( $atributos as $nombre => $valor ) {
+            if ( null === $valor || '' === $valor || false === $valor ) {
+                continue;
+            }
+            $valor = 'href' === $nombre ? esc_url( $valor ) : esc_attr( $valor );
+            $output .= ' ' . esc_attr( $nombre ) . '="' . $valor . '"';
+        }
+        $output .= '>' . $titulo_html;
+        if ( $es_contribuye ) {
+            $output .= '<span class="bi bi-arrow-right" aria-hidden="true"></span>';
+        }
+        $output .= '</a>';
+    }
+
+    public function end_el( &$output, $item, $depth = 0, $args = null ) {
+        $output .= "</li>\n";
+    }
+}

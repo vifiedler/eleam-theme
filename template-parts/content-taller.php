@@ -89,11 +89,11 @@ $hero_imagen        = $id_actividades ? get_field( 'imagen_pagina', $id_activida
 						foreach ( $piezas as $j => $pieza ) :
 							$foto   = $pieza['foto_detalle_taller'];
 							$rotulo = $pieza['rotulo_foto_detalle_taller'] ?: $foto['title'];
-							$texto  = $pieza['descripcion_foto_detalle_taller'] ?: $rotulo;
+							// Se muestra solo el rótulo (sin descripción ni capa azul).
+							$alt_foto = $foto['alt'] ?: $rotulo;
 							?>
-						<figure class="galeria-mosaico-pieza<?php echo 0 === $j ? ' galeria-mosaico-pieza-descripcion' : ''; ?>" data-rotulo="<?php echo esc_attr( $rotulo ); ?>" tabindex="0">
-							<img class="img-fluid" src="<?php echo esc_url( $foto['url'] ); ?>" alt="<?php echo esc_attr( $foto['alt'] ?: $rotulo ); ?>" loading="lazy" decoding="async">
-							<figcaption class="galeria-mosaico-pie"><?php echo esc_html( $texto ); ?></figcaption>
+						<figure class="galeria-mosaico-pieza" data-rotulo="<?php echo esc_attr( $rotulo ); ?>">
+							<img class="img-fluid" src="<?php echo esc_url( $foto['url'] ); ?>" alt="<?php echo esc_attr( $alt_foto ); ?>" loading="lazy" decoding="async">
 						</figure>
 						<?php endforeach; ?>
 					</div>

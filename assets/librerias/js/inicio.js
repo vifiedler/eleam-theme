@@ -22,12 +22,12 @@
 
     $pista.slick({
       accessibility: true,
-      adaptiveHeight: true,
+      adaptiveHeight: false,
       arrows: false,
       autoplay: !reduccionDeMovimiento,
       autoplaySpeed: 6000,
-      centerMode: true,
-      centerPadding: '19%',
+      centerMode: $diapositivas.length > 2,
+      centerPadding: '8%',
       slidesToShow: 1,
       slidesToScroll: 1,
       fade: false,
