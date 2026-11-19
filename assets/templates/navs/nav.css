@@ -1,0 +1,156 @@
+/* ELEAM · Navegación con Walker. Extensión localizada de general.css. */
+
+.navegacion-principal .navbar-collapse {
+    min-width: 0;
+    justify-content: flex-end;
+}
+
+.navegacion-principal .navegacion-enlaces {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 0 auto;
+}
+
+.navegacion-principal .nav-item {
+    list-style: none;
+}
+
+/* "Nosotros" es un control nativo, no un enlace. */
+.navegacion-principal .navegacion-desplegable {
+    position: relative;
+}
+
+.navegacion-principal .navegacion-disparador {
+    cursor: pointer;
+    user-select: none;
+    list-style: none;
+}
+
+.navegacion-principal .navegacion-disparador::marker {
+    content: "";
+}
+
+.navegacion-principal .navegacion-disparador::-webkit-details-marker {
+    display: none;
+}
+
+.navegacion-principal .navegacion-disparador .bi {
+    font-size: .75em;
+    transition: transform var(--eleam-duracion-interaccion) var(--eleam-curva-transicion);
+}
+
+.navegacion-principal .navegacion-desplegable[open] > .navegacion-disparador .bi {
+    transform: rotate(180deg);
+}
+
+.navegacion-principal .navegacion-desplegable:not([open]) > .navegacion-submenu {
+    display: none;
+}
+
+.navegacion-principal .navegacion-desplegable[open] > .navegacion-submenu {
+    display: block;
+}
+
+.navegacion-principal .navegacion-disparador:focus-visible {
+    outline: 3px solid var(--eleam-azul);
+    outline-offset: 3px;
+}
+
+.navegacion-principal .marca-sitio-texto {
+    color: var(--eleam-azul);
+    font-weight: 700;
+}
+
+.navegacion-principal .current-menu-ancestor > .navegacion-desplegable > .navegacion-disparador,
+.navegacion-principal .current-menu-parent > .navegacion-desplegable > .navegacion-disparador,
+.navegacion-principal .current-menu-item > .nav-link {
+    font-weight: 700;
+    border-bottom-color: var(--eleam-terracota);
+}
+
+.navegacion-principal .navegacion-submenu {
+    list-style: none;
+    z-index: 30;
+    margin: 0;
+    padding: 8px;
+    border-radius: var(--eleam-radio);
+    max-width: min(90vw, 320px);
+}
+
+.navegacion-principal .navegacion-submenu .dropdown-item {
+    border-radius: var(--eleam-radio);
+    border-bottom: 2px solid transparent;
+    min-height: 44px;
+    white-space: normal;
+}
+
+.navegacion-principal .navegacion-submenu .dropdown-item:focus-visible,
+.navegacion-principal .navegacion-submenu .dropdown-item[aria-current="page"] {
+    border-bottom-color: var(--eleam-terracota);
+}
+
+.navegacion-principal .navegacion-accion .boton {
+    text-decoration: none;
+}
+
+.navegacion-principal .boton-menu-movil {
+    border: 1px solid var(--eleam-borde);
+    border-radius: var(--eleam-radio);
+    color: var(--eleam-azul);
+    padding: 8px 12px;
+    min-height: 44px;
+    min-width: 44px;
+}
+
+.navegacion-principal .boton-menu-movil:focus-visible {
+    outline: 3px solid var(--eleam-azul);
+    outline-offset: 3px;
+    box-shadow: none;
+}
+
+.navegacion-principal .boton-menu-movil .bi {
+    font-size: 1.5rem;
+    line-height: 1;
+}
+
+@media (max-width: 1199.98px) {
+    .navegacion-principal .navbar-collapse {
+        flex-basis: 100%;
+    }
+
+    .navegacion-principal .navegacion-enlaces {
+        width: 100%;
+        padding: 12px 0 8px;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 2px;
+    }
+
+    .navegacion-principal .navegacion-enlaces > .nav-item > .nav-link,
+    .navegacion-principal .navegacion-enlaces > .nav-item > .boton,
+    .navegacion-principal .navegacion-enlaces > .nav-item > .navegacion-desplegable > .navegacion-disparador {
+        display: flex;
+        width: 100%;
+        justify-content: flex-start;
+    }
+
+    .navegacion-principal .navegacion-submenu {
+        position: static;
+        min-width: 0;
+        max-width: 100%;
+        border: 0;
+        box-shadow: none;
+        padding: 0 0 0 16px;
+    }
+
+    .navegacion-principal .navegacion-accion {
+        margin-top: 8px;
+    }
+
+    .navegacion-principal .navegacion-accion .boton {
+        justify-content: center !important;
+        max-width: 100%;
+    }
+}

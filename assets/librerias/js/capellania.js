@@ -23,3 +23,48 @@
     });
   });
 }());
+jQuery(function ($) {
+	var $pista = $('.calendario-liturgico-pista');
+
+	if (!$pista.length || !$.fn.slick) {
+		return;
+	}
+
+	var reducirMovimiento = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+	$pista.slick({
+		slidesToShow: 4,
+		slidesToScroll: 1,
+		infinite: true,
+		arrows: false,
+		dots: false,
+		autoplay: !reducirMovimiento,
+		autoplaySpeed: 0,
+		speed: 6000,
+		cssEase: 'linear',
+		pauseOnHover: true,
+		pauseOnFocus: true,
+		responsive: [
+			{ breakpoint: 992, settings: { slidesToShow: 3 } },
+			{ breakpoint: 768, settings: { slidesToShow: 2 } },
+			{ breakpoint: 576, settings: { slidesToShow: 1 } }
+		]
+	});
+
+	$('.calendario-liturgico-controles').on('click', '[data-calendario-accion]', function () {
+		switch ($(this).data('calendario-accion')) {
+			case 'anterior':
+				$pista.slick('slickPrev');
+				break;
+			case 'siguiente':
+				$pista.slick('slickNext');
+				break;
+			case 'reproducir':
+				$pista.slick('slickPlay');
+				break;
+			case 'pausar':
+				$pista.slick('slickPause');
+				break;
+		}
+	});
+});

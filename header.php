@@ -26,27 +26,5 @@
 	<a class="skip-link screen-reader-text" href="#primary"><?php esc_html_e( 'Skip to content', 'eleam-theme' ); ?></a>
 
 	<header class="cabecera-sitio">
-	<nav class="navbar navegacion-principal container-fluid contenedor-amplio" aria-label="<?php esc_attr_e( 'Navegación principal', 'eleam-theme' ); ?>">
-
-		<a class="navbar-brand marca-sitio" href="<?php echo esc_url( home_url( '/' ) ); ?>" aria-label="<?php esc_attr_e( 'ELEAM San Francisco, inicio', 'eleam-theme' ); ?>">
-			<img class="img-fluid"
-				src="<?php echo esc_url( get_theme_file_uri( 'assets/images/logo-eleam.avif' ) ); ?>"
-				alt="<?php echo esc_attr( get_bloginfo( 'name' ) ); ?>"
-				decoding="async">
-		</a>
-
-		<?php
-			wp_nav_menu(
-				array(
-					'theme_location' => 'menu-nav',
-					'menu_id'        => 'primary-menu',
-				)
-			);
-			?>
-	</nav>
-</header>
-
-
-
- 
-  
+		<?php get_template_part( 'assets/templates/navs/nav-desk' ); ?>
+	</header>
