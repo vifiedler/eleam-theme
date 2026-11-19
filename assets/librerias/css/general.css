@@ -82,7 +82,9 @@
 body {
   margin: 0;
 }
-
+body .page{
+  margin: 0 0 0;
+}
 h1,
 h2,
 h3,
