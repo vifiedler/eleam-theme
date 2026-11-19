@@ -1,89 +1,51 @@
-<!-- 6. CONTACTO -->
-<?php $mapa = get_field('contacto_mapa'); ?>
-<section class="seccion seccion-crema" aria-label="Información de contacto y formulario">
-	<div class="contenedor-contenido">
-		<div class="row align-items-stretch">
-			<div class="col-lg">
-				<div class="bloque-contacto-informacion">
-					<h3><?php echo $t('contacto_titulo'); ?></h3>
-					<p><?php echo $t('contacto_texto'); ?></p>
-					<h4><?php echo $t('contacto_ubicacion_titulo'); ?></h4>
-					<p><?php echo $t('contacto_direccion'); ?></p>
-					<img class="mapa-referencial" src="<?php echo $src($mapa); ?>"
-						alt="<?php echo $alt($mapa); ?>" width="524" height="240">
-					<h4><?php echo $t('contacto_consultas_titulo'); ?></h4>
-					<p><?php echo $t('contacto_consultas_texto'); ?></p>
-				</div>
-			</div>
+<?php
+/** Inicio reutiliza la información SCF de Contacto y su formulario de Contact Form 7. */
+defined('ABSPATH') || exit;
 
-			<div class="col-lg-auto d-none d-lg-block">
-				<div class="vr h-100"></div>
-			</div>
-
-			<div class="col-lg">
-				<form class="formulario-contacto" action="<?php echo esc_url(admin_url('admin-post.php')); ?>"
-					method="post">
-					<input type="hidden" name="action" value="enviar_contacto">
-					<?php wp_nonce_field('enviar_contacto', 'contacto_nonce'); ?>
-
-					<div class="campo-formulario">
-						<label class="form-label"
-							for="nombre"><?php esc_html_e('Nombre completo', 'tu-tema'); ?></label>
-						<input class="form-control" type="text" id="nombre" name="nombre"
-							placeholder="<?php esc_attr_e('Tu nombre y apellido', 'tu-tema'); ?>"
-							autocomplete="name" required>
-					</div>
-
-					<div class="campo-formulario">
-						<label class="form-label"
-							for="correo"><?php esc_html_e('Correo electrónico', 'tu-tema'); ?></label>
-						<input class="form-control" type="email" id="correo" name="correo"
-							placeholder="nombre@correo.cl" autocomplete="email" required>
-					</div>
-
-					<div class="campo-formulario">
-						<label class="form-label"
-							for="telefono"><?php esc_html_e('Teléfono de contacto (opcional)', 'tu-tema'); ?></label>
-						<input class="form-control" type="tel" id="telefono" name="telefono"
-							placeholder="+569 12345678" autocomplete="tel">
-					</div>
-
-					<div class="campo-formulario">
-						<label class="form-label" for="asunto"><?php esc_html_e('Asunto', 'tu-tema'); ?></label>
-						<select class="form-select" id="asunto" name="asunto" required>
-							<option value="" selected><?php esc_html_e('Selecciona una opción', 'tu-tema'); ?>
-							</option>
-							<option value="conocer-hogar"><?php esc_html_e('Conocer el hogar', 'tu-tema'); ?>
-							</option>
-							<option value="visita"><?php esc_html_e('Consultar por una visita', 'tu-tema'); ?>
-							</option>
-							<option value="contribuir"><?php esc_html_e('Cómo contribuir', 'tu-tema'); ?>
-							</option>
-							<option value="otro"><?php esc_html_e('Otro', 'tu-tema'); ?></option>
-						</select>
-					</div>
-
-					<div class="campo-formulario">
-						<label class="form-label"
-							for="mensaje"><?php esc_html_e('Tu mensaje', 'tu-tema'); ?></label>
-						<textarea class="form-control" id="mensaje" name="mensaje" rows="5" required></textarea>
-					</div>
-
-					<div class="form-check">
-						<input class="form-check-input" type="checkbox" id="privacidad" name="privacidad"
-							required>
-						<label class="form-check-label" for="privacidad">
-							<?php esc_html_e('Acepto la política de privacidad y el manejo de datos de la fundación.', 'tu-tema'); ?>
-						</label>
-					</div>
-
-					<div class="d-flex justify-content-center">
-						<button class="btn boton boton-primario"
-							type="submit"><?php esc_html_e('Enviar mensaje', 'tu-tema'); ?></button>
-					</div>
-				</form>
-			</div>
-
-		</div>
-	</div>
+$contacto_id = eleam_inicio_contacto_id();
+$titulo = eleam_inicio_texto('titulo_contacto_info', $contacto_id, 'Estamos para orientarte');
+$descripcion = eleam_inicio_texto('descripcion_contacto_info', $contacto_id);
+$titulo_ubicacion = eleam_inicio_texto('titulo_ubicacion', $contacto_id, 'Dónde encontrarnos');
+$mapa = eleam_inicio_texto('url_mapa_incrustado', $contacto_id);
+$ruta = eleam_inicio_texto('url_como_llegar', $contacto_id);
+$titulo_consultas = eleam_inicio_texto('titulo_consultas', $contacto_id, 'Consultas y visitas');
+$texto_consultas = eleam_inicio_texto('descripcion_consultas', $contacto_id);
+$titulo_formulario = eleam_inicio_texto('titulo_formulario_contacto', $contacto_id, 'Formulario de contacto');
+$formulario = eleam_inicio_formulario_cf7();
+?>
+<section class="seccion seccion-crema" aria-labelledby="titulo-contacto-inicio">
+    <div class="contenedor-contenido">
+        <div class="row align-items-stretch">
+            <div class="col-lg">
+                <div class="bloque-contacto-informacion">
+                    <h2 id="titulo-contacto-inicio" class="inicio-contacto-titulo"><?php echo esc_html($titulo); ?></h2>
+                    <?php if ($descripcion !== ''): ?><p><?php echo esc_html($descripcion); ?></p><?php endif; ?>
+                    <h3 class="inicio-contacto-subtitulo"><?php echo esc_html($titulo_ubicacion); ?></h3>
+                    <address>Los Libertadores 234, El Monte, Región Metropolitana.</address>
+                    <?php if ($mapa !== ''): ?>
+                        <iframe class="mapa-referencial inicio-mapa" src="<?php echo esc_url($mapa); ?>"
+                            title="Ubicación del ELEAM San Francisco en El Monte" width="524" height="240"
+                            loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+                    <?php endif; ?>
+                    <?php if ($ruta !== ''): ?>
+                        <p class="inicio-como-llegar"><a href="<?php echo esc_url($ruta); ?>" target="_blank" rel="noopener noreferrer">Cómo llegar <span class="bi bi-box-arrow-up-right" aria-hidden="true"></span></a></p>
+                    <?php endif; ?>
+                    <h3 class="inicio-contacto-subtitulo"><?php echo esc_html($titulo_consultas); ?></h3>
+                    <?php if ($texto_consultas !== ''): ?><p><?php echo esc_html($texto_consultas); ?></p><?php endif; ?>
+                </div>
+            </div>
+            <div class="col-lg-auto d-none d-lg-block"><div class="vr h-100"></div></div>
+            <div class="col-lg">
+                <div class="formulario-contacto">
+                    <h2 class="inicio-formulario-titulo"><?php echo esc_html($titulo_formulario); ?></h2>
+                    <?php if ($formulario !== ''): ?>
+                        <?php echo $formulario; // HTML producido y saneado por Contact Form 7. ?>
+                    <?php else: ?>
+                        <p>El formulario de contacto no está disponible en este momento.</p>
+                        <?php if ($contacto_id): ?><a href="<?php echo esc_url(get_permalink($contacto_id)); ?>">Ir a Contacto</a><?php endif; ?>
+                    <?php endif; ?>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
