@@ -64,15 +64,7 @@ while ( have_posts() ) :
 
 		<?php get_template_part( 'assets/modulos/modulo-quienes-somos/loop-hero' ); ?>
 
-		<!-- QUÉ NOS DEFINE -->
-		<section class="seccion-crema py-5" aria-labelledby="titulo-definen">
-			<div class="container">
-				<header class="encabezado-seccion">
-					<h2 id="titulo-definen"><?php echo $t( 'definen_titulo' ); ?></h2>
-				</header>
-				<p class="text-center"><?php echo $t( 'definen_texto' ); ?></p>
-			</div>
-		</section>
+		<?php get_template_part( 'assets/modulos/modulo-quienes-somos/loop-seccion-uno' ); ?>
 
 		<!-- NUESTROS VALORES-->
 					<?php include get_template_directory() . '/assets/modulos/modulo-quienes-somos/loop-modulo-quienes-somos.php'; ?>

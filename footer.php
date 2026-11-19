@@ -34,54 +34,47 @@
 				<?php endif; ?>
 			</div>
 
-			<?php if ( is_active_sidebar( 'footer_2' ) ) : ?>
-				<div>
-					<?php dynamic_sidebar( 'footer_2' ); ?>
+			<div>
+				<h2><?php esc_html_e( 'Ubicación', 'eleam-theme' ); ?></h2>
+				<address>Los Libertadores 234, El Monte. Región Metropolitana</address>
+				<h3><?php esc_html_e( 'Teléfono', 'eleam-theme' ); ?></h3>
+				<div class="pila-contenido">
+					<p><?php esc_html_e( 'Teléfono: por confirmar', 'eleam-theme' ); ?></p>
+					<p><?php esc_html_e( 'Correo: por confirmar', 'eleam-theme' ); ?></p>
 				</div>
-			<?php else : ?>
-				<div>
-					<h2><?php esc_html_e( 'Ubicación', 'eleam-theme' ); ?></h2>
-					<address>Los Libertadores 234, El Monte. Región Metropolitana</address>
-					<h3><?php esc_html_e( 'Teléfono', 'eleam-theme' ); ?></h3>
-					<div class="pila-contenido">
-						<p><?php esc_html_e( 'Teléfono: por confirmar', 'eleam-theme' ); ?></p>
-						<p><?php esc_html_e( 'Correo: por confirmar', 'eleam-theme' ); ?></p>
-					</div>
-				</div>
-			<?php endif; ?>
+			</div>
 
 			<div>
-				<?php if ( is_active_sidebar( 'footer_3' ) ) : ?>
-					<?php dynamic_sidebar( 'footer_3' ); ?>
-				<?php else : ?>
-					<h2><?php esc_html_e( 'Navegación', 'eleam-theme' ); ?></h2>
-					<nav class="pie-sitio-navegacion" aria-label="<?php esc_attr_e( 'Navegación del pie', 'eleam-theme' ); ?>">
-						<ul>
-							<?php
-							$paginas_footer = array(
-								'quienes-somos' => __( '¿Quiénes somos?', 'eleam-theme' ),
-								'infraestructura' => __( 'Infraestructura', 'eleam-theme' ),
-								'actividades' => __( 'Actividades', 'eleam-theme' ),
-								'capellania' => __( 'Capellanía', 'eleam-theme' ),
-								'transparencia' => __( 'Transparencia', 'eleam-theme' ),
-								'contacto' => __( 'Contacto', 'eleam-theme' ),
-							);
-							foreach ( $paginas_footer as $slug => $titulo ) :
-								$pagina = get_page_by_path( $slug );
-								if ( ! $pagina instanceof WP_Post ) {
-									continue;
-								}
-							?>
-								<li>
-									<a href="<?php echo esc_url( get_permalink( $pagina ) ); ?>"
-										<?php if ( is_page( $slug ) ) : ?>aria-current="page"<?php endif; ?>>
-										<?php echo esc_html( $titulo ); ?>
-									</a>
-								</li>
-							<?php endforeach; ?>
-						</ul>
-					</nav>
-				<?php endif; ?>
+				<h2><?php esc_html_e( 'Navegación', 'eleam-theme' ); ?></h2>
+				<nav class="pie-sitio-navegacion" aria-label="<?php esc_attr_e( 'Navegación del pie', 'eleam-theme' ); ?>">
+					<ul>
+						<?php
+						$paginas_footer = array(
+							'inicio' => __( 'Inicio', 'eleam-theme' ),
+							'nosotros' => __( 'Nosotros', 'eleam-theme' ),
+							'quienes-somos' => __( '¿Quiénes somos?', 'eleam-theme' ),
+							'infraestructura' => __( 'Infraestructura', 'eleam-theme' ),
+							'actividades' => __( 'Actividades', 'eleam-theme' ),
+							'capellania' => __( 'Capellanía', 'eleam-theme' ),
+							'transparencia' => __( 'Transparencia', 'eleam-theme' ),
+							'contacto' => __( 'Contacto', 'eleam-theme' ),
+							'contribuye' => __( 'Contribuye', 'eleam-theme' ),
+						);
+						foreach ( $paginas_footer as $slug => $titulo ) :
+							$pagina = $slug === 'inicio' ? get_page_by_path( 'inicio' ) : get_page_by_path( $slug );
+							if ( ! $pagina instanceof WP_Post ) {
+								continue;
+							}
+						?>
+							<li>
+								<a href="<?php echo esc_url( get_permalink( $pagina ) ); ?>"
+									<?php if ( is_page( $slug ) || ( $slug === 'inicio' && is_front_page() ) ) : ?>aria-current="page"<?php endif; ?>>
+									<?php echo esc_html( $titulo ); ?>
+								</a>
+							</li>
+						<?php endforeach; ?>
+					</ul>
+				</nav>
 			</div>
 
 			<?php if ( is_active_sidebar( 'footer_4' ) ) : ?>
