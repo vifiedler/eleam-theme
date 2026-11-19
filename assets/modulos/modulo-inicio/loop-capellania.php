@@ -27,7 +27,7 @@ $publicaciones = new WP_Query(array(
             <?php if ($descripcion !== ''): ?><p><?php echo esc_html($descripcion); ?></p><?php endif; ?>
         </header>
         <div class="row g-4 align-items-stretch">
-            <div class="col-12 col-lg-7">
+            <div class="col-12">
                 <div class="capellania-publicaciones">
                     <h3 class="capellania-publicaciones-titulo"><?php echo esc_html($titulo_publicaciones); ?></h3>
                     <?php if ($publicaciones->have_posts()): ?>
