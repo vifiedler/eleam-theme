@@ -9,7 +9,7 @@
 
     const VELOCIDAD_AUTOPLAY = 15000;
     const VELOCIDAD_MANUAL = 1800;
-    const HITOS_POR_FLECHA = 1;
+    const HITOS_POR_FLECHA = 4;
 
     $('.calendario-liturgico-pista').each(function () {
       const $pista = $(this);
