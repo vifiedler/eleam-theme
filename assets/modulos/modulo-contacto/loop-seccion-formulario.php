@@ -17,7 +17,7 @@ $formulario = eleam_inicio_formulario_cf7();
         <div class="row align-items-stretch">
             <div class="col-lg">
                 <div class="bloque-contacto-informacion">
-                    <h2 class="d-none"><?php echo esc_html($titulo_formulario); ?></h2>
+                    <h2 class="visually-hidden"><?php echo esc_html($titulo_formulario); ?></h2>
                     <h3><?php echo esc_html($titulo); ?></h3>
                     <?php if ($descripcion !== ''): ?><p><?php echo esc_html($descripcion); ?></p><?php endif; ?>
                     <h4><?php echo esc_html($titulo_ubicacion); ?></h4>
