@@ -1,0 +1,21 @@
+/* Ajustes acotados a Transparencia. Se conservan las clases base de componentes.css. */
+.transparencia-lista-documentos { display: grid; gap: 16px; }
+.transparencia-bloque-documentos { scroll-margin-top: 100px; }
+#aportes, #transferencias, #directorio, #profesionales { scroll-margin-top: 100px; }
+.transparencia-sin-datos { padding: 20px 24px; border: 1px solid var(--eleam-borde); border-radius: 8px; }
+.transparencia-tabla-vacia { padding: 20px 12px !important; text-align: center !important; }
+.transparencia-subtitulo-equipo { margin: 32px 0 20px; }
+.transparencia-bloque-equipo + .transparencia-subtitulo-equipo { margin-top: 48px; }
+.transparencia-directorio .tarjeta, .transparencia-profesionales .tarjeta { height: 100%; overflow: hidden; }
+.transparencia-directorio .card-body, .transparencia-profesionales .card-body { gap: 8px; }
+.transparencia-directorio .card-body p, .transparencia-profesionales .card-body p { margin-bottom: 0; }
+.transparencia-directorio .card-body small, .transparencia-profesionales .card-body small { display: block; }
+.transparencia-retrato-vacio { height: 260px; display: grid; place-items: center; background: var(--eleam-arena); border-bottom: 8px solid var(--eleam-verde); }
+.transparencia-retrato-vacio .bi { font-size: 4rem; color: var(--eleam-azul); opacity: .6; }
+.transparencia-directorio .tarjeta-directorio-destacada .transparencia-retrato-vacio { height: 318px; }
+.transparencia-profesionales .tarjeta-directorio h4 { font-size: 1.15rem; }
+@media (max-width: 767.98px) {
+  .transparencia-navegacion { justify-content: flex-start; }
+  .transparencia-navegacion a { min-width: 0; }
+  .transparencia-retrato-vacio { height: 220px; }
+}
