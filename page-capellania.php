@@ -72,17 +72,7 @@ while ( have_posts() ) :
 			</div>
 		</section>
 
-		<!-- GALERÍA -->
 			<?php include get_template_directory() . '/assets/modulos/modulo-capellania/loop-modulo-capellania.php'; ?>
-
-		<!-- CALENDARIO LITÚRGICO: ENCABEZADO -->
-
-
-		<!-- CALENDARIO LITÚRGICO: HITOS -->
-		
-
-		<!-- ACTIVIDADES LITÚRGICAS  -->
-
 
 	</div><!-- #contenido -->
 	<?php

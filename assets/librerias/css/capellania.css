@@ -1,14 +1,12 @@
 .calendario-liturgico {
-  position: relative;
-  overflow: hidden;
-  padding-block: 36px 12px;
+	position: relative;
 }
 
 .calendario-liturgico-controles {
-  display: flex;
-  gap: 8px;
-  margin: 1.5rem auto 0;
-  justify-content: center;
+	display: flex;
+	justify-content: center;
+	gap: .5rem;
+	margin-top: 1rem;
 }
 
 .calendario-liturgico-control {
@@ -32,16 +30,24 @@
 }
 
 .calendario-liturgico-linea {
-  position: absolute;
-  top: 128px;
-  right: 0;
-  left: 0;
-  height: 2px;
-  background: var(--eleam-terracota);
+	position: absolute;
+	top: 3.25rem;                    /* ajústalo para alinearla con las tarjetas */
+	left: 0;
+	right: 0;
+	height: 2px;
+	background: currentColor;
+	opacity: .3;
 }
 
 .calendario-liturgico-pista {
-  position: relative;
+	display: flex;
+	flex-wrap: nowrap;
+	gap: 1.5rem;
+	max-width: none;                 /* anula el límite de .container */
+	overflow-x: auto;
+	scroll-snap-type: x mandatory;
+	padding-top: 2rem;
+	padding-bottom: 1rem;
 }
 
 .calendario-liturgico-pista .slick-track {
@@ -49,14 +55,12 @@
 }
 
 .calendario-liturgico-hito {
-  position: relative;
-  display: flex !important;
-  min-height: 184px;
-  padding: 0 12px;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  text-align: center;
+	flex: 0 0 260px;                 /* ancho fijo de cada hito */
+	scroll-snap-align: start;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
 }
 
 .calendario-liturgico-hito::after {
