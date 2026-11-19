@@ -14,9 +14,8 @@
     const VELOCIDAD_AUTOPLAY = 15000;
     const VELOCIDAD_MANUAL = 1800;
 <<<<<<< HEAD
-    const HITOS_POR_FLECHA = 4;
-=======
     const HITOS_POR_FLECHA = 1;
+=======
 >>>>>>> 8f2f9f1058e78733050e7b8da730f3809706246e
 
     $('.calendario-liturgico-pista').each(function () {
