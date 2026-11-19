@@ -16,6 +16,12 @@ get_header();
 		while ( have_posts() ) :
 			the_post();
 
+			// Talleres: vista de detalle (actividades-detalle.html), sin navegación ni comentarios.
+			if ( in_category( 'talleres' ) ) {
+				get_template_part( 'template-parts/content', 'taller' );
+				continue;
+			}
+
 			get_template_part( 'template-parts/content', get_post_type() );
 
 			the_post_navigation(
@@ -36,5 +42,7 @@ get_header();
 	</main><!-- #main -->
 
 <?php
-get_sidebar();
+if ( ! in_category( 'talleres' ) ) {
+	get_sidebar();
+}
 get_footer();
