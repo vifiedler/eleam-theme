@@ -8,3 +8,4 @@ require_once get_template_directory() . '/assets/includes/santoral-functions.php
 require_once get_template_directory() . '/assets/includes/inicio-functions.php';
 require_once get_template_directory() . '/assets/includes/transparencia-functions.php';
 require_once get_template_directory() . '/assets/includes/infraestructura-functions.php';
+require_once get_template_directory() . '/assets/includes/interiores-functions.php';
