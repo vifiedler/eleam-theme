@@ -11,7 +11,7 @@ $contenido = eleam_interior_campo('contenido_seccion_1_capellania');
 			<h2 id="titulo-introduccion-capellania"><?php echo esc_html($titulo); ?></h2>
 			<?php if ($contenido !== ''): ?>
 				<div class="capellania-introduccion-texto">
-					<?php echo wp_kses_post(wpautop((string) $contenido)); ?>
+					<?php echo wp_kses_post(wpautop((string) $contenido, false)); ?>
 				</div>
 			<?php endif; ?>
 		</div>
