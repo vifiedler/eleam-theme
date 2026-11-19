@@ -65,7 +65,7 @@ $publicaciones = new WP_Query(array(
                     <?php wp_reset_postdata(); ?>
                 </div>
             </div>
-            <div class="col-12 col-lg-5">
+            <div class="col-12">
                 <?php get_template_part('assets/modulos/modulo-inicio/loop-santoral'); ?>
             </div>
         </div>
