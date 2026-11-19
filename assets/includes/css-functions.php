@@ -1,31 +1,29 @@
 <?php
-function eleam_theme_calendario_liturgico_assets()
+function css_functions()
 {
-    if (!is_page('capellania')) {
-        return;
-    }
+    wp_register_style('bootstrap', 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css', array(), null, 'all');
+    wp_register_style('bootstrap-icon', 'https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css', array(), null, 'all');  
+    wp_register_style('slick', 'https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css', array(), null, 'all');
+    wp_register_style('general', get_template_directory_uri() . '/assets/librerias/css/general.css', array(), null, 'all');
+    wp_register_style('footer-css', get_template_directory_uri() . '/assets/templates/footers/footer.css', array(), null, 'all');
+    wp_register_style('capellania-css', get_template_directory_uri() . '/assets/librerias/css/capellania.css', array(), null, 'all');
+    wp_register_style('actividades-css', get_template_directory_uri() . '/assets/librerias/css/actividades.css', array(), null, 'all');
+    wp_register_style('catalogo-css', get_template_directory_uri() . '/assets/librerias/css/catalogo.css', array(), null, 'all');
+    wp_register_style('componentes-css', get_template_directory_uri() . '/assets/librerias/css/componentes.css', array(), null, 'all');
+    wp_register_style('donaciones-css', get_template_directory_uri() . '/assets/librerias/css/donaciones.css', array(), null, 'all');
 
-    wp_enqueue_style(
-        'slick',
-        'https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css',
-        array(),
-        '1.8.1'
-    );
 
-    wp_enqueue_script(
-        'slick',
-        'https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js',
-        array('jquery'),
-        '1.8.1',
-        true
-    );
+    wp_enqueue_style('bootstrap');
+    wp_enqueue_style('bootstrap-icon');
+    wp_enqueue_style('slick');
+    wp_enqueue_style('general');
+    wp_enqueue_style('footer-css');
+    wp_enqueue_style('capellania-css');
+    wp_enqueue_style('actividades-css');
+    wp_enqueue_style('catalogo-css');
+    wp_enqueue_style('componentes-css');
+    wp_enqueue_style('donaciones-css');
 
-    wp_enqueue_script(
-        'eleam-calendario-liturgico',
-        get_template_directory_uri() . '/assets/js/calendario-liturgico.js',
-        array('jquery', 'slick'),
-        '1.0.0',
-        true
-    );
+
 }
-add_action('wp_enqueue_scripts', 'eleam_theme_calendario_liturgico_assets');
+add_action('wp_enqueue_scripts', 'css_functions'); 
