@@ -73,19 +73,10 @@ while ( have_posts() ) :
 		</section>
 
 		<!-- GALERÍA -->
-		<section class="seccion" aria-labelledby="titulo-galeria">
 			<?php include get_template_directory() . '/assets/modulos/modulo-capellania/loop-modulo-capellania.php'; ?>
-		</section>
 
 		<!-- CALENDARIO LITÚRGICO: ENCABEZADO -->
-		<section class="seccion seccion-crema" aria-labelledby="titulo-calendario-liturgico">
-			<div class="container">
-				<div class="encabezado-seccion">
-					<h2 id="titulo-calendario-liturgico"><?php echo $t( 'calendario_titulo' ); ?></h2>
-					<p class="text-center"><?php echo $t( 'calendario_texto' ); ?></p>
-				</div>
-			</div>
-		</section>
+
 
 		<!-- CALENDARIO LITÚRGICO: HITOS -->
 		<section class="calendario-liturgico seccion-crema pb-5" role="group" aria-label="<?php echo esc_attr( get_field( 'calendario_etiqueta' ) ); ?>">
