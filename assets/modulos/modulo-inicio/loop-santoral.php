@@ -33,7 +33,7 @@ if (!$total) {
             <article class="card tarjeta tarjeta-santo-dia santoral-diapositiva"
                      data-santoral-diapositiva
                      aria-labelledby="<?php echo esc_attr($id_nombre); ?>"
-                     <?php if ($total > 1): ?>role="group" aria-roledescription="diapositiva" aria-label="<?php echo esc_attr(($indice + 1) . ' de ' . $total); ?>"<?php endif; ?>
+                     <?php if ($total > 1): ?>aria-roledescription="diapositiva"<?php endif; ?>
                      <?php if ($indice > 0): ?>hidden<?php endif; ?>>
                 <header class="santo-dia-cabecera">
                     <p class="santo-dia-etiqueta"><?php echo esc_html($etiqueta); ?></p>
@@ -43,7 +43,7 @@ if (!$total) {
                     <?php if ($imagen): ?>
                         <img src="<?php echo esc_url($imagen); ?>" alt="<?php echo esc_attr('Imagen relacionada con ' . $santo['nombre']); ?>" loading="lazy" decoding="async" width="800" height="500">
                     <?php else: ?>
-                        <div class="santoral-sin-imagen" aria-label="Imagen no disponible">
+                        <div class="santoral-sin-imagen" role="img" aria-label="Imagen no disponible">
                             <span class="bi bi-person-circle" aria-hidden="true"></span>
                         </div>
                     <?php endif; ?>
@@ -65,7 +65,7 @@ if (!$total) {
         <?php endforeach; ?>
     </div>
     <?php if ($total > 1): ?>
-        <div class="santoral-controles" aria-label="Controles del santoral">
+        <div class="santoral-controles" role="group" aria-label="Controles del santoral">
             <button class="santoral-control" type="button" data-santoral-anterior aria-label="Santo anterior">
                 <span class="bi bi-arrow-left" aria-hidden="true"></span>
             </button>
