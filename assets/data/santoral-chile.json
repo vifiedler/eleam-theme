@@ -1,0 +1,44 @@
+{
+  "01-22": [
+    {
+      "nombre": "Beata Laura Vicuña",
+      "titulo_wikipedia": "Laura Vicuña",
+      "fuente": "https://www.iglesia.cl/detalle_documento.php?id=795"
+    }
+  ],
+  "07-13": [
+    {
+      "nombre": "Santa Teresa de Jesús de Los Andes",
+      "titulo_wikipedia": "Teresa de Los Andes",
+      "fuente": "https://www.iglesia.cl/detalle_documento.php?id=795"
+    }
+  ],
+  "07-16": [
+    {
+      "nombre": "Nuestra Señora del Carmen, Madre y Reina de Chile",
+      "titulo_wikipedia": "Virgen del Carmen",
+      "fuente": "https://www.iglesia.cl/area_eclesial.php"
+    }
+  ],
+  "08-18": [
+    {
+      "nombre": "San Alberto Hurtado",
+      "titulo_wikipedia": "Alberto Hurtado",
+      "fuente": "https://www.iglesia.cl/detalle_documento.php?id=795"
+    }
+  ],
+  "08-30": [
+    {
+      "nombre": "Santa Rosa de Lima",
+      "titulo_wikipedia": "Rosa de Lima",
+      "fuente": "https://www.iglesia.cl/detalle_documento.php?id=795"
+    }
+  ],
+  "09-24": [
+    {
+      "nombre": "Nuestra Señora de la Merced",
+      "titulo_wikipedia": "Nuestra Señora de las Mercedes",
+      "fuente": "https://www.iglesia.cl/detalle_documento.php?id=795"
+    }
+  ]
+}
