@@ -31,7 +31,7 @@
       slidesToShow: 1,
       slidesToScroll: 1,
       fade: false,
-      speed: 900,
+      speed: 300,
       cssEase: 'ease-in-out',
       infinite: true,
       pauseOnHover: false,
