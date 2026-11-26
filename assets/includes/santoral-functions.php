@@ -237,9 +237,152 @@ function eleam_santoral_buscar_wikipedia($nombre) {
     return $resultado;
 }
 
-/** Devuelve los santos de la fecha actual en Chile y sus datos complementarios. */
-function eleam_santoral_obtener_dia() {
-    $fecha = new DateTimeImmutable('now', new DateTimeZone('America/Santiago'));
+/**
+ * Calendario propio de Chile. Archivo de datos del tema, no de WordPress.
+ * Sólo incluye celebraciones de fecha fija. Las móviles requieren Ordo anual.
+ */
+function eleam_santoral_obtener_chile($mes, $dia) {
+    $ruta = get_template_directory() . '/assets/data/santoral-chile.json';
+    if (!is_readable($ruta)) {
+        return array();
+    }
+
+    $datos = json_decode((string) file_get_contents($ruta), true);
+    if (!is_array($datos)) {
+        return array();
+    }
+
+    $clave = sprintf('%02d-%02d', (int) $mes, (int) $dia);
+    $seleccion = isset($datos[$clave]) ? $datos[$clave] : array();
+    return is_array($seleccion) ? array_values(array_filter($seleccion, static function ($item) {
+        return is_array($item) && !empty($item['nombre']) && is_string($item['nombre']);
+    })) : array();
+}
+
+/**
+ * Extrae sólo los nombres de santos publicados por Vatican News.
+ * No reutiliza ni copia sus reseñas; las biografías siguen viniendo de Wikipedia.
+ * Un cambio de HTML o un bloqueo HTTP activa el JSON local de respaldo.
+ */
+function eleam_santoral_extraer_vatican_html($html) {
+    if (!is_string($html) || $html === '') {
+        return array();
+    }
+
+    $encabezados = array();
+    if (class_exists('DOMDocument')) {
+        $documento = new DOMDocument();
+        $estado_anterior = libxml_use_internal_errors(true);
+        $procesado = $documento->loadHTML('<?xml encoding="utf-8"?>' . $html);
+        libxml_clear_errors();
+        libxml_use_internal_errors($estado_anterior);
+        if ($procesado) {
+            $xpath = new DOMXPath($documento);
+            $nodos = $xpath->query('//h1 | //h2 | //h3 | //h4');
+            if ($nodos) {
+                foreach ($nodos as $nodo) {
+                    $encabezados[] = (string) $nodo->textContent;
+                }
+            }
+        }
+    } elseif (preg_match_all('~<h[1-4]\b[^>]*>(.*?)</h[1-4]>~isu', $html, $encontrados)) {
+        // Respaldo cuando la extensión PHP DOM no está habilitada en el hosting.
+        foreach ($encontrados[1] as $encabezado) {
+            $encabezados[] = html_entity_decode(strip_tags($encabezado), ENT_QUOTES | ENT_HTML5, 'UTF-8');
+        }
+    }
+
+    $en_santoral = false;
+    $santos = array();
+    $vistos = array();
+    foreach ($encabezados as $encabezado) {
+        $titulo = trim(preg_replace('/\s+/u', ' ', $encabezado));
+        if (preg_match('/^santos? del d[ií]a$/iu', $titulo)) {
+            $en_santoral = true;
+            continue;
+        }
+        if (!$en_santoral) {
+            continue;
+        }
+        if (preg_match('/^(actividad del papa|nuestra fe|informaciones [uú]tiles|nuestros canales)$/iu', $titulo)) {
+            break;
+        }
+        if (!preg_match('/^(?:s\.|san(?:to|ta)?\b|beato\b|beata\b|santos\b|santas\b|virgen\b|nuestra se[ñn]ora\b)\s*/iu', $titulo)) {
+            continue;
+        }
+
+        // Retirar calificativos descriptivos, sin truncar advocaciones marianas.
+        $nombre = preg_replace('/,\s*(?:papa|sacerdote|presb[ií]tero|franciscano|abad|abadesa|m[aá]rtir|religios[oa]|fundador[ae]?|virgen|obispo|di[aá]cono|ap[oó]stol|ermita[ñn]o)\b.*$/iu', '', $titulo);
+        $nombre = trim((string) $nombre);
+        $busqueda = trim((string) preg_replace('/^(?:s\.|san|santa|santo|beato|beata)\s+/iu', '', $nombre));
+        if ($busqueda === '') {
+            $busqueda = $nombre;
+        }
+        $clave = eleam_santoral_normalizar($nombre);
+        if ($clave !== '' && !isset($vistos[$clave])) {
+            $vistos[$clave] = true;
+            $santos[] = array('nombre' => $nombre, 'busqueda' => $busqueda);
+        }
+        if (count($santos) >= 8) {
+            break;
+        }
+    }
+    return $santos;
+}
+
+/** Santoral internacional con caché; no requiere plugins ni endpoints propios. */
+function eleam_santoral_obtener_internacional($mes, $dia) {
+    $clave = sprintf('eleam_vatican_v1_%02d_%02d', (int) $mes, (int) $dia);
+    $guardado = get_transient($clave);
+    if (is_array($guardado)) {
+        return $guardado;
+    }
+
+    $url = sprintf('https://www.vaticannews.va/es/santos/%02d/%02d.html', (int) $mes, (int) $dia);
+    $respuesta = wp_safe_remote_get($url, array(
+        'timeout' => 5,
+        'redirection' => 2,
+        'user-agent' => 'ELEAM-Santoral/1.1 (' . home_url('/') . '; WordPress)',
+        'headers' => array('Accept' => 'text/html'),
+        'limit_response_size' => 350000,
+    ));
+
+    $santos = array();
+    if (!is_wp_error($respuesta) && (int) wp_remote_retrieve_response_code($respuesta) === 200) {
+        $santos = eleam_santoral_extraer_vatican_html(wp_remote_retrieve_body($respuesta));
+    }
+    set_transient($clave, $santos, $santos ? DAY_IN_SECONDS : HOUR_IN_SECONDS);
+    return $santos;
+}
+
+/** Respaldo original del tema, sólo cuando no hay datos de las otras fuentes. */
+function eleam_santoral_obtener_local($mes, $dia, $nombre_mes) {
+    $ruta = get_template_directory() . '/assets/data/santorales-catolicos.json';
+    if (!is_readable($ruta)) {
+        return array();
+    }
+    $calendario = json_decode((string) file_get_contents($ruta), true);
+    $entradas = is_array($calendario) && !empty($calendario[$nombre_mes]) && is_array($calendario[$nombre_mes])
+        ? $calendario[$nombre_mes] : array();
+    $valor = isset($entradas[$dia - 1]) ? (string) $entradas[$dia - 1] : '';
+    $resultado = array();
+    foreach (eleam_santoral_separar_nombres($valor) as $nombre) {
+        $resultado[] = array('nombre' => $nombre, 'busqueda' => $nombre);
+    }
+    return $resultado;
+}
+
+/**
+ * Prioridad de selección: propio de Chile → Vaticano → JSON local.
+ * La falta de biografía NO cambia de santo: sólo afecta el enriquecimiento.
+ */
+function eleam_santoral_obtener_dia($fecha = null) {
+    $zona = new DateTimeZone('America/Santiago');
+    if (!($fecha instanceof DateTimeInterface)) {
+        $fecha = new DateTimeImmutable('now', $zona);
+    }
+    $fecha = new DateTimeImmutable($fecha->format('Y-m-d'), $zona);
+
     $meses = array(
         1 => 'enero', 2 => 'febrero', 3 => 'marzo', 4 => 'abril',
         5 => 'mayo', 6 => 'junio', 7 => 'julio', 8 => 'agosto',
@@ -247,26 +390,37 @@ function eleam_santoral_obtener_dia() {
     );
     $mes = (int) $fecha->format('n');
     $dia = (int) $fecha->format('j');
-    $ruta = get_template_directory() . '/assets/data/santorales-catolicos.json';
-    $calendario = array();
-    if (is_readable($ruta)) {
-        $contenido = file_get_contents($ruta); // Ruta fija y local, sólo lectura.
-        $decodificado = json_decode($contenido, true);
-        if (is_array($decodificado)) {
-            $calendario = $decodificado;
-        }
+
+    $seleccion = eleam_santoral_obtener_chile($mes, $dia);
+    $origen = 'Iglesia.cl';
+    $enlace_origen = 'https://www.iglesia.cl/docs/Ordo_Pastoral_2022_Final.pdf';
+    if (!$seleccion) {
+        $seleccion = eleam_santoral_obtener_internacional($mes, $dia);
+        $origen = 'Vatican News';
+        $enlace_origen = sprintf('https://www.vaticannews.va/es/santos/%02d/%02d.html', $mes, $dia);
     }
-    $entradas = isset($calendario[$meses[$mes]]) && is_array($calendario[$meses[$mes]])
-        ? $calendario[$meses[$mes]] : array();
-    $valor = isset($entradas[$dia - 1]) ? (string) $entradas[$dia - 1] : '';
-    $nombres = eleam_santoral_separar_nombres($valor);
+    if (!$seleccion) {
+        $seleccion = eleam_santoral_obtener_local($mes, $dia, $meses[$mes]);
+        $origen = '';
+        $enlace_origen = '';
+    }
+
     $santos = array();
-    foreach ($nombres as $nombre) {
-        $santos[] = array_merge(
-            array('nombre' => $nombre),
-            eleam_santoral_buscar_wikipedia($nombre)
-        );
+    foreach ($seleccion as $item) {
+        $nombre = trim((string) $item['nombre']);
+        $busqueda = !empty($item['busqueda']) ? (string) $item['busqueda'] : $nombre;
+        $detalle = eleam_santoral_buscar_wikipedia($busqueda);
+        $santo = array_merge(array(
+            'nombre' => $nombre,
+            'fuente' => $enlace_origen,
+            'fuente_tipo' => $origen,
+        ), $detalle);
+        if (!empty($detalle['fuente'])) {
+            $santo['fuente_tipo'] = 'Wikipedia';
+        }
+        $santos[] = $santo;
     }
+
     return array(
         'fecha_iso' => $fecha->format('Y-m-d'),
         'fecha_legible' => $dia . ' de ' . $meses[$mes],

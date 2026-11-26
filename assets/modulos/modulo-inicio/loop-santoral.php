@@ -26,7 +26,9 @@ if (!$total) {
 <div class="santoral" data-santoral <?php if ($total > 1): ?>role="region" aria-roledescription="carrusel" aria-label="Santos del día"<?php endif; ?>>
     <div class="santoral-diapositivas" aria-live="off">
         <?php foreach ($santos as $indice => $santo):
-            $imagen = !empty($santo['imagen']) ? $santo['imagen'] : $url_respaldo;
+            $imagen_verificada = !empty($santo['imagen']);
+            $imagen = $imagen_verificada ? $santo['imagen'] : $url_respaldo;
+            $alt_imagen = $imagen_verificada ? 'Imagen relacionada con ' . $santo['nombre'] : 'Imagen ilustrativa de respaldo del santoral';
             $descripcion = !empty($santo['descripcion']) ? $santo['descripcion'] : $texto_respaldo;
             $id_nombre = 'nombre-santoral-' . $indice;
         ?>
@@ -41,7 +43,7 @@ if (!$total) {
                 </header>
                 <figure class="santo-dia-imagen">
                     <?php if ($imagen): ?>
-                        <img src="<?php echo esc_url($imagen); ?>" alt="<?php echo esc_attr('Imagen relacionada con ' . $santo['nombre']); ?>" loading="lazy" decoding="async" width="800" height="500">
+                        <img src="<?php echo esc_url($imagen); ?>" alt="<?php echo esc_attr($alt_imagen); ?>" loading="lazy" decoding="async" width="800" height="500">
                     <?php else: ?>
                         <div class="santoral-sin-imagen" role="img" aria-label="Imagen no disponible">
                             <span class="bi bi-person-circle" aria-hidden="true"></span>
@@ -55,7 +57,7 @@ if (!$total) {
                     </p>
                     <p class="santo-dia-descripcion"><?php echo esc_html($descripcion); ?></p>
                     <?php if (!empty($santo['fuente'])): ?>
-                        <p class="santoral-fuente"><a href="<?php echo esc_url($santo['fuente']); ?>" target="_blank" rel="noopener noreferrer">Leer en Wikipedia <span class="bi bi-box-arrow-up-right" aria-hidden="true"></span></a></p>
+                        <p class="santoral-fuente"><a href="<?php echo esc_url($santo['fuente']); ?>" target="_blank" rel="noopener noreferrer">Leer en <?php echo esc_html(!empty($santo['fuente_tipo']) ? $santo['fuente_tipo'] : 'Wikipedia'); ?> <span class="bi bi-box-arrow-up-right" aria-hidden="true"></span></a></p>
                     <?php endif; ?>
                     <?php if (!empty($santo['imagen']) && !empty($santo['credito_imagen'])): ?>
                         <p class="santoral-fuente santoral-credito"><a href="<?php echo esc_url($santo['credito_imagen']); ?>" target="_blank" rel="noopener noreferrer">Fuente y licencia de la imagen</a></p>

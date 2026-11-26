@@ -1,0 +1,106 @@
+{
+  "01-22": [
+    {
+      "nombre": "Beata Laura Vicuña",
+      "busqueda": "Laura Vicuña"
+    }
+  ],
+  "02-07": [
+    {
+      "nombre": "Beato Pío IX",
+      "busqueda": "Pío IX"
+    }
+  ],
+  "02-11": [
+    {
+      "nombre": "Nuestra Señora de Lourdes",
+      "busqueda": "Nuestra Señora de Lourdes"
+    }
+  ],
+  "05-03": [
+    {
+      "nombre": "Santa Cruz de Mayo",
+      "busqueda": "Cruz de mayo"
+    }
+  ],
+  "05-04": [
+    {
+      "nombre": "San Felipe, apóstol",
+      "busqueda": "Felipe el Apóstol"
+    },
+    {
+      "nombre": "Santiago, apóstol",
+      "busqueda": "Santiago el Menor"
+    }
+  ],
+  "05-24": [
+    {
+      "nombre": "María Auxiliadora",
+      "busqueda": "María Auxiliadora"
+    }
+  ],
+  "07-13": [
+    {
+      "nombre": "Santa Teresa de Jesús de Los Andes",
+      "busqueda": "Teresa de los Andes"
+    }
+  ],
+  "07-14": [
+    {
+      "nombre": "San Enrique",
+      "busqueda": "Enrique II del Sacro Imperio Romano Germánico"
+    },
+    {
+      "nombre": "San Camilo de Lelis",
+      "busqueda": "Camilo de Lelis"
+    }
+  ],
+  "07-16": [
+    {
+      "nombre": "Nuestra Señora del Carmen",
+      "busqueda": "Virgen del Carmen"
+    }
+  ],
+  "08-18": [
+    {
+      "nombre": "San Alberto Hurtado",
+      "busqueda": "Alberto Hurtado"
+    }
+  ],
+  "08-26": [
+    {
+      "nombre": "Beato Ceferino Namuncurá",
+      "busqueda": "Ceferino Namuncurá"
+    }
+  ],
+  "08-30": [
+    {
+      "nombre": "Santa Rosa de Lima",
+      "busqueda": "Rosa de Lima"
+    }
+  ],
+  "09-24": [
+    {
+      "nombre": "Nuestra Señora de la Merced",
+      "busqueda": "Virgen de la Merced"
+    }
+  ],
+  "10-11": [
+    {
+      "nombre": "San Juan XXIII",
+      "busqueda": "Juan XXIII"
+    }
+  ],
+  "10-22": [
+    {
+      "nombre": "San Juan Pablo II",
+      "busqueda": "Juan Pablo II"
+    }
+  ],
+  "12-12": [
+    {
+      "nombre": "Nuestra Señora de Guadalupe",
+      "busqueda": "Nuestra Señora de Guadalupe"
+    }
+  ]
+}
