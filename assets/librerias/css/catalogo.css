@@ -1,0 +1,9 @@
+/* Solo presentación del catálogo. NO copiar este archivo al sitio. */
+.catalogo-introduccion { padding-block: 56px; }
+.catalogo-etiqueta { font-size: .75rem; font-weight: 700; letter-spacing: .12em; color: var(--eleam-terracota); margin-bottom: 12px; }
+.catalogo-titulo { font-family: "Helvetica Neue Local", Helvetica, Arial, sans-serif; font-size: clamp(2rem,4vw,3rem); font-weight: 800; color: var(--eleam-azul); margin-bottom: 16px; }
+.catalogo-introduccion ol { columns: 2; padding-left: 20px; margin-top: 24px; }
+.catalogo-introduccion li { break-inside: avoid; padding: 6px 16px 6px 0; }
+.catalogo-ejemplo { padding-top: 24px; border-top: 1px solid var(--eleam-borde); }
+.catalogo-rotulo { margin-bottom: 24px; font-size: .875rem; font-weight: 700; color: var(--eleam-secundario); }
+@media(max-width:575.98px) { .catalogo-introduccion ol { columns: 1; } }

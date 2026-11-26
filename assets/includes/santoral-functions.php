@@ -1,8 +1,7 @@
 <?php
 /**
- * Santoral de Inicio: calendario propio de Chile, santoral de Vatican News,
- * respaldo JSON existente y biografias/imagenes verificadas en Wikipedia.
- * Sin cambios en WordPress core, CSS o JavaScript.
+ * Santoral de Inicio: lectura del calendario local y consulta pública de Wikipedia.
+ * No modifica el JSON original ni necesita registros o campos SCF adicionales.
  *
  * @package eleam-theme
  */
@@ -75,12 +74,6 @@ function eleam_santoral_titulo_busqueda($nombre) {
         'María Auxiliadora'         => 'María Auxiliadora',
         'Teresita del Niño Jesús'   => 'Teresa de Lisieux',
         'Teresa de los Andes'       => 'Teresa de Los Andes',
-        'Beata Laura Vicuña'        => 'Laura Vicuña',
-        'Santa Teresa de Jesús de Los Andes' => 'Teresa de Los Andes',
-        'San Alberto Hurtado'      => 'Alberto Hurtado',
-        'Santa Rosa de Lima'        => 'Rosa de Lima',
-        'Nuestra Señora del Carmen, Madre y Reina de Chile' => 'Virgen del Carmen',
-        'Nuestra Señora de la Merced' => 'Nuestra Señora de la Merced',
         'Alberto Hurtado'           => 'Alberto Hurtado',
         'Francisco de Asís'         => 'Francisco de Asís',
         'Inmaculada Concepción'     => 'Inmaculada Concepción',
@@ -244,182 +237,39 @@ function eleam_santoral_buscar_wikipedia($nombre) {
     return $resultado;
 }
 
-/** Lee únicamente fechas chilenas contrastadas en el calendario propio local. */
-function eleam_santoral_consultar_chile($fecha) {
-    $ruta = get_template_directory() . '/assets/data/santoral-chile.json';
-    if (!is_readable($ruta)) {
-        return array();
-    }
-    $datos = json_decode((string) file_get_contents($ruta), true);
-    $clave = $fecha->format('m-d');
-    if (!is_array($datos) || empty($datos[$clave]) || !is_array($datos[$clave])) {
-        return array();
-    }
-    $resultado = array();
-    foreach ($datos[$clave] as $entrada) {
-        if (!is_array($entrada) || empty($entrada['nombre'])) {
-            continue;
-        }
-        $resultado[] = array(
-            'nombre' => sanitize_text_field($entrada['nombre']),
-            'titulo_wikipedia' => !empty($entrada['titulo_wikipedia']) ? sanitize_text_field($entrada['titulo_wikipedia']) : '',
-            'fuente_calendario' => !empty($entrada['fuente']) ? esc_url_raw($entrada['fuente']) : '',
-            'etiqueta_calendario' => 'Calendario litúrgico de Chile',
-        );
-    }
-    return $resultado;
-}
-
-/**
- * Extrae títulos de santos de la página del día, sin copiar reseñas externas.
- * El proveedor publica HTML, no una API JSON estable: si cambia su estructura
- * devolvemos [] y se activa el respaldo local.
- */
-function eleam_santoral_extraer_vatican($html) {
-    if (!is_string($html) || strlen($html) > 600000 || strlen($html) < 100) {
-        return array();
-    }
-    $titulos = array();
-    if (class_exists('DOMDocument') && class_exists('DOMXPath')) {
-        $anterior = libxml_use_internal_errors(true);
-        $dom = new DOMDocument();
-        $cargado = $dom->loadHTML('<?xml encoding="UTF-8">' . $html, LIBXML_NONET | LIBXML_NOERROR | LIBXML_NOWARNING);
-        libxml_clear_errors();
-        libxml_use_internal_errors($anterior);
-        if ($cargado) {
-            $xpath = new DOMXPath($dom);
-            foreach ($xpath->query('//h2') as $nodo) {
-                $titulos[] = trim($nodo->textContent);
-            }
-        }
-    }
-    // Respaldo para hostings sin la extensión PHP DOM.
-    if (!$titulos && preg_match_all('~<h2\b[^>]*>(.*?)</h2>~si', $html, $coincidencias)) {
-        foreach ($coincidencias[1] as $etiqueta) {
-            $titulos[] = trim(html_entity_decode(wp_strip_all_tags($etiqueta), ENT_QUOTES | ENT_HTML5, 'UTF-8'));
-        }
-    }
-    $santos = array();
-    $vistos = array();
-    foreach ($titulos as $titulo) {
-        // Solo encabezados con fórmula de santoral, no los bloques de navegación.
-        $titulo = trim(preg_replace('/\s+/u', ' ', $titulo));
-        if (!preg_match('/^(?:s\.\s*|san\s|santa?\s|santos?\s|santas?\s|beato\s|beata\s|nuestra\s+señora\s)/iu', $titulo)) {
-            continue;
-        }
-        $nombre = preg_replace('/^s\.\s*/iu', 'San ', $titulo);
-        // Vatican News agrega el oficio tras la coma; no forma parte del nombre.
-        $nombre = trim(preg_replace('/,.*$/u', '', $nombre));
-        $nombre = sanitize_text_field($nombre);
-        if (strlen($nombre) < 7 || strlen($nombre) > 115) {
-            continue;
-        }
-        $clave = eleam_santoral_normalizar($nombre);
-        if (isset($vistos[$clave])) {
-            continue;
-        }
-        $vistos[$clave] = true;
-        $santos[] = array('nombre' => $nombre);
-        if (count($santos) >= 5) {
-            break;
-        }
-    }
-    return $santos;
-}
-
-/** Lista internacional diaria; endpoint de fecha cerrada (mes/día), con caché. */
-function eleam_santoral_consultar_internacional($fecha) {
-    $clave = 'eleam_santoral_vaticano_v1_' . $fecha->format('md');
-    $cache = get_transient($clave);
-    if (is_array($cache)) {
-        return $cache;
-    }
-    $url = 'https://www.vaticannews.va/es/santos/' . $fecha->format('m/d') . '.html';
-    $respuesta = wp_remote_get($url, array(
-        'timeout' => 5,
-        'redirection' => 2,
-        'limit_response_size' => 600000,
-        'headers' => array('Accept' => 'text/html'),
-        'user-agent' => 'ELEAM San Francisco (santoral; ' . home_url('/') . ')',
-    ));
-    $santos = array();
-    if (!is_wp_error($respuesta) && (int) wp_remote_retrieve_response_code($respuesta) === 200) {
-        $santos = eleam_santoral_extraer_vatican(wp_remote_retrieve_body($respuesta));
-        foreach ($santos as &$santo) {
-            $santo['fuente_calendario'] = $url;
-            $santo['etiqueta_calendario'] = 'Santoral de Vatican News';
-        }
-        unset($santo);
-    }
-    set_transient($clave, $santos, $santos ? DAY_IN_SECONDS : HOUR_IN_SECONDS);
-    return $santos;
-}
-
-/** Conserva exactamente el respaldo JSON del tema anterior. */
-function eleam_santoral_consultar_local($fecha, $meses) {
-    $ruta = get_template_directory() . '/assets/data/santorales-catolicos.json';
-    if (!is_readable($ruta)) {
-        return array();
-    }
-    $calendario = json_decode((string) file_get_contents($ruta), true);
-    $mes = (int) $fecha->format('n');
-    $dia = (int) $fecha->format('j');
-    if (!is_array($calendario) || empty($calendario[$meses[$mes]]) || !is_array($calendario[$meses[$mes]])) {
-        return array();
-    }
-    $valor = isset($calendario[$meses[$mes]][$dia - 1])
-        ? (string) $calendario[$meses[$mes]][$dia - 1] : '';
-    $santos = array();
-    foreach (eleam_santoral_separar_nombres($valor) as $nombre) {
-        $santos[] = array('nombre' => $nombre);
-    }
-    return $santos;
-}
-
-/**
- * Chile > Vaticano > JSON original. La falta de artículo en Wikipedia nunca
- * modifica la selección del santo. Permite fecha ISO opcional para pruebas.
- */
-function eleam_santoral_obtener_dia($fecha_iso = '') {
-    $zona = new DateTimeZone('America/Santiago');
-    $fecha = new DateTimeImmutable('now', $zona);
-    if (is_string($fecha_iso) && preg_match('/^\d{4}-\d{2}-\d{2}$/D', $fecha_iso)) {
-        $prueba = DateTimeImmutable::createFromFormat('!Y-m-d', $fecha_iso, $zona);
-        if ($prueba && $prueba->format('Y-m-d') === $fecha_iso) {
-            $fecha = $prueba;
-        }
-    }
+/** Devuelve los santos de la fecha actual en Chile y sus datos complementarios. */
+function eleam_santoral_obtener_dia() {
+    $fecha = new DateTimeImmutable('now', new DateTimeZone('America/Santiago'));
     $meses = array(
         1 => 'enero', 2 => 'febrero', 3 => 'marzo', 4 => 'abril',
         5 => 'mayo', 6 => 'junio', 7 => 'julio', 8 => 'agosto',
         9 => 'septiembre', 10 => 'octubre', 11 => 'noviembre', 12 => 'diciembre',
     );
-    $santos = eleam_santoral_consultar_chile($fecha);
-    if (!$santos) {
-        $santos = eleam_santoral_consultar_internacional($fecha);
-    }
-    if (!$santos) {
-        $santos = eleam_santoral_consultar_local($fecha, $meses);
-    }
-    foreach ($santos as &$santo) {
-        $titulo = !empty($santo['titulo_wikipedia']) ? $santo['titulo_wikipedia'] : $santo['nombre'];
-        $wikipedia = eleam_santoral_buscar_wikipedia($titulo);
-        if ($wikipedia) {
-            // La ficha Wikipedia solo complementa, no decide qué santo se muestra.
-            $santo = array_merge($santo, $wikipedia);
-            $santo['fuente_etiqueta'] = 'Leer en Wikipedia';
-        } else {
-            $santo['imagen'] = '';
-            $santo['descripcion'] = 'Hoy se conmemora a ' . $santo['nombre'] . '. Consulta la fuente del calendario para conocer más.';
-            $santo['fuente'] = !empty($santo['fuente_calendario']) ? $santo['fuente_calendario'] : '';
-            $santo['fuente_etiqueta'] = !empty($santo['etiqueta_calendario']) ? 'Consultar ' . $santo['etiqueta_calendario'] : '';
-            $santo['credito_imagen'] = '';
+    $mes = (int) $fecha->format('n');
+    $dia = (int) $fecha->format('j');
+    $ruta = get_template_directory() . '/assets/data/santorales-catolicos.json';
+    $calendario = array();
+    if (is_readable($ruta)) {
+        $contenido = file_get_contents($ruta); // Ruta fija y local, sólo lectura.
+        $decodificado = json_decode($contenido, true);
+        if (is_array($decodificado)) {
+            $calendario = $decodificado;
         }
     }
-    unset($santo);
+    $entradas = isset($calendario[$meses[$mes]]) && is_array($calendario[$meses[$mes]])
+        ? $calendario[$meses[$mes]] : array();
+    $valor = isset($entradas[$dia - 1]) ? (string) $entradas[$dia - 1] : '';
+    $nombres = eleam_santoral_separar_nombres($valor);
+    $santos = array();
+    foreach ($nombres as $nombre) {
+        $santos[] = array_merge(
+            array('nombre' => $nombre),
+            eleam_santoral_buscar_wikipedia($nombre)
+        );
+    }
     return array(
         'fecha_iso' => $fecha->format('Y-m-d'),
-        'fecha_legible' => (int) $fecha->format('j') . ' de ' . $meses[(int) $fecha->format('n')],
+        'fecha_legible' => $dia . ' de ' . $meses[$mes],
         'santos' => $santos,
     );
 }

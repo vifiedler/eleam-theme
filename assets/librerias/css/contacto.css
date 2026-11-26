@@ -1,0 +1,125 @@
+/* ELEAM: presentación de Contacto conforme a contacto.html.
+   Estilos delimitados a la página, sin afectar el formulario de Inicio. */
+.contacto-interior .bloque-contacto-informacion {
+  padding: 24px 32px 24px 0;
+}
+.contacto-interior .bloque-contacto-informacion h3 {
+  margin: 0 0 24px;
+  font-size: 1.5rem;
+  line-height: 1.35;
+}
+.contacto-interior .bloque-contacto-informacion h4 {
+  margin: 24px 0 16px;
+  font-size: 1.25rem;
+  line-height: 1.4;
+}
+.contacto-interior .bloque-contacto-informacion address {
+  margin: 0 0 16px;
+  font-style: normal;
+  color: var(--eleam-texto);
+}
+.contacto-interior .mapa-referencial {
+  display: block;
+  width: 100%;
+  height: 240px;
+  border: 0;
+  border-radius: var(--eleam-radio);
+  margin-top: 24px;
+}
+.contacto-interior .inicio-como-llegar {
+  margin: 12px 0 0;
+}
+.contacto-interior .formulario-contacto {
+  height: auto;
+  margin: 0;
+}
+.contacto-interior .formulario-contacto .wpcf7-form .campo-formulario {
+  margin-top: 16px;
+}
+.contacto-interior .formulario-contacto .wpcf7-form .campo-formulario:first-child {
+  margin-top: 0;
+}
+.contacto-interior .formulario-contacto .wpcf7-form .form-label {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--eleam-texto);
+  font-weight: 600;
+}
+.contacto-interior .formulario-contacto .wpcf7-form-control-wrap {
+  display: block;
+  width: 100%;
+}
+.contacto-interior .formulario-contacto .wpcf7-form .form-control,
+.contacto-interior .formulario-contacto .wpcf7-form .form-select,
+.contacto-interior .formulario-contacto .wpcf7-form input:not([type="submit"]):not([type="checkbox"]):not([type="radio"]),
+.contacto-interior .formulario-contacto .wpcf7-form textarea {
+  display: block;
+  width: 100%;
+  min-height: 48px;
+  max-width: 100%;
+  padding: 12px 24px;
+  border: 1px solid var(--eleam-borde-control);
+  border-radius: var(--eleam-radio);
+  background: white;
+  color: var(--eleam-texto);
+  font: inherit;
+}
+.contacto-interior .formulario-contacto .wpcf7-form textarea {
+  min-height: 150px;
+  resize: vertical;
+}
+.contacto-interior .formulario-contacto .wpcf7-form :is(input, select, textarea):focus-visible {
+  outline: 3px solid var(--eleam-azul);
+  outline-offset: 2px;
+}
+.contacto-interior .formulario-contacto .wpcf7-form .form-check {
+  margin-block: 16px 24px;
+}
+.contacto-interior .formulario-contacto .wpcf7-form .wpcf7-acceptance label {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  cursor: pointer;
+}
+.contacto-interior .formulario-contacto .wpcf7-form .wpcf7-acceptance input {
+  width: 18px;
+  height: 18px;
+  min-height: 18px;
+  margin-top: 3px;
+  accent-color: var(--eleam-azul);
+}
+.contacto-interior .formulario-contacto .wpcf7-form .wpcf7-submit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--eleam-ancho-boton);
+  max-width: 100%;
+  height: 48px;
+  padding: 0 16px;
+  margin: 24px auto 0;
+  border: 0;
+  border-radius: var(--eleam-radio);
+  background: var(--eleam-terracota);
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+}
+.contacto-interior .formulario-contacto .wpcf7-form .wpcf7-submit:hover {
+  background: var(--eleam-terracota-oscuro);
+}
+.contacto-interior .formulario-contacto .wpcf7-form .wpcf7-response-output {
+  margin-inline: 0;
+}
+@media (max-width: 991.98px) {
+  .contacto-interior .bloque-contacto-informacion {
+    padding: 0 0 24px;
+  }
+}
+@media (max-width: 575.98px) {
+  .contacto-interior .mapa-referencial {
+    height: 220px;
+  }
+  .contacto-interior .formulario-contacto {
+    padding: 20px;
+  }
+}

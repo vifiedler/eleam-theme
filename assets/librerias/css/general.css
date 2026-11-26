@@ -1,0 +1,527 @@
+/* ELEAM San Francisco · Adaby
+   Cargar después de Bootstrap 5.3.8. Clases propias en español.
+   Las clases de Bootstrap se conservan en inglés para mantener su compatibilidad. */
+:root {
+  --eleam-azul: #072b4a;
+  --eleam-terracota: #b8431b;
+  --eleam-terracota-oscuro: #963514;
+  --eleam-verde: #1a7f80;
+  --eleam-crema: #fcf8f4;
+  --eleam-arena: #f5ece8;
+  --eleam-texto: #262220;
+  --eleam-secundario: #555e68;
+  --eleam-borde: #d9dee2;
+  --eleam-borde-control: #727981;
+  --eleam-radio: 8px;
+  --eleam-espacio-seccion: 56px;
+  --eleam-ancho-boton: 217px;
+  --eleam-sombra-control: 0 4px 12px rgba(7, 43, 74, .13);
+  --eleam-duracion-interaccion: 180ms;
+  --eleam-curva-transicion: ease-in;
+  --bs-body-font-family: 'Helvetica Neue Local', Helvetica, Arial, sans-serif;
+  --bs-body-color: var(--eleam-texto);
+  --bs-body-line-height: 1.5;
+  --bs-border-radius: var(--eleam-radio);
+}
+@font-face {
+  font-family: Athelas;
+  src: url("../../includes/fonts/Athelas-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Athelas;
+  src: url("../../includes/fonts/Athelas-Bold.ttf") format("truetype");
+  font-weight: 700 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Athelas;
+  src: url("../../includes/fonts/Athelas-BoldItalic.ttf") format("truetype");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Helvetica Neue Local";
+  src: url("../../includes/fonts/HelveticaNeue-Roman.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Helvetica Neue Local";
+  src: url("../../includes/fonts/HelveticaNeue-Light.otf") format("opentype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Helvetica Neue Local";
+  src: url("../../includes/fonts/HelveticaNeue-Medium.otf") format("opentype");
+  font-weight: 500 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Helvetica Neue Local";
+  src: url("../../includes/fonts/HelveticaNeue-Bold.otf") format("opentype");
+  font-weight: 700 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* La familia del diseño debe aplicarse también a los controles del formulario. */
+html,
+body {
+  margin: 0;
+  background: var(--eleam-crema);
+}
+
+body,
+button,
+input,
+select,
+optgroup,
+textarea {
+  font-family: "Helvetica Neue Local", Helvetica, Arial, sans-serif;
+  color: var(--eleam-texto);
+}
+
+/* El lienzo del sitio es blanco; el fondo crema evita una franja de contraste
+   bajo el último elemento y la estructura flex lleva el footer hasta el borde. */
+.site {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+.site > .site-main {
+  flex: 1 0 auto;
+  background: white;
+}
+
+.site > .pie-sitio {
+  flex: 0 0 auto;
+}
+
+
+h1,
+h2,
+h3,
+h4,
+p,
+figure {
+  margin: 0;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  color: var(--eleam-azul);
+  font-family: "Helvetica Neue Local", Helvetica, Arial, sans-serif;
+}
+
+h1,
+.titulo-principal {
+  font-size: clamp(2rem, 3.34vw, 3rem);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: .02em;
+}
+
+h2,
+.titulo-seccion {
+  font-size: clamp(1.625rem, 2.23vw, 2rem);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: .01em;
+}
+
+h3,
+.titulo-tarjeta {
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+h4,
+.subtitulo {
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: .01em;
+}
+
+blockquote,
+.cita {
+  font-family: Athelas, Georgia, serif;
+}
+
+a {
+  color: inherit;
+  text-underline-offset: .2em;
+}
+
+.img-fluid {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+:focus-visible {
+  outline: 3px solid var(--eleam-azul);
+  outline-offset: 4px;
+}
+
+.saltar-contenido {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  transform: translateY(-160%);
+  background: white;
+  padding: 12px;
+  z-index: 10;
+}
+
+.saltar-contenido:focus {
+  transform: none;
+}
+
+.contenedor-amplio {
+  width: 90%;
+  max-width: none;
+  padding-inline: 20px;
+  margin-inline: auto;
+}
+
+.contenedor-contenido {
+  width: 100%;
+  max-width: 1204px;
+  padding-inline: 20px;
+  margin-inline: auto;
+}
+
+.row {
+  --bs-gutter-x: 20px;
+  --bs-gutter-y: 24px;
+}
+
+.seccion {
+  padding-block: var(--eleam-espacio-seccion);
+}
+
+.seccion-crema {
+  background: var(--eleam-crema);
+}
+
+.encabezado-seccion {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.encabezado-seccion p {
+  margin-top: 16px;
+  text-align: left;
+}
+
+.pila-contenido>*+* {
+  margin-top: 16px;
+}
+
+.texto-secundario {
+  color: var(--eleam-secundario);
+}
+
+.bi {
+  display: inline-block;
+  flex-shrink: 0;
+  font-family: bootstrap-icons !important;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.bi-box-arrow-up-right::before {
+  content: "\f1c5";
+}
+
+.bi-download::before {
+  content: "\f30a";
+}
+
+/* 01 · Navegación principal, submenú y marca del sitio. Siempre visible en móvil. */
+.cabecera-sitio {
+  background: #fff;
+}
+
+.navegacion-principal {
+  min-height: 67px;
+  padding-block: 0;
+  padding-inline: 0;
+  gap: 12px;
+}
+
+.marca-sitio {
+  padding: 0;
+  margin: 0;
+  flex-shrink: 0;
+}
+
+.marca-sitio img {
+  display: block;
+  width: 217px;
+  height: auto;
+}
+
+.navegacion-enlaces {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-left: auto;
+}
+
+.navegacion-principal .nav-link,
+.navegacion-submenu a {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 44px;
+  padding: 8px;
+  border-bottom: 2px solid transparent;
+  border-radius: var(--eleam-radio) var(--eleam-radio) 0 0;
+  background-color: transparent;
+  color: var(--eleam-azul);
+  font-size: 1rem;
+  font-weight: 400;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color var(--eleam-duracion-interaccion) var(--eleam-curva-transicion), background-color var(--eleam-duracion-interaccion) var(--eleam-curva-transicion), border-color var(--eleam-duracion-interaccion) var(--eleam-curva-transicion), box-shadow var(--eleam-duracion-interaccion) var(--eleam-curva-transicion), font-weight var(--eleam-duracion-interaccion) var(--eleam-curva-transicion);
+}
+
+/* Reserva la medida en negrita para que hover y activo no desplacen los enlaces vecinos. */
+.navegacion-texto {
+  display: inline-block;
+}
+
+.navegacion-texto::after {
+  content: attr(data-texto);
+  display: block;
+  height: 0;
+  overflow: hidden;
+  visibility: hidden;
+  font-weight: 700;
+}
+
+.navegacion-principal .nav-link:hover,
+.navegacion-submenu a:hover {
+  background-color: var(--eleam-crema);
+  font-weight: 600;
+  box-shadow: var(--eleam-sombra-control);
+}
+
+.navegacion-principal .nav-link:focus-visible,
+.navegacion-submenu a:focus-visible {
+  background-color: var(--eleam-crema);
+  font-weight: 600;
+  outline: 3px solid var(--eleam-azul);
+  outline-offset: 3px;
+  box-shadow: none;
+}
+
+.navegacion-principal .nav-link[aria-current='page'],
+.navegacion-submenu a[aria-current='page'] {
+  font-weight: 700;
+  border-bottom-color: var(--eleam-terracota);
+}
+
+.navegacion-secundaria {
+  position: relative;
+}
+
+.navegacion-secundaria summary {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  list-style: none;
+}
+
+.navegacion-secundaria summary::-webkit-details-marker {
+  display: none;
+}
+
+.navegacion-secundaria summary .bi {
+  font-size: .75em;
+  transition: transform var(--eleam-duracion-interaccion) var(--eleam-curva-transicion);
+}
+
+.navegacion-secundaria[open] summary .bi {
+  transform: rotate(180deg);
+}
+
+.navegacion-submenu {
+  position: absolute;
+  z-index: 5;
+  top: 100%;
+  left: 0;
+  min-width: 210px;
+  padding: 12px 16px;
+  background: white;
+  border: 1px solid var(--eleam-borde);
+  border-radius: 8px;
+  box-shadow: 0 4px 12px #072b4a1a;
+}
+
+/* 02 · Botones, enlaces de texto y estados de foco. */
+.boton {
+  --bs-btn-border-radius: 8px;
+  --bs-btn-border-width: 0px;
+  --bs-btn-focus-box-shadow: none;
+  --bs-btn-active-shadow: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: var(--eleam-ancho-boton);
+  min-width: max-content;
+  max-width: 100%;
+  height: 48px;
+  padding: 16px;
+  font-weight: 700;
+  font-size: 1rem;
+  line-height: 1;
+  letter-spacing: .02em;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.boton-primario {
+  --bs-btn-color: white;
+  --bs-btn-bg: var(--eleam-terracota);
+  --bs-btn-border-color: var(--eleam-terracota);
+  --bs-btn-hover-color: white;
+  --bs-btn-hover-bg: var(--eleam-terracota-oscuro);
+  --bs-btn-hover-border-color: var(--eleam-terracota-oscuro);
+  --bs-btn-active-bg: var(--eleam-terracota-oscuro);
+  --bs-btn-active-color: white;
+  --bs-btn-active-border-color: var(--eleam-terracota-oscuro);
+}
+
+.boton-secundario {
+  --eleam-ancho-boton: 216px;
+  --bs-btn-border-width: 1px;
+  --bs-btn-bg: white;
+  --bs-btn-color: var(--eleam-texto);
+  --bs-btn-border-color: var(--eleam-borde-control);
+  --bs-btn-hover-bg: white;
+  --bs-btn-hover-color: var(--eleam-texto);
+  --bs-btn-hover-border-color: var(--eleam-borde-control);
+  --bs-btn-active-bg: white;
+  --bs-btn-active-color: var(--eleam-texto);
+  --bs-btn-active-border-color: var(--eleam-borde-control);
+}
+
+.enlace-texto,
+.publicacion-control {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  padding: 8px 16px;
+  border: 0 solid transparent;
+  background: white;
+  color: var(--eleam-texto);
+  white-space: nowrap;
+}
+
+.enlace-texto {
+  min-height: 40px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.boton,
+.enlace-texto,
+.publicacion-control,
+.form-control,
+.form-select {
+  transition: color var(--eleam-duracion-interaccion) var(--eleam-curva-transicion), background-color var(--eleam-duracion-interaccion) var(--eleam-curva-transicion), border-color var(--eleam-duracion-interaccion) var(--eleam-curva-transicion), box-shadow var(--eleam-duracion-interaccion) var(--eleam-curva-transicion);
+}
+
+.boton:not(:disabled):hover,
+.enlace-texto:not(:disabled):hover,
+.publicacion-control:not(:disabled):hover {
+  box-shadow: var(--eleam-sombra-control);
+}
+
+/* El borde de foco sustituye al halo de Bootstrap; el padding compensa su grosor. */
+.boton:not(:disabled):focus-visible {
+  --bs-btn-hover-bg: var(--bs-btn-bg);
+  --bs-btn-hover-color: var(--bs-btn-color);
+  --bs-btn-hover-border-color: var(--eleam-azul);
+  --bs-btn-active-bg: var(--bs-btn-bg);
+  --bs-btn-active-color: var(--bs-btn-color);
+  --bs-btn-active-border-color: var(--eleam-azul);
+  align-items: center;
+  padding: 0 calc(13px + var(--bs-btn-border-width));
+  border: 3px solid var(--eleam-azul);
+  outline: 0;
+  box-shadow: none;
+}
+
+.enlace-texto:not(:disabled):focus-visible,
+.publicacion-control:not(:disabled):focus-visible {
+  justify-content: center;
+  padding: 5px 13px;
+  border: 3px solid var(--eleam-azul);
+  border-radius: var(--eleam-radio);
+  outline: 0;
+  box-shadow: none;
+}
+
+.boton:disabled {
+  background: var(--eleam-borde);
+  color: var(--eleam-secundario);
+  border-color: var(--bs-btn-border-color);
+  opacity: 1;
+  box-shadow: none;
+}
+
+.enlace-texto:disabled,
+.publicacion-control:disabled {
+  justify-content: center;
+  border-radius: var(--eleam-radio);
+  background: var(--eleam-borde);
+  box-shadow: none;
+}
+
+.acciones-seccion {
+  display: flex;
+  justify-content: center;
+  margin-top: 32px;
+}
+
+/* Excepción deliberada: conservar la tipografía y escala previa de las
+   tarjetas de equipo de ¿Quiénes somos?, sin afectar los encabezados globales. */
+.tarjeta-horizontal,
+.tarjeta-persona {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+}
+.tarjeta-horizontal :is(h3, h4),
+.tarjeta-persona :is(h3, h4) {
+  font-family: inherit;
+}
+.tarjeta-horizontal .tarjeta-horizontal-titulo,
+.tarjeta-persona .card-body h3 {
+  font-size: 1.3rem;
+}
