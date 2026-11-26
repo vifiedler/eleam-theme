@@ -163,27 +163,22 @@ while ( have_posts() ) :
 
 							<fieldset>
 								<legend class="subtitulo"><?php echo esc_html( $textos['titulo_montos'] ); ?></legend>
-								<div class="row mt-3" data-grupo="monto">
+								<div class="row g-2 mt-3" data-grupo="monto">
 									<?php foreach ( $montos as $monto ) : ?>
-										<?php
-										$valor    = (string) $monto['monto_sugerido_donacion'];
-										$etiqueta = $monto['etiqueta_monto_donacion'] ?: '$' . number_format( (int) $valor, 0, ',', '.' );
-										?>
-									<div class="col-3">
-										<button class="btn boton boton-contorno" type="button" aria-pressed="<?php echo (string) $monto_inicial === $valor ? 'true' : 'false'; ?>"
-											data-valor="<?php echo esc_attr( $valor ); ?>"><?php echo esc_html( $etiqueta ); ?></button>
-									</div>
+									<?php
+									$valor    = (string) $monto['monto_sugerido_donacion'];
+									$etiqueta = $monto['etiqueta_monto_donacion'] ?: '$' . number_format( (int) $valor, 0, ',', '.' );
+									?>
+								<div class="col-6 col-sm-3">
+									<button class="btn boton boton-contorno w-100" type="button" aria-pressed="<?php echo (string) $monto_inicial === $valor ? 'true' : 'false'; ?>"
+									data-valor="<?php echo esc_attr( $valor ); ?>"><?php echo esc_html( $etiqueta ); ?></button>
+								</div>
 									<?php endforeach; ?>
-									<div class="col-3">
-										<button class="btn boton boton-contorno" type="button" aria-pressed="false"
-											data-valor="otro"><?php echo esc_html( $textos['texto_otro_monto'] ); ?></button>
-									</div>
+								<div class="col-6 col-sm-3">
+									<button class="btn boton boton-contorno w-100" type="button" aria-pressed="false"
+									data-valor="otro"><?php echo esc_html( $textos['texto_otro_monto'] ); ?></button>
 								</div>
-								<div class="campo-formulario mt-3" id="campo-otro-monto" hidden>
-									<label class="form-label" for="otro-monto"><?php esc_html_e( 'Monto en pesos (CLP)', 'eleam' ); ?></label>
-									<input class="form-control" type="number" id="otro-monto" name="otro_monto" min="1000" step="1000" inputmode="numeric">
-								</div>
-							</fieldset>
+							</div>
 
 							<fieldset>
 								<legend class="subtitulo"><?php echo esc_html( $textos['titulo_datos_donante'] ); ?></legend>
