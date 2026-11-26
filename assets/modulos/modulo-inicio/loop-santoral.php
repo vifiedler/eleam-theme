@@ -9,7 +9,15 @@ $etiqueta_scf = function_exists('get_field') ? (string) get_field('etiqueta_sant
 $etiqueta = trim($etiqueta_scf) !== '' ? $etiqueta_scf : 'Santos del día';
 $texto_respaldo = function_exists('get_field') ? (string) get_field('texto_santo_no_disponible') : '';
 $texto_respaldo = trim($texto_respaldo) !== '' ? $texto_respaldo : 'No hay una reseña disponible en Wikipedia para esta conmemoración.';
-// No usar la imagen SCF global como si fuese el retrato del santo elegido.
+$imagen_respaldo = function_exists('get_field') ? get_field('imagen_santo_no_disponible') : null;
+$url_respaldo = '';
+if (is_array($imagen_respaldo) && !empty($imagen_respaldo['url'])) {
+    $url_respaldo = (string) $imagen_respaldo['url'];
+} elseif (is_numeric($imagen_respaldo)) {
+    $url_respaldo = (string) wp_get_attachment_image_url((int) $imagen_respaldo, 'large');
+} elseif (is_string($imagen_respaldo) && wp_http_validate_url($imagen_respaldo)) {
+    $url_respaldo = $imagen_respaldo;
+}
 if (!$total) {
     $santos = array(array('nombre' => 'Santoral no disponible'));
     $total = 1;
@@ -18,8 +26,7 @@ if (!$total) {
 <div class="santoral" data-santoral <?php if ($total > 1): ?>role="region" aria-roledescription="carrusel" aria-label="Santos del día"<?php endif; ?>>
     <div class="santoral-diapositivas" aria-live="off">
         <?php foreach ($santos as $indice => $santo):
-            $imagen = !empty($santo['imagen']) ? $santo['imagen'] : '';
-            $fuente_etiqueta = !empty($santo['fuente_etiqueta']) ? $santo['fuente_etiqueta'] : 'Leer en Wikipedia';
+            $imagen = !empty($santo['imagen']) ? $santo['imagen'] : $url_respaldo;
             $descripcion = !empty($santo['descripcion']) ? $santo['descripcion'] : $texto_respaldo;
             $id_nombre = 'nombre-santoral-' . $indice;
         ?>
@@ -48,7 +55,7 @@ if (!$total) {
                     </p>
                     <p class="santo-dia-descripcion"><?php echo esc_html($descripcion); ?></p>
                     <?php if (!empty($santo['fuente'])): ?>
-                        <p class="santoral-fuente"><a href="<?php echo esc_url($santo['fuente']); ?>" target="_blank" rel="noopener noreferrer"><?php echo esc_html($fuente_etiqueta); ?> <span class="bi bi-box-arrow-up-right" aria-hidden="true"></span></a></p>
+                        <p class="santoral-fuente"><a href="<?php echo esc_url($santo['fuente']); ?>" target="_blank" rel="noopener noreferrer">Leer en Wikipedia <span class="bi bi-box-arrow-up-right" aria-hidden="true"></span></a></p>
                     <?php endif; ?>
                     <?php if (!empty($santo['imagen']) && !empty($santo['credito_imagen'])): ?>
                         <p class="santoral-fuente santoral-credito"><a href="<?php echo esc_url($santo['credito_imagen']); ?>" target="_blank" rel="noopener noreferrer">Fuente y licencia de la imagen</a></p>
