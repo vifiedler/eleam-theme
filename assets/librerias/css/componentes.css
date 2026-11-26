@@ -1438,3 +1438,35 @@ textarea.form-control {
   outline: 3px solid var(--eleam-azul);
   outline-offset: 3px;
 }
+
+@media (max-width: 575.98px) {
+  /* ... tus reglas existentes ... */
+
+  .formulario-aporte [data-grupo="monto"] {
+    row-gap: 12px;
+  }
+
+  /* Si mantienes col-3 en el HTML, esto los convierte a 2 columnas en móvil */
+  .formulario-aporte [data-grupo="monto"] > [class*="col-"] {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+
+  .formulario-aporte [data-grupo="monto"] .boton {
+    width: 100%;
+    padding-inline: 12px;
+    font-size: 0.9375rem;
+    white-space: nowrap;
+  }
+
+  /* Opcional: hacer que los botones de frecuencia (Mensual / Una vez) también ocupen 50% cada uno */
+  .formulario-aporte .opciones-aporte {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .formulario-aporte .opciones-aporte .boton {
+    width: 100%;
+  }
+}
