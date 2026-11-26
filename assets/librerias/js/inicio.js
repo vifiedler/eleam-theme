@@ -25,7 +25,7 @@
       adaptiveHeight: false,
       arrows: false,
       autoplay: !reduccionDeMovimiento,
-      autoplaySpeed: 1000,
+      autoplaySpeed: 3500,
       centerMode: $diapositivas.length > 2,
       centerPadding: '8%',
       slidesToShow: 1,
